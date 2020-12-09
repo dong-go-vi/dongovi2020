@@ -1,0 +1,2 @@
+		sqlSession.insert("##NAMESPACE##.insert##BIZ_NAME##", model);
+		return model.##KEY_GETTER##();

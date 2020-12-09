@@ -1,0 +1,5 @@
+			if ( vo == null ) {
+				iResult = ##service_NAME##Service.add##BIZ_NAME##(param);
+			} else {
+				iResult = ##service_NAME##Service.modify##BIZ_NAME##(param);
+			}

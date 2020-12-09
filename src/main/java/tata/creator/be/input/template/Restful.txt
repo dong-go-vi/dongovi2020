@@ -1,0 +1,56 @@
+package tata.creator.be.output.biz.restful;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import tata.creator.be.output.biz.service.##SERVICE_NAME##Service;
+import dongovi2020.base.common.Constants;
+import dongovi2020.base.common.Message;
+import dongovi2020.base.common.MessageUtils;
+
+##IMPORT_VO##
+
+/**
+ * ##RESTFUL_NAME##Restful
+ * @author tata creator
+ * @since ##TODAY## 
+ */
+@Controller
+public class ##RESTFUL_NAME##Restful {
+
+	private static final Logger logger = LoggerFactory.getLogger(##RESTFUL_NAME##Restful.class);
+
+	@Autowired
+	private ##SERVICE_NAME##Service ##service_NAME##Service;
+
+##EACH_TABLES##
+
+
+	private int getLoginUserKey(HttpServletRequest request) {
+		int key = 0;
+		if ( request != null && request.getSession() != null && request.getSession().getAttribute("LOGIN_USER_ID") != null) {
+			try {
+				key = (int)request.getSession().getAttribute("LOGIN_USER_ID");
+			} catch (Exception e) {
+				logger.error("ERROR:" + request.getSession().getAttribute("LOGIN_USER_ID"));
+				e = null;
+			}
+		}
+		request = null; 
+		return key;
+	}
+
+}

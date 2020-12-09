@@ -1,0 +1,6 @@
+			#{crnMbrNo} 
+			, #{bsisIf} 
+			, #{loginMbrNo} 
+			, NOW() 
+			, #{loginMbrNo} 
+			, NOW() 

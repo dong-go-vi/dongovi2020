@@ -1,0 +1,1 @@
+		<##TAG## property="##PROPTERTY##" column="##COLUMN_NAME##" /> <!-- ##COLUMN_COMMENT## -->

@@ -1,0 +1,14 @@
+package tata.creator.be.output.common.model.extend;
+
+import tata.creator.be.output.common.model.entity.##TABLE_NAME##;
+
+/**
+ * BIZ VO - ##BIZ_NAME## <= ##TABLE_NAME## / ##TABLE_COMMENT##		
+ * @author tata creator
+ * @since ##TODAY##
+ *
+ */
+@SuppressWarnings("serial")
+public class ##BIZ_NAME##VO extends ##TABLE_NAME## {
+
+}

@@ -1,0 +1,6 @@
+			CRN_MBR_NO 
+			, BSIS_IF 
+			, RGNT_NO 
+			, date_format(REG_DT,'%Y-%m-%d %T') AS REG_DT 
+			, UPDT_MN_NO 
+			, date_format(REG_DT,'%Y-%m-%d %T') AS UPDT_DT 

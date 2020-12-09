@@ -1,0 +1,7 @@
+package devketerius.base.common;
+
+
+public class SearchParam implements java.io.Serializable {
+
+	private static final long serialVersionUID = 9139418222516849998L;
+}

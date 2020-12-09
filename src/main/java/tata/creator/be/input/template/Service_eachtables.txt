@@ -1,0 +1,71 @@
+	/// ===== ##BIZ_NAME## ===== =======================================================================
+
+	/**
+	 * search ##BIZ_NAME## => select##BIZ_NAME##
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public ##BIZ_NAME##VO search##BIZ_NAME##(##BIZ_NAME##VO param) throws Exception {
+		return ##dao_NAME##Dao.select##BIZ_NAME##(param);
+	}
+
+	/**
+	 * search ##BIZ_NAME## List => select##BIZ_NAME##List
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public List<##BIZ_NAME##VO> search##BIZ_NAME##List(##BIZ_NAME##VO param) throws Exception {
+		return ##dao_NAME##Dao.select##BIZ_NAME##List(param);
+	}
+
+	/**
+	 * search ##BIZ_NAME## List Count => select##BIZ_NAME##ListCount
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public int search##BIZ_NAME##ListCount(##BIZ_NAME##VO param) throws Exception {
+		return ##dao_NAME##Dao.select##BIZ_NAME##ListCount(param);
+	}
+
+	/**
+	 * add ##BIZ_NAME## => insert##BIZ_NAME##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int add##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+		return ##dao_NAME##Dao.insert##BIZ_NAME##(model);
+	}
+
+	/**
+	 * modify ##BIZ_NAME## => update##BIZ_NAME##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int modify##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+		return ##dao_NAME##Dao.update##BIZ_NAME##(model);
+	}
+
+	/**
+	 * remove ##BIZ_NAME## => delete##BIZ_NAME##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int remove##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+		return ##dao_NAME##Dao.delete##BIZ_NAME##(model);
+	}
+

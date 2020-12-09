@@ -1,0 +1,2535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+	Mybatis mapper, tata creator generated!
+	##TODAY## 
+ -->
+ 
+<mapper namespace="dongovi2020.biz01.dao">
+
+	
+	<!-- ===== TB_CMN_CD - CommonCode | 공통 코드 ================================================================= -->
+	<resultMap id="_CommonCodeResultMap" type="dongovi2020.common.model.extend.CommonCodeVO">
+		<id property="grpCd" column="GRP_CD" /> <!-- 그룹 코드 -->
+		<id property="cmnCd" column="CMN_CD" /> <!-- 공통 코드 -->
+		<result property="cmnGrpNm" column="CMN_GRP_NM" /> <!-- 공통 그룹 이름 -->
+		<result property="cmnCdNm" column="CMN_CD_NM" /> <!-- 공통 코드 이름 -->
+		<result property="cmnCdVal01" column="CMN_CD_VAL_01" /> <!-- 공통 코드 값 01 -->
+		<result property="cmnCdVal02" column="CMN_CD_VAL_02" /> <!-- 공통 코드 값 02 -->
+		<result property="srtOrdNo" column="SRT_ORD_NO" /> <!-- 정렬 순서 번호 -->
+		<result property="rmks" column="RMKS" /> <!-- 비고 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectCommonCode" parameterType="dongovi2020.common.model.extend.CommonCodeVO" resultMap="_CommonCodeResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectCommonCode */
+			GRP_CD 
+			, CMN_CD 
+			, CMN_GRP_NM 
+			, CMN_CD_NM 
+			, CMN_CD_VAL_01 
+			, CMN_CD_VAL_02 
+			, SRT_ORD_NO 
+			, RMKS 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_CMN_CD 
+		WHERE 1=1 
+			AND GRP_CD = #{grpCd}  
+			AND CMN_CD = #{cmnCd}   
+	</select>
+	
+	<select id="selectCommonCodeList" parameterType="dongovi2020.common.model.extend.CommonCodeVO" resultMap="_CommonCodeResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectCommonCodeList */
+			GRP_CD 
+			, CMN_CD 
+			, CMN_GRP_NM 
+			, CMN_CD_NM 
+			, CMN_CD_VAL_01 
+			, CMN_CD_VAL_02 
+			, SRT_ORD_NO 
+			, RMKS 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_CMN_CD 
+		WHERE 1=1 
+	</select>
+	
+	<select id="selectCommonCodeListCount" parameterType="dongovi2020.common.model.extend.CommonCodeVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectCommonCodeCount */
+			COUNT(1) CNT
+		FROM TB_CMN_CD 
+		WHERE 1=1 
+			AND GRP_CD = #{grpCd}  
+			AND CMN_CD = #{cmnCd}  
+	</select>
+	
+	<insert id="insertCommonCode" parameterType="dongovi2020.common.model.extend.CommonCodeVO" >
+		INSERT INTO TB_CMN_CD ( /* dongovi2020.biz01.dao.insertCommonCode */ 
+			GRP_CD 
+			, CMN_CD 
+			, CMN_GRP_NM 
+			, CMN_CD_NM 
+			, CMN_CD_VAL_01 
+			, CMN_CD_VAL_02 
+			, SRT_ORD_NO 
+			, RMKS 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{grpCd} 
+			, #{cmnCd} 
+			, #{cmnGrpNm} 
+			, #{cmnCdNm} 
+			, #{cmnCdVal01} 
+			, #{cmnCdVal02} 
+			, #{srtOrdNo} 
+			, #{rmks} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateCommonCode" parameterType="dongovi2020.common.model.extend.CommonCodeVO">
+		UPDATE TB_CMN_CD /* dongovi2020.biz01.dao.updateCommonCode */
+		SET 
+			CMN_GRP_NM = #{cmnGrpNm} 
+			, CMN_CD_NM = #{cmnCdNm} 
+			, CMN_CD_VAL_01 = #{cmnCdVal01} 
+			, CMN_CD_VAL_02 = #{cmnCdVal02} 
+			, SRT_ORD_NO = #{srtOrdNo} 
+			, RMKS = #{rmks} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND GRP_CD = #{grpCd}  
+			AND CMN_CD = #{cmnCd}  
+	</update>
+	
+	<delete id="deleteCommonCode" parameterType="dongovi2020.common.model.extend.CommonCodeVO">
+		UPDATE TB_CMN_CD /* dongovi2020.biz01.dao.deleteCommonCode */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_CMN_CD /* dongovi2020.biz01.dao.deleteCommonCode */
+		WHERE 1=1 
+			AND GRP_CD = #{grpCd}  
+			AND CMN_CD = #{cmnCd}   
+	</delete>
+	
+	<!-- ===== TB_LSN - Lesson  | 수업 ================================================================= -->
+	<resultMap id="_LessonResultMap" type="dongovi2020.common.model.extend.LessonVO">
+		<id property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="prvSmtrLsnIdx" column="PRV_SMTR_LSN_IDX" /> <!-- 이전 학기 수업 IDX -->
+		<result property="rlyLsnNo" column="RLY_LSN_NO" /> <!-- 실제 수업 번호 -->
+		<result property="lsnPrgsStsCd" column="LSN_PRGS_STS_CD" /> <!-- 공통코드004 -->
+		<result property="lsnAraId" column="LSN_ARA_ID" /> <!-- 수업 지역 ID -->
+		<result property="chgTeamId" column="CHG_TEAM_ID" /> <!-- 담당 팀 ID -->
+		<result property="rpstTchrIdx" column="RPST_TCHR_IDX" /> <!-- 대표 교사 IDX -->
+		<result property="lsnFrmId" column="LSN_FRM_ID" /> <!-- 수업 형태 ID -->
+		<result property="affOrgNm" column="AFF_ORG_NM" /> <!-- 소속 기관 이름 -->
+		<result property="grdCd" column="GRD_CD" /> <!-- 공통코드005 -->
+		<result property="ctrtLsnCnt" column="CTRT_LSN_CNT" /> <!-- 계약 수업 횟수 -->
+		<result property="psntPrgsLsnCnt" column="PSNT_PRGS_LSN_CNT" /> <!-- 현재 진행 수업 횟수 -->
+		<result property="untLtrFee" column="UNT_LTR_FEE" /> <!-- 단위 강의료 -->
+		<result property="lsnSchlCsttWkCd" column="LSN_SCHL_CSTT_WK_CD" /> <!-- 공통코드006 -->
+		<result property="lsnSchlCsttDowCd" column="LSN_SCHL_CSTT_DOW_CD" /> <!-- 공통코드007 -->
+		<result property="lsnSchlCsttHh" column="LSN_SCHL_CSTT_HH" /> <!-- 수업 일정 구성 시 -->
+		<result property="lsnSchlCsttMm" column="LSN_SCHL_CSTT_MM" /> <!-- 수업 일정 구성 분 -->
+		<result property="cltFrmCd" column="CLT_FRM_CD" /> <!-- 공통코드008 -->
+		<result property="allTtn" column="ALL_TTN" /> <!-- 전체 수강료 -->
+		<result property="schdStrtDy" column="SCHD_STRT_DY" /> <!-- 예정 시작일자 -->
+		<result property="rlyStrtDy" column="RLY_STRT_DY" /> <!-- 실제 시작일자 -->
+		<result property="schdEndDy" column="SCHD_END_DY" /> <!-- 예정 종료일자 -->
+		<result property="rlyEndDy" column="RLY_END_DY" /> <!-- 실제 종료일자 -->
+		<result property="gudDy" column="GUD_DY" /> <!-- 안내 일자 -->
+		<result property="gudAcntCd" column="GUD_ACNT_CD" /> <!-- 공통코드009 -->
+		<result property="rmks" column="RMKS" /> <!-- 비고 -->
+		<result property="untLtrFeeUpdAmt" column="UNT_LTR_FEE_UPD_AMT" /> <!-- 단위 강의료 수정 금액 -->
+		<result property="ttnDpstFnshDy" column="TTN_DPST_FNSH_DY" /> <!-- 수업료 입금 완료일자 -->
+		<result property="ttnDpstFnshYn" column="TTN_DPST_FNSH_YN" /> <!-- 수업료 입금 완료 여부 -->
+		<result property="lsnSmtrCnt" column="LSN_SMTR_CNT" /> <!-- 수업 학기 수 -->
+		<result property="lsnTmMm" column="LSN_TM_MM" /> <!-- 분단위 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLesson" parameterType="dongovi2020.common.model.extend.LessonVO" resultMap="_LessonResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLesson */
+			LSN_IDX 
+			, PRV_SMTR_LSN_IDX 
+			, RLY_LSN_NO 
+			, LSN_PRGS_STS_CD 
+			, LSN_ARA_ID 
+			, CHG_TEAM_ID 
+			, RPST_TCHR_IDX 
+			, LSN_FRM_ID 
+			, AFF_ORG_NM 
+			, GRD_CD 
+			, CTRT_LSN_CNT 
+			, PSNT_PRGS_LSN_CNT 
+			, UNT_LTR_FEE 
+			, LSN_SCHL_CSTT_WK_CD 
+			, LSN_SCHL_CSTT_DOW_CD 
+			, LSN_SCHL_CSTT_HH 
+			, LSN_SCHL_CSTT_MM 
+			, CLT_FRM_CD 
+			, ALL_TTN 
+			, SCHD_STRT_DY 
+			, RLY_STRT_DY 
+			, SCHD_END_DY 
+			, RLY_END_DY 
+			, GUD_DY 
+			, GUD_ACNT_CD 
+			, RMKS 
+			, UNT_LTR_FEE_UPD_AMT 
+			, TTN_DPST_FNSH_DY 
+			, TTN_DPST_FNSH_YN 
+			, LSN_SMTR_CNT 
+			, LSN_TM_MM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN 
+		WHERE 1=1 
+			AND LSN_IDX = #{lsnIdx}   
+	</select>
+	
+	<select id="selectLessonList" parameterType="dongovi2020.common.model.extend.LessonVO" resultMap="_LessonResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonList */
+			LSN_IDX 
+			, PRV_SMTR_LSN_IDX 
+			, RLY_LSN_NO 
+			, LSN_PRGS_STS_CD 
+			, LSN_ARA_ID 
+			, CHG_TEAM_ID 
+			, RPST_TCHR_IDX 
+			, LSN_FRM_ID 
+			, AFF_ORG_NM 
+			, GRD_CD 
+			, CTRT_LSN_CNT 
+			, PSNT_PRGS_LSN_CNT 
+			, UNT_LTR_FEE 
+			, LSN_SCHL_CSTT_WK_CD 
+			, LSN_SCHL_CSTT_DOW_CD 
+			, LSN_SCHL_CSTT_HH 
+			, LSN_SCHL_CSTT_MM 
+			, CLT_FRM_CD 
+			, ALL_TTN 
+			, SCHD_STRT_DY 
+			, RLY_STRT_DY 
+			, SCHD_END_DY 
+			, RLY_END_DY 
+			, GUD_DY 
+			, GUD_ACNT_CD 
+			, RMKS 
+			, UNT_LTR_FEE_UPD_AMT 
+			, TTN_DPST_FNSH_DY 
+			, TTN_DPST_FNSH_YN 
+			, LSN_SMTR_CNT 
+			, LSN_TM_MM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN 
+		WHERE 1=1 
+			AND LSN_IDX = #{lsnIdx}  
+	</select>
+	
+	<select id="selectLessonListCount" parameterType="dongovi2020.common.model.extend.LessonVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonCount */
+			COUNT(1) CNT
+		FROM TB_LSN 
+		WHERE 1=1 
+			AND LSN_IDX = #{lsnIdx}  
+	</select>
+	
+	<insert id="insertLesson" parameterType="dongovi2020.common.model.extend.LessonVO" useGeneratedKeys="true" keyProperty="lsnIdx" >
+		INSERT INTO TB_LSN ( /* dongovi2020.biz01.dao.insertLesson */ 
+			PRV_SMTR_LSN_IDX 
+			, RLY_LSN_NO 
+			, LSN_PRGS_STS_CD 
+			, LSN_ARA_ID 
+			, CHG_TEAM_ID 
+			, RPST_TCHR_IDX 
+			, LSN_FRM_ID 
+			, AFF_ORG_NM 
+			, GRD_CD 
+			, CTRT_LSN_CNT 
+			, PSNT_PRGS_LSN_CNT 
+			, UNT_LTR_FEE 
+			, LSN_SCHL_CSTT_WK_CD 
+			, LSN_SCHL_CSTT_DOW_CD 
+			, LSN_SCHL_CSTT_HH 
+			, LSN_SCHL_CSTT_MM 
+			, CLT_FRM_CD 
+			, ALL_TTN 
+			, SCHD_STRT_DY 
+			, RLY_STRT_DY 
+			, SCHD_END_DY 
+			, RLY_END_DY 
+			, GUD_DY 
+			, GUD_ACNT_CD 
+			, RMKS 
+			, UNT_LTR_FEE_UPD_AMT 
+			, TTN_DPST_FNSH_DY 
+			, TTN_DPST_FNSH_YN 
+			, LSN_SMTR_CNT 
+			, LSN_TM_MM 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{prvSmtrLsnIdx} 
+			, #{rlyLsnNo} 
+			, #{lsnPrgsStsCd} 
+			, #{lsnAraId} 
+			, #{chgTeamId} 
+			, #{rpstTchrIdx} 
+			, #{lsnFrmId} 
+			, #{affOrgNm} 
+			, #{grdCd} 
+			, #{ctrtLsnCnt} 
+			, #{psntPrgsLsnCnt} 
+			, #{untLtrFee} 
+			, #{lsnSchlCsttWkCd} 
+			, #{lsnSchlCsttDowCd} 
+			, #{lsnSchlCsttHh} 
+			, #{lsnSchlCsttMm} 
+			, #{cltFrmCd} 
+			, #{allTtn} 
+			, #{schdStrtDy} 
+			, #{rlyStrtDy} 
+			, #{schdEndDy} 
+			, #{rlyEndDy} 
+			, #{gudDy} 
+			, #{gudAcntCd} 
+			, #{rmks} 
+			, #{untLtrFeeUpdAmt} 
+			, #{ttnDpstFnshDy} 
+			, #{ttnDpstFnshYn} 
+			, #{lsnSmtrCnt} 
+			, #{lsnTmMm} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLesson" parameterType="dongovi2020.common.model.extend.LessonVO">
+		UPDATE TB_LSN /* dongovi2020.biz01.dao.updateLesson */
+		SET 
+			PRV_SMTR_LSN_IDX = #{prvSmtrLsnIdx} 
+			, RLY_LSN_NO = #{rlyLsnNo} 
+			, LSN_PRGS_STS_CD = #{lsnPrgsStsCd} 
+			, LSN_ARA_ID = #{lsnAraId} 
+			, CHG_TEAM_ID = #{chgTeamId} 
+			, RPST_TCHR_IDX = #{rpstTchrIdx} 
+			, LSN_FRM_ID = #{lsnFrmId} 
+			, AFF_ORG_NM = #{affOrgNm} 
+			, GRD_CD = #{grdCd} 
+			, CTRT_LSN_CNT = #{ctrtLsnCnt} 
+			, PSNT_PRGS_LSN_CNT = #{psntPrgsLsnCnt} 
+			, UNT_LTR_FEE = #{untLtrFee} 
+			, LSN_SCHL_CSTT_WK_CD = #{lsnSchlCsttWkCd} 
+			, LSN_SCHL_CSTT_DOW_CD = #{lsnSchlCsttDowCd} 
+			, LSN_SCHL_CSTT_HH = #{lsnSchlCsttHh} 
+			, LSN_SCHL_CSTT_MM = #{lsnSchlCsttMm} 
+			, CLT_FRM_CD = #{cltFrmCd} 
+			, ALL_TTN = #{allTtn} 
+			, SCHD_STRT_DY = #{schdStrtDy} 
+			, RLY_STRT_DY = #{rlyStrtDy} 
+			, SCHD_END_DY = #{schdEndDy} 
+			, RLY_END_DY = #{rlyEndDy} 
+			, GUD_DY = #{gudDy} 
+			, GUD_ACNT_CD = #{gudAcntCd} 
+			, RMKS = #{rmks} 
+			, UNT_LTR_FEE_UPD_AMT = #{untLtrFeeUpdAmt} 
+			, TTN_DPST_FNSH_DY = #{ttnDpstFnshDy} 
+			, TTN_DPST_FNSH_YN = #{ttnDpstFnshYn} 
+			, LSN_SMTR_CNT = #{lsnSmtrCnt} 
+			, LSN_TM_MM = #{lsnTmMm} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_IDX = #{lsnIdx}  
+	</update>
+	
+	<delete id="deleteLesson" parameterType="dongovi2020.common.model.extend.LessonVO">
+		UPDATE TB_LSN /* dongovi2020.biz01.dao.deleteLesson */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN /* dongovi2020.biz01.dao.deleteLesson */
+		WHERE 1=1 
+			AND LSN_IDX = #{lsnIdx}   
+	</delete>
+	
+	<!-- ===== TB_LSN_ARA - LessonArea | 수업 지역 ================================================================= -->
+	<resultMap id="_LessonAreaResultMap" type="dongovi2020.common.model.extend.LessonAreaVO">
+		<id property="lsnAraId" column="LSN_ARA_ID" /> <!-- 수업 지역 ID -->
+		<result property="lsnAraNm" column="LSN_ARA_NM" /> <!-- 수업 지역 이름 -->
+		<result property="araDivDth" column="ARA_DIV_DTH" /> <!-- 지역 구분 깊이 -->
+		<result property="uprLsnAraId" column="UPR_LSN_ARA_ID" /> <!-- 상위 수업 지역 ID -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+		<result property="sysRmks" column="SYS_RMKS" /> <!-- 시스템 비고 -->
+	</resultMap>
+
+	<select id="selectLessonArea" parameterType="dongovi2020.common.model.extend.LessonAreaVO" resultMap="_LessonAreaResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonArea */
+			LSN_ARA_ID 
+			, LSN_ARA_NM 
+			, ARA_DIV_DTH 
+			, UPR_LSN_ARA_ID 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+			, SYS_RMKS 
+		FROM TB_LSN_ARA 
+		WHERE 1=1 
+			AND LSN_ARA_ID = #{lsnAraId}   
+	</select>
+	
+	<select id="selectLessonAreaList" parameterType="dongovi2020.common.model.extend.LessonAreaVO" resultMap="_LessonAreaResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonAreaList */
+			LSN_ARA_ID 
+			, LSN_ARA_NM 
+			, ARA_DIV_DTH 
+			, UPR_LSN_ARA_ID 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+			, SYS_RMKS 
+		FROM TB_LSN_ARA 
+		WHERE 1=1 
+			AND LSN_ARA_ID = #{lsnAraId}  
+	</select>
+	
+	<select id="selectLessonAreaListCount" parameterType="dongovi2020.common.model.extend.LessonAreaVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonAreaCount */
+			COUNT(1) CNT
+		FROM TB_LSN_ARA 
+		WHERE 1=1 
+			AND LSN_ARA_ID = #{lsnAraId}  
+	</select>
+	
+	<insert id="insertLessonArea" parameterType="dongovi2020.common.model.extend.LessonAreaVO" >
+		INSERT INTO TB_LSN_ARA ( /* dongovi2020.biz01.dao.insertLessonArea */ 
+			LSN_ARA_ID 
+			, LSN_ARA_NM 
+			, ARA_DIV_DTH 
+			, UPR_LSN_ARA_ID 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+			, SYS_RMKS 
+		) VALUES ( 
+			#{lsnAraId} 
+			, #{lsnAraNm} 
+			, #{araDivDth} 
+			, #{uprLsnAraId} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+			, #{sysRmks} 
+		)
+	</insert>
+	
+	<update id="updateLessonArea" parameterType="dongovi2020.common.model.extend.LessonAreaVO">
+		UPDATE TB_LSN_ARA /* dongovi2020.biz01.dao.updateLessonArea */
+		SET 
+			LSN_ARA_NM = #{lsnAraNm} 
+			, ARA_DIV_DTH = #{araDivDth} 
+			, UPR_LSN_ARA_ID = #{uprLsnAraId} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+			, SYS_RMKS = #{sysRmks} 
+		WHERE 1=1 
+			AND LSN_ARA_ID = #{lsnAraId}  
+	</update>
+	
+	<delete id="deleteLessonArea" parameterType="dongovi2020.common.model.extend.LessonAreaVO">
+		UPDATE TB_LSN_ARA /* dongovi2020.biz01.dao.deleteLessonArea */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_ARA /* dongovi2020.biz01.dao.deleteLessonArea */
+		WHERE 1=1 
+			AND LSN_ARA_ID = #{lsnAraId}   
+	</delete>
+	
+	<!-- ===== TB_LSN_FRM - LessonForm | 수업 형태 ================================================================= -->
+	<resultMap id="_LessonFormResultMap" type="dongovi2020.common.model.extend.LessonFormVO">
+		<id property="lsnFrmId" column="LSN_FRM_ID" /> <!-- 수업 형태 ID -->
+		<result property="lsnFrmAbbrNm" column="LSN_FRM_ABBR_NM" /> <!-- 수업 형태 축약 이름 -->
+		<result property="lsnFrmNm" column="LSN_FRM_NM" /> <!-- 수업 형태 이름 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonForm" parameterType="dongovi2020.common.model.extend.LessonFormVO" resultMap="_LessonFormResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonForm */
+			LSN_FRM_ID 
+			, LSN_FRM_ABBR_NM 
+			, LSN_FRM_NM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_FRM 
+		WHERE 1=1 
+			AND LSN_FRM_ID = #{lsnFrmId}   
+	</select>
+	
+	<select id="selectLessonFormList" parameterType="dongovi2020.common.model.extend.LessonFormVO" resultMap="_LessonFormResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonFormList */
+			LSN_FRM_ID 
+			, LSN_FRM_ABBR_NM 
+			, LSN_FRM_NM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_FRM 
+		WHERE 1=1 
+			AND LSN_FRM_ID = #{lsnFrmId}  
+	</select>
+	
+	<select id="selectLessonFormListCount" parameterType="dongovi2020.common.model.extend.LessonFormVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonFormCount */
+			COUNT(1) CNT
+		FROM TB_LSN_FRM 
+		WHERE 1=1 
+			AND LSN_FRM_ID = #{lsnFrmId}  
+	</select>
+	
+	<insert id="insertLessonForm" parameterType="dongovi2020.common.model.extend.LessonFormVO" >
+		INSERT INTO TB_LSN_FRM ( /* dongovi2020.biz01.dao.insertLessonForm */ 
+			LSN_FRM_ID 
+			, LSN_FRM_ABBR_NM 
+			, LSN_FRM_NM 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnFrmId} 
+			, #{lsnFrmAbbrNm} 
+			, #{lsnFrmNm} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonForm" parameterType="dongovi2020.common.model.extend.LessonFormVO">
+		UPDATE TB_LSN_FRM /* dongovi2020.biz01.dao.updateLessonForm */
+		SET 
+			LSN_FRM_ABBR_NM = #{lsnFrmAbbrNm} 
+			, LSN_FRM_NM = #{lsnFrmNm} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_FRM_ID = #{lsnFrmId}  
+	</update>
+	
+	<delete id="deleteLessonForm" parameterType="dongovi2020.common.model.extend.LessonFormVO">
+		UPDATE TB_LSN_FRM /* dongovi2020.biz01.dao.deleteLessonForm */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_FRM /* dongovi2020.biz01.dao.deleteLessonForm */
+		WHERE 1=1 
+			AND LSN_FRM_ID = #{lsnFrmId}   
+	</delete>
+	
+	<!-- ===== TB_LSN_PLC - LessonPlace | 수업 장소 ================================================================= -->
+	<resultMap id="_LessonPlaceResultMap" type="dongovi2020.common.model.extend.LessonPlaceVO">
+		<id property="lsnPlcId" column="LSN_PLC_ID" /> <!-- 수업 장소 ID -->
+		<result property="lsnAraId" column="LSN_ARA_ID" /> <!-- 수업 지역 ID -->
+		<result property="lsnPlcNm" column="LSN_PLC_NM" /> <!-- 수업 장소 이름 -->
+		<result property="lsnPlcAddr" column="LSN_PLC_ADDR" /> <!-- 수업 장소 주소 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonPlace" parameterType="dongovi2020.common.model.extend.LessonPlaceVO" resultMap="_LessonPlaceResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonPlace */
+			LSN_PLC_ID 
+			, LSN_ARA_ID 
+			, LSN_PLC_NM 
+			, LSN_PLC_ADDR 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_PLC 
+		WHERE 1=1 
+			AND LSN_PLC_ID = #{lsnPlcId}   
+	</select>
+	
+	<select id="selectLessonPlaceList" parameterType="dongovi2020.common.model.extend.LessonPlaceVO" resultMap="_LessonPlaceResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonPlaceList */
+			LSN_PLC_ID 
+			, LSN_ARA_ID 
+			, LSN_PLC_NM 
+			, LSN_PLC_ADDR 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_PLC 
+		WHERE 1=1 
+			AND LSN_PLC_ID = #{lsnPlcId}  
+	</select>
+	
+	<select id="selectLessonPlaceListCount" parameterType="dongovi2020.common.model.extend.LessonPlaceVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonPlaceCount */
+			COUNT(1) CNT
+		FROM TB_LSN_PLC 
+		WHERE 1=1 
+			AND LSN_PLC_ID = #{lsnPlcId}  
+	</select>
+	
+	<insert id="insertLessonPlace" parameterType="dongovi2020.common.model.extend.LessonPlaceVO" >
+		INSERT INTO TB_LSN_PLC ( /* dongovi2020.biz01.dao.insertLessonPlace */ 
+			LSN_PLC_ID 
+			, LSN_ARA_ID 
+			, LSN_PLC_NM 
+			, LSN_PLC_ADDR 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnPlcId} 
+			, #{lsnAraId} 
+			, #{lsnPlcNm} 
+			, #{lsnPlcAddr} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonPlace" parameterType="dongovi2020.common.model.extend.LessonPlaceVO">
+		UPDATE TB_LSN_PLC /* dongovi2020.biz01.dao.updateLessonPlace */
+		SET 
+			LSN_ARA_ID = #{lsnAraId} 
+			, LSN_PLC_NM = #{lsnPlcNm} 
+			, LSN_PLC_ADDR = #{lsnPlcAddr} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_PLC_ID = #{lsnPlcId}  
+	</update>
+	
+	<delete id="deleteLessonPlace" parameterType="dongovi2020.common.model.extend.LessonPlaceVO">
+		UPDATE TB_LSN_PLC /* dongovi2020.biz01.dao.deleteLessonPlace */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_PLC /* dongovi2020.biz01.dao.deleteLessonPlace */
+		WHERE 1=1 
+			AND LSN_PLC_ID = #{lsnPlcId}   
+	</delete>
+	
+	<!-- ===== TB_LSN_STDNT_CSTT - LessonStudentConstitue | 수업 학생 구성 ================================================================= -->
+	<resultMap id="_LessonStudentConstitueResultMap" type="dongovi2020.common.model.extend.LessonStudentConstitueVO">
+		<id property="lsnStdntCsttIdx" column="LSN_STDNT_CSTT_IDX" /> <!-- 수업 학생 구성 IDX -->
+		<result property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="psnTtnAmt" column="PSN_TTN_AMT" /> <!-- 개인 수강료 금액 -->
+		<result property="psnTtnUpdAmt" column="PSN_TTN_UPD_AMT" /> <!-- 개인 수강료 수정 금액 -->
+		<result property="rpstStdntYn" column="RPST_STDNT_YN" /> <!-- 대표 학생 여부 -->
+		<result property="spCmntItm" column="SP_CMNT_ITM" /> <!-- 특기사항 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonStudentConstitue" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO" resultMap="_LessonStudentConstitueResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentConstitue */
+			LSN_STDNT_CSTT_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, PSN_TTN_AMT 
+			, PSN_TTN_UPD_AMT 
+			, RPST_STDNT_YN 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_STDNT_CSTT 
+		WHERE 1=1 
+			AND LSN_STDNT_CSTT_IDX = #{lsnStdntCsttIdx}   
+	</select>
+	
+	<select id="selectLessonStudentConstitueList" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO" resultMap="_LessonStudentConstitueResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentConstitueList */
+			LSN_STDNT_CSTT_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, PSN_TTN_AMT 
+			, PSN_TTN_UPD_AMT 
+			, RPST_STDNT_YN 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_STDNT_CSTT 
+		WHERE 1=1 
+			AND LSN_STDNT_CSTT_IDX = #{lsnStdntCsttIdx}  
+	</select>
+	
+	<select id="selectLessonStudentConstitueListCount" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentConstitueCount */
+			COUNT(1) CNT
+		FROM TB_LSN_STDNT_CSTT 
+		WHERE 1=1 
+			AND LSN_STDNT_CSTT_IDX = #{lsnStdntCsttIdx}  
+	</select>
+	
+	<insert id="insertLessonStudentConstitue" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO" useGeneratedKeys="true" keyProperty="lsnStdntCsttIdx" >
+		INSERT INTO TB_LSN_STDNT_CSTT ( /* dongovi2020.biz01.dao.insertLessonStudentConstitue */ 
+			LSN_IDX 
+			, STDNT_IDX 
+			, PSN_TTN_AMT 
+			, PSN_TTN_UPD_AMT 
+			, RPST_STDNT_YN 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnIdx} 
+			, #{stdntIdx} 
+			, #{psnTtnAmt} 
+			, #{psnTtnUpdAmt} 
+			, #{rpstStdntYn} 
+			, #{spCmntItm} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonStudentConstitue" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO">
+		UPDATE TB_LSN_STDNT_CSTT /* dongovi2020.biz01.dao.updateLessonStudentConstitue */
+		SET 
+			LSN_IDX = #{lsnIdx} 
+			, STDNT_IDX = #{stdntIdx} 
+			, PSN_TTN_AMT = #{psnTtnAmt} 
+			, PSN_TTN_UPD_AMT = #{psnTtnUpdAmt} 
+			, RPST_STDNT_YN = #{rpstStdntYn} 
+			, SP_CMNT_ITM = #{spCmntItm} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_STDNT_CSTT_IDX = #{lsnStdntCsttIdx}  
+	</update>
+	
+	<delete id="deleteLessonStudentConstitue" parameterType="dongovi2020.common.model.extend.LessonStudentConstitueVO">
+		UPDATE TB_LSN_STDNT_CSTT /* dongovi2020.biz01.dao.deleteLessonStudentConstitue */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_STDNT_CSTT /* dongovi2020.biz01.dao.deleteLessonStudentConstitue */
+		WHERE 1=1 
+			AND LSN_STDNT_CSTT_IDX = #{lsnStdntCsttIdx}   
+	</delete>
+	
+	<!-- ===== TB_LSN_STDNT_TTN_DPST - LessonStudentTuitionDeposit | 수업 학생 수강료 입금 ================================================================= -->
+	<resultMap id="_LessonStudentTuitionDepositResultMap" type="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO">
+		<id property="lsnStdntTtnDpstIdx" column="LSN_STDNT_TTN_DPST_IDX" /> <!-- 수업 학생 수강료 입금 IDX -->
+		<result property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="dpstSeqNo" column="DPST_SEQ_NO" /> <!-- 입금 일련 번호 -->
+		<result property="dpstDy" column="DPST_DY" /> <!-- 입금 일자 -->
+		<result property="dpstAmt" column="DPST_AMT" /> <!-- 입금 금액 -->
+		<result property="dpstBnkCd" column="DPST_BNK_CD" /> <!-- 공통코드010 -->
+		<result property="dpstAcntNo" column="DPST_ACNT_NO" /> <!-- 입금 계좌 번호 -->
+		<result property="ntfTlkSndYn" column="NTF_TLK_SND_YN" /> <!-- 알림톡 발송 여부 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonStudentTuitionDeposit" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO" resultMap="_LessonStudentTuitionDepositResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentTuitionDeposit */
+			LSN_STDNT_TTN_DPST_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, DPST_SEQ_NO 
+			, DPST_DY 
+			, DPST_AMT 
+			, DPST_BNK_CD 
+			, DPST_ACNT_NO 
+			, NTF_TLK_SND_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_STDNT_TTN_DPST 
+		WHERE 1=1 
+			AND LSN_STDNT_TTN_DPST_IDX = #{lsnStdntTtnDpstIdx}   
+	</select>
+	
+	<select id="selectLessonStudentTuitionDepositList" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO" resultMap="_LessonStudentTuitionDepositResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentTuitionDepositList */
+			LSN_STDNT_TTN_DPST_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, DPST_SEQ_NO 
+			, DPST_DY 
+			, DPST_AMT 
+			, DPST_BNK_CD 
+			, DPST_ACNT_NO 
+			, NTF_TLK_SND_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_STDNT_TTN_DPST 
+		WHERE 1=1 
+			AND LSN_STDNT_TTN_DPST_IDX = #{lsnStdntTtnDpstIdx}  
+	</select>
+	
+	<select id="selectLessonStudentTuitionDepositListCount" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonStudentTuitionDepositCount */
+			COUNT(1) CNT
+		FROM TB_LSN_STDNT_TTN_DPST 
+		WHERE 1=1 
+			AND LSN_STDNT_TTN_DPST_IDX = #{lsnStdntTtnDpstIdx}  
+	</select>
+	
+	<insert id="insertLessonStudentTuitionDeposit" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO" useGeneratedKeys="true" keyProperty="lsnStdntTtnDpstIdx" >
+		INSERT INTO TB_LSN_STDNT_TTN_DPST ( /* dongovi2020.biz01.dao.insertLessonStudentTuitionDeposit */ 
+			LSN_IDX 
+			, STDNT_IDX 
+			, DPST_SEQ_NO 
+			, DPST_DY 
+			, DPST_AMT 
+			, DPST_BNK_CD 
+			, DPST_ACNT_NO 
+			, NTF_TLK_SND_YN 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnIdx} 
+			, #{stdntIdx} 
+			, #{dpstSeqNo} 
+			, #{dpstDy} 
+			, #{dpstAmt} 
+			, #{dpstBnkCd} 
+			, #{dpstAcntNo} 
+			, #{ntfTlkSndYn} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonStudentTuitionDeposit" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO">
+		UPDATE TB_LSN_STDNT_TTN_DPST /* dongovi2020.biz01.dao.updateLessonStudentTuitionDeposit */
+		SET 
+			LSN_IDX = #{lsnIdx} 
+			, STDNT_IDX = #{stdntIdx} 
+			, DPST_SEQ_NO = #{dpstSeqNo} 
+			, DPST_DY = #{dpstDy} 
+			, DPST_AMT = #{dpstAmt} 
+			, DPST_BNK_CD = #{dpstBnkCd} 
+			, DPST_ACNT_NO = #{dpstAcntNo} 
+			, NTF_TLK_SND_YN = #{ntfTlkSndYn} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_STDNT_TTN_DPST_IDX = #{lsnStdntTtnDpstIdx}  
+	</update>
+	
+	<delete id="deleteLessonStudentTuitionDeposit" parameterType="dongovi2020.common.model.extend.LessonStudentTuitionDepositVO">
+		UPDATE TB_LSN_STDNT_TTN_DPST /* dongovi2020.biz01.dao.deleteLessonStudentTuitionDeposit */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_STDNT_TTN_DPST /* dongovi2020.biz01.dao.deleteLessonStudentTuitionDeposit */
+		WHERE 1=1 
+			AND LSN_STDNT_TTN_DPST_IDX = #{lsnStdntTtnDpstIdx}   
+	</delete>
+	
+	<!-- ===== TB_LSN_TRN - LessonTrun | 수업 회차 ================================================================= -->
+	<resultMap id="_LessonTrunResultMap" type="dongovi2020.common.model.extend.LessonTrunVO">
+		<id property="lsnTrnIdx" column="LSN_TRN_IDX" /> <!-- 수업 회차 IDX -->
+		<result property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="lsnTrnNo" column="LSN_TRN_NO" /> <!-- 수업 회차 번호 -->
+		<result property="rmnTrnNo" column="RMN_TRN_NO" /> <!-- 잔여 회차 번호 -->
+		<result property="schdLsnDy" column="SCHD_LSN_DY" /> <!-- 예정 수업 일자 -->
+		<result property="rlyLsnDy" column="RLY_LSN_DY" /> <!-- 실제 수업 일자 -->
+		<result property="lsnPrgsTchrIdx" column="LSN_PRGS_TCHR_IDX" /> <!-- 수업 진행 교사 IDX -->
+		<result property="spCmntItm" column="SP_CMNT_ITM" /> <!-- 특기 사항 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonTrun" parameterType="dongovi2020.common.model.extend.LessonTrunVO" resultMap="_LessonTrunResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTrun */
+			LSN_TRN_IDX 
+			, LSN_IDX 
+			, LSN_TRN_NO 
+			, RMN_TRN_NO 
+			, SCHD_LSN_DY 
+			, RLY_LSN_DY 
+			, LSN_PRGS_TCHR_IDX 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_TRN 
+		WHERE 1=1 
+			AND LSN_TRN_IDX = #{lsnTrnIdx}   
+	</select>
+	
+	<select id="selectLessonTrunList" parameterType="dongovi2020.common.model.extend.LessonTrunVO" resultMap="_LessonTrunResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTrunList */
+			LSN_TRN_IDX 
+			, LSN_IDX 
+			, LSN_TRN_NO 
+			, RMN_TRN_NO 
+			, SCHD_LSN_DY 
+			, RLY_LSN_DY 
+			, LSN_PRGS_TCHR_IDX 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_TRN 
+		WHERE 1=1 
+			AND LSN_TRN_IDX = #{lsnTrnIdx}  
+	</select>
+	
+	<select id="selectLessonTrunListCount" parameterType="dongovi2020.common.model.extend.LessonTrunVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTrunCount */
+			COUNT(1) CNT
+		FROM TB_LSN_TRN 
+		WHERE 1=1 
+			AND LSN_TRN_IDX = #{lsnTrnIdx}  
+	</select>
+	
+	<insert id="insertLessonTrun" parameterType="dongovi2020.common.model.extend.LessonTrunVO" useGeneratedKeys="true" keyProperty="lsnTrnIdx" >
+		INSERT INTO TB_LSN_TRN ( /* dongovi2020.biz01.dao.insertLessonTrun */ 
+			LSN_IDX 
+			, LSN_TRN_NO 
+			, RMN_TRN_NO 
+			, SCHD_LSN_DY 
+			, RLY_LSN_DY 
+			, LSN_PRGS_TCHR_IDX 
+			, SP_CMNT_ITM 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnIdx} 
+			, #{lsnTrnNo} 
+			, #{rmnTrnNo} 
+			, #{schdLsnDy} 
+			, #{rlyLsnDy} 
+			, #{lsnPrgsTchrIdx} 
+			, #{spCmntItm} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonTrun" parameterType="dongovi2020.common.model.extend.LessonTrunVO">
+		UPDATE TB_LSN_TRN /* dongovi2020.biz01.dao.updateLessonTrun */
+		SET 
+			LSN_IDX = #{lsnIdx} 
+			, LSN_TRN_NO = #{lsnTrnNo} 
+			, RMN_TRN_NO = #{rmnTrnNo} 
+			, SCHD_LSN_DY = #{schdLsnDy} 
+			, RLY_LSN_DY = #{rlyLsnDy} 
+			, LSN_PRGS_TCHR_IDX = #{lsnPrgsTchrIdx} 
+			, SP_CMNT_ITM = #{spCmntItm} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_TRN_IDX = #{lsnTrnIdx}  
+	</update>
+	
+	<delete id="deleteLessonTrun" parameterType="dongovi2020.common.model.extend.LessonTrunVO">
+		UPDATE TB_LSN_TRN /* dongovi2020.biz01.dao.deleteLessonTrun */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_TRN /* dongovi2020.biz01.dao.deleteLessonTrun */
+		WHERE 1=1 
+			AND LSN_TRN_IDX = #{lsnTrnIdx}   
+	</delete>
+	
+	<!-- ===== TB_LSN_TRN_STDNT_PTCPT - LessonTurnStudentPaticipation | 수업 회차 학생 참여 ================================================================= -->
+	<resultMap id="_LessonTurnStudentPaticipationResultMap" type="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO">
+		<id property="lsnTrnStdntPtcptIdx" column="LSN_TRN_STDNT_PTCPT_IDX" /> <!-- 수업 회차 학생 참여 IDX -->
+		<result property="lsnTrnIdx" column="LSN_TRN_IDX" /> <!-- 수업 회차 IDX -->
+		<result property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="attdYn" column="ATTD_YN" /> <!-- 참석 여부 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLessonTurnStudentPaticipation" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO" resultMap="_LessonTurnStudentPaticipationResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTurnStudentPaticipation */
+			LSN_TRN_STDNT_PTCPT_IDX 
+			, LSN_TRN_IDX 
+			, STDNT_IDX 
+			, ATTD_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_TRN_STDNT_PTCPT 
+		WHERE 1=1 
+			AND LSN_TRN_STDNT_PTCPT_IDX = #{lsnTrnStdntPtcptIdx}   
+	</select>
+	
+	<select id="selectLessonTurnStudentPaticipationList" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO" resultMap="_LessonTurnStudentPaticipationResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTurnStudentPaticipationList */
+			LSN_TRN_STDNT_PTCPT_IDX 
+			, LSN_TRN_IDX 
+			, STDNT_IDX 
+			, ATTD_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LSN_TRN_STDNT_PTCPT 
+		WHERE 1=1 
+			AND LSN_TRN_STDNT_PTCPT_IDX = #{lsnTrnStdntPtcptIdx}  
+	</select>
+	
+	<select id="selectLessonTurnStudentPaticipationListCount" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLessonTurnStudentPaticipationCount */
+			COUNT(1) CNT
+		FROM TB_LSN_TRN_STDNT_PTCPT 
+		WHERE 1=1 
+			AND LSN_TRN_STDNT_PTCPT_IDX = #{lsnTrnStdntPtcptIdx}  
+	</select>
+	
+	<insert id="insertLessonTurnStudentPaticipation" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO" useGeneratedKeys="true" keyProperty="lsnTrnStdntPtcptIdx" >
+		INSERT INTO TB_LSN_TRN_STDNT_PTCPT ( /* dongovi2020.biz01.dao.insertLessonTurnStudentPaticipation */ 
+			LSN_TRN_IDX 
+			, STDNT_IDX 
+			, ATTD_YN 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnTrnIdx} 
+			, #{stdntIdx} 
+			, #{attdYn} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLessonTurnStudentPaticipation" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO">
+		UPDATE TB_LSN_TRN_STDNT_PTCPT /* dongovi2020.biz01.dao.updateLessonTurnStudentPaticipation */
+		SET 
+			LSN_TRN_IDX = #{lsnTrnIdx} 
+			, STDNT_IDX = #{stdntIdx} 
+			, ATTD_YN = #{attdYn} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LSN_TRN_STDNT_PTCPT_IDX = #{lsnTrnStdntPtcptIdx}  
+	</update>
+	
+	<delete id="deleteLessonTurnStudentPaticipation" parameterType="dongovi2020.common.model.extend.LessonTurnStudentPaticipationVO">
+		UPDATE TB_LSN_TRN_STDNT_PTCPT /* dongovi2020.biz01.dao.deleteLessonTurnStudentPaticipation */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LSN_TRN_STDNT_PTCPT /* dongovi2020.biz01.dao.deleteLessonTurnStudentPaticipation */
+		WHERE 1=1 
+			AND LSN_TRN_STDNT_PTCPT_IDX = #{lsnTrnStdntPtcptIdx}   
+	</delete>
+	
+	<!-- ===== TB_LTR_FEE_PAY - LectureFeePay | 강의료 지급 ================================================================= -->
+	<resultMap id="_LectureFeePayResultMap" type="dongovi2020.common.model.extend.LectureFeePayVO">
+		<id property="ltrFeePayIdx" column="LTR_FEE_PAY_IDX" /> <!-- 강의료 지급 IDX -->
+		<result property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
+		<result property="payYm" column="PAY_YM" /> <!-- 지급 연월 -->
+		<result property="payAmt" column="PAY_AMT" /> <!-- 지급 금액 -->
+		<result property="payAmtCalDt" column="PAY_AMT_CAL_DT" /> <!-- 지급 금액 계산 일시 -->
+		<result property="payAmtRmks" column="PAY_AMT_RMKS" /> <!-- 지급 금액 비고 -->
+		<result property="payFnshYn" column="PAY_FNSH_YN" /> <!-- 지급 완료 여부 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLectureFeePay" parameterType="dongovi2020.common.model.extend.LectureFeePayVO" resultMap="_LectureFeePayResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePay */
+			LTR_FEE_PAY_IDX 
+			, TCHR_IDX 
+			, PAY_YM 
+			, PAY_AMT 
+			, date_format(PAY_AMT_CAL_DT,'%Y-%m-%d %T') AS PAY_AMT_CAL_DT 
+			, PAY_AMT_RMKS 
+			, PAY_FNSH_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LTR_FEE_PAY 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_IDX = #{ltrFeePayIdx}   
+	</select>
+	
+	<select id="selectLectureFeePayList" parameterType="dongovi2020.common.model.extend.LectureFeePayVO" resultMap="_LectureFeePayResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePayList */
+			LTR_FEE_PAY_IDX 
+			, TCHR_IDX 
+			, PAY_YM 
+			, PAY_AMT 
+			, date_format(PAY_AMT_CAL_DT,'%Y-%m-%d %T') AS PAY_AMT_CAL_DT 
+			, PAY_AMT_RMKS 
+			, PAY_FNSH_YN 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LTR_FEE_PAY 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_IDX = #{ltrFeePayIdx}  
+	</select>
+	
+	<select id="selectLectureFeePayListCount" parameterType="dongovi2020.common.model.extend.LectureFeePayVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePayCount */
+			COUNT(1) CNT
+		FROM TB_LTR_FEE_PAY 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_IDX = #{ltrFeePayIdx}  
+	</select>
+	
+	<insert id="insertLectureFeePay" parameterType="dongovi2020.common.model.extend.LectureFeePayVO" useGeneratedKeys="true" keyProperty="ltrFeePayIdx" >
+		INSERT INTO TB_LTR_FEE_PAY ( /* dongovi2020.biz01.dao.insertLectureFeePay */ 
+			TCHR_IDX 
+			, PAY_YM 
+			, PAY_AMT 
+			, PAY_AMT_CAL_DT 
+			, PAY_AMT_RMKS 
+			, PAY_FNSH_YN 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{tchrIdx} 
+			, #{payYm} 
+			, #{payAmt} 
+			, #{payAmtCalDt} 
+			, #{payAmtRmks} 
+			, #{payFnshYn} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLectureFeePay" parameterType="dongovi2020.common.model.extend.LectureFeePayVO">
+		UPDATE TB_LTR_FEE_PAY /* dongovi2020.biz01.dao.updateLectureFeePay */
+		SET 
+			TCHR_IDX = #{tchrIdx} 
+			, PAY_YM = #{payYm} 
+			, PAY_AMT = #{payAmt} 
+			, PAY_AMT_CAL_DT = #{payAmtCalDt} 
+			, PAY_AMT_RMKS = #{payAmtRmks} 
+			, PAY_FNSH_YN = #{payFnshYn} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_IDX = #{ltrFeePayIdx}  
+	</update>
+	
+	<delete id="deleteLectureFeePay" parameterType="dongovi2020.common.model.extend.LectureFeePayVO">
+		UPDATE TB_LTR_FEE_PAY /* dongovi2020.biz01.dao.deleteLectureFeePay */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LTR_FEE_PAY /* dongovi2020.biz01.dao.deleteLectureFeePay */
+		WHERE 1=1 
+			AND LTR_FEE_PAY_IDX = #{ltrFeePayIdx}   
+	</delete>
+	
+	<!-- ===== TB_LTR_FEE_PAY_ADD_DTL - LectureFeePayAddDetail | 강의료 지급 추가 내역 ================================================================= -->
+	<resultMap id="_LectureFeePayAddDetailResultMap" type="dongovi2020.common.model.extend.LectureFeePayAddDetailVO">
+		<id property="ltrFeePayAddDtlIdx" column="LTR_FEE_PAY_ADD_DTL_IDX" /> <!-- 강의료 지급 추가 내역 IDX -->
+		<result property="ltrFeePayIdx" column="LTR_FEE_PAY_IDX" /> <!-- 강의료 지급 IDX -->
+		<result property="addDtl" column="ADD_DTL" /> <!-- 추가 내역 -->
+		<result property="addAmt" column="ADD_AMT" /> <!-- 추가 금액 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectLectureFeePayAddDetail" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO" resultMap="_LectureFeePayAddDetailResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePayAddDetail */
+			LTR_FEE_PAY_ADD_DTL_IDX 
+			, LTR_FEE_PAY_IDX 
+			, ADD_DTL 
+			, ADD_AMT 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LTR_FEE_PAY_ADD_DTL 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_ADD_DTL_IDX = #{ltrFeePayAddDtlIdx}   
+	</select>
+	
+	<select id="selectLectureFeePayAddDetailList" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO" resultMap="_LectureFeePayAddDetailResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePayAddDetailList */
+			LTR_FEE_PAY_ADD_DTL_IDX 
+			, LTR_FEE_PAY_IDX 
+			, ADD_DTL 
+			, ADD_AMT 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_LTR_FEE_PAY_ADD_DTL 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_ADD_DTL_IDX = #{ltrFeePayAddDtlIdx}  
+	</select>
+	
+	<select id="selectLectureFeePayAddDetailListCount" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectLectureFeePayAddDetailCount */
+			COUNT(1) CNT
+		FROM TB_LTR_FEE_PAY_ADD_DTL 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_ADD_DTL_IDX = #{ltrFeePayAddDtlIdx}  
+	</select>
+	
+	<insert id="insertLectureFeePayAddDetail" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO" useGeneratedKeys="true" keyProperty="ltrFeePayAddDtlIdx" >
+		INSERT INTO TB_LTR_FEE_PAY_ADD_DTL ( /* dongovi2020.biz01.dao.insertLectureFeePayAddDetail */ 
+			LTR_FEE_PAY_IDX 
+			, ADD_DTL 
+			, ADD_AMT 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{ltrFeePayIdx} 
+			, #{addDtl} 
+			, #{addAmt} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateLectureFeePayAddDetail" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO">
+		UPDATE TB_LTR_FEE_PAY_ADD_DTL /* dongovi2020.biz01.dao.updateLectureFeePayAddDetail */
+		SET 
+			LTR_FEE_PAY_IDX = #{ltrFeePayIdx} 
+			, ADD_DTL = #{addDtl} 
+			, ADD_AMT = #{addAmt} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND LTR_FEE_PAY_ADD_DTL_IDX = #{ltrFeePayAddDtlIdx}  
+	</update>
+	
+	<delete id="deleteLectureFeePayAddDetail" parameterType="dongovi2020.common.model.extend.LectureFeePayAddDetailVO">
+		UPDATE TB_LTR_FEE_PAY_ADD_DTL /* dongovi2020.biz01.dao.deleteLectureFeePayAddDetail */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_LTR_FEE_PAY_ADD_DTL /* dongovi2020.biz01.dao.deleteLectureFeePayAddDetail */
+		WHERE 1=1 
+			AND LTR_FEE_PAY_ADD_DTL_IDX = #{ltrFeePayAddDtlIdx}   
+	</delete>
+	
+	<!-- ===== TB_MNU - Menu | 메뉴 ================================================================= -->
+	<resultMap id="_MenuResultMap" type="dongovi2020.common.model.extend.MenuVO">
+		<id property="mnuIdx" column="MNU_IDX" /> <!-- 메뉴 IDX -->
+		<result property="uprMnuIdx" column="UPR_MNU_IDX" /> <!-- 상위 메뉴 IDX -->
+		<result property="mnuNm" column="MNU_NM" /> <!-- 메뉴 이름 -->
+		<result property="mnuDth" column="MNU_DTH" /> <!-- 메뉴 깊이 -->
+		<result property="pgmUri" column="PGM_URI" /> <!-- 프로그램 URI -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectMenu" parameterType="dongovi2020.common.model.extend.MenuVO" resultMap="_MenuResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenu */
+			MNU_IDX 
+			, UPR_MNU_IDX 
+			, MNU_NM 
+			, MNU_DTH 
+			, PGM_URI 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU 
+		WHERE 1=1 
+			AND MNU_IDX = #{mnuIdx}   
+	</select>
+	
+	<select id="selectMenuList" parameterType="dongovi2020.common.model.extend.MenuVO" resultMap="_MenuResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenuList */
+			MNU_IDX 
+			, UPR_MNU_IDX 
+			, MNU_NM 
+			, MNU_DTH 
+			, PGM_URI 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU 
+		WHERE 1=1 
+			AND MNU_IDX = #{mnuIdx}  
+	</select>
+	
+	<select id="selectMenuListCount" parameterType="dongovi2020.common.model.extend.MenuVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectMenuCount */
+			COUNT(1) CNT
+		FROM TB_MNU 
+		WHERE 1=1 
+			AND MNU_IDX = #{mnuIdx}  
+	</select>
+	
+	<insert id="insertMenu" parameterType="dongovi2020.common.model.extend.MenuVO" useGeneratedKeys="true" keyProperty="mnuIdx" >
+		INSERT INTO TB_MNU ( /* dongovi2020.biz01.dao.insertMenu */ 
+			UPR_MNU_IDX 
+			, MNU_NM 
+			, MNU_DTH 
+			, PGM_URI 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{uprMnuIdx} 
+			, #{mnuNm} 
+			, #{mnuDth} 
+			, #{pgmUri} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateMenu" parameterType="dongovi2020.common.model.extend.MenuVO">
+		UPDATE TB_MNU /* dongovi2020.biz01.dao.updateMenu */
+		SET 
+			UPR_MNU_IDX = #{uprMnuIdx} 
+			, MNU_NM = #{mnuNm} 
+			, MNU_DTH = #{mnuDth} 
+			, PGM_URI = #{pgmUri} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND MNU_IDX = #{mnuIdx}  
+	</update>
+	
+	<delete id="deleteMenu" parameterType="dongovi2020.common.model.extend.MenuVO">
+		UPDATE TB_MNU /* dongovi2020.biz01.dao.deleteMenu */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_MNU /* dongovi2020.biz01.dao.deleteMenu */
+		WHERE 1=1 
+			AND MNU_IDX = #{mnuIdx}   
+	</delete>
+	
+	<!-- ===== TB_MNU_ACS_LOG - MenuAccessLog | 메뉴 접근 로그 ================================================================= -->
+	<resultMap id="_MenuAccessLogResultMap" type="dongovi2020.common.model.extend.MenuAccessLogVO">
+		<id property="idx" column="IDX" /> <!-- IDX -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectMenuAccessLog" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO" resultMap="_MenuAccessLogResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAccessLog */
+			IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU_ACS_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}   
+	</select>
+	
+	<select id="selectMenuAccessLogList" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO" resultMap="_MenuAccessLogResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAccessLogList */
+			IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU_ACS_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</select>
+	
+	<select id="selectMenuAccessLogListCount" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAccessLogCount */
+			COUNT(1) CNT
+		FROM TB_MNU_ACS_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</select>
+	
+	<insert id="insertMenuAccessLog" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO" useGeneratedKeys="true" keyProperty="idx" >
+		INSERT INTO TB_MNU_ACS_LOG ( /* dongovi2020.biz01.dao.insertMenuAccessLog */ 
+			USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateMenuAccessLog" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO">
+		UPDATE TB_MNU_ACS_LOG /* dongovi2020.biz01.dao.updateMenuAccessLog */
+		SET 
+			CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</update>
+	
+	<delete id="deleteMenuAccessLog" parameterType="dongovi2020.common.model.extend.MenuAccessLogVO">
+		UPDATE TB_MNU_ACS_LOG /* dongovi2020.biz01.dao.deleteMenuAccessLog */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_MNU_ACS_LOG /* dongovi2020.biz01.dao.deleteMenuAccessLog */
+		WHERE 1=1 
+			AND IDX = #{idx}   
+	</delete>
+	
+	<!-- ===== TB_MNU_ATH - MenuAuth | 메뉴 권한 ================================================================= -->
+	<resultMap id="_MenuAuthResultMap" type="dongovi2020.common.model.extend.MenuAuthVO">
+		<id property="mnuAthIdx" column="MNU_ATH_IDX" /> <!-- 메뉴 권한 IDX -->
+		<result property="mnuIdx" column="MNU_IDX" /> <!-- 메뉴 IDX -->
+		<result property="useAthCd" column="USE_ATH_CD" /> <!-- 공통코드003 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectMenuAuth" parameterType="dongovi2020.common.model.extend.MenuAuthVO" resultMap="_MenuAuthResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAuth */
+			MNU_ATH_IDX 
+			, MNU_IDX 
+			, USE_ATH_CD 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU_ATH 
+		WHERE 1=1 
+			AND MNU_ATH_IDX = #{mnuAthIdx}   
+	</select>
+	
+	<select id="selectMenuAuthList" parameterType="dongovi2020.common.model.extend.MenuAuthVO" resultMap="_MenuAuthResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAuthList */
+			MNU_ATH_IDX 
+			, MNU_IDX 
+			, USE_ATH_CD 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MNU_ATH 
+		WHERE 1=1 
+			AND MNU_ATH_IDX = #{mnuAthIdx}  
+	</select>
+	
+	<select id="selectMenuAuthListCount" parameterType="dongovi2020.common.model.extend.MenuAuthVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectMenuAuthCount */
+			COUNT(1) CNT
+		FROM TB_MNU_ATH 
+		WHERE 1=1 
+			AND MNU_ATH_IDX = #{mnuAthIdx}  
+	</select>
+	
+	<insert id="insertMenuAuth" parameterType="dongovi2020.common.model.extend.MenuAuthVO" useGeneratedKeys="true" keyProperty="mnuAthIdx" >
+		INSERT INTO TB_MNU_ATH ( /* dongovi2020.biz01.dao.insertMenuAuth */ 
+			MNU_IDX 
+			, USE_ATH_CD 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{mnuIdx} 
+			, #{useAthCd} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateMenuAuth" parameterType="dongovi2020.common.model.extend.MenuAuthVO">
+		UPDATE TB_MNU_ATH /* dongovi2020.biz01.dao.updateMenuAuth */
+		SET 
+			MNU_IDX = #{mnuIdx} 
+			, USE_ATH_CD = #{useAthCd} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND MNU_ATH_IDX = #{mnuAthIdx}  
+	</update>
+	
+	<delete id="deleteMenuAuth" parameterType="dongovi2020.common.model.extend.MenuAuthVO">
+		UPDATE TB_MNU_ATH /* dongovi2020.biz01.dao.deleteMenuAuth */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_MNU_ATH /* dongovi2020.biz01.dao.deleteMenuAuth */
+		WHERE 1=1 
+			AND MNU_ATH_IDX = #{mnuAthIdx}   
+	</delete>
+	
+	<!-- ===== TB_MSG_SND - MessageSend | 메세지 발송 ================================================================= -->
+	<resultMap id="_MessageSendResultMap" type="dongovi2020.common.model.extend.MessageSendVO">
+		<id property="msgSndIdx" column="MSG_SND_IDX" /> <!-- 메세지 발송 IDX -->
+		<result property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="sndDy" column="SND_DY" /> <!-- 발송 일자 -->
+		<result property="msgSndMtdCd" column="MSG_SND_MTD_CD" /> <!-- 공통코드011 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectMessageSend" parameterType="dongovi2020.common.model.extend.MessageSendVO" resultMap="_MessageSendResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMessageSend */
+			MSG_SND_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, SND_DY 
+			, MSG_SND_MTD_CD 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MSG_SND 
+		WHERE 1=1 
+			AND MSG_SND_IDX = #{msgSndIdx}   
+	</select>
+	
+	<select id="selectMessageSendList" parameterType="dongovi2020.common.model.extend.MessageSendVO" resultMap="_MessageSendResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectMessageSendList */
+			MSG_SND_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, SND_DY 
+			, MSG_SND_MTD_CD 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_MSG_SND 
+		WHERE 1=1 
+			AND MSG_SND_IDX = #{msgSndIdx}  
+	</select>
+	
+	<select id="selectMessageSendListCount" parameterType="dongovi2020.common.model.extend.MessageSendVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectMessageSendCount */
+			COUNT(1) CNT
+		FROM TB_MSG_SND 
+		WHERE 1=1 
+			AND MSG_SND_IDX = #{msgSndIdx}  
+	</select>
+	
+	<insert id="insertMessageSend" parameterType="dongovi2020.common.model.extend.MessageSendVO" useGeneratedKeys="true" keyProperty="msgSndIdx" >
+		INSERT INTO TB_MSG_SND ( /* dongovi2020.biz01.dao.insertMessageSend */ 
+			LSN_IDX 
+			, STDNT_IDX 
+			, SND_DY 
+			, MSG_SND_MTD_CD 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnIdx} 
+			, #{stdntIdx} 
+			, #{sndDy} 
+			, #{msgSndMtdCd} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateMessageSend" parameterType="dongovi2020.common.model.extend.MessageSendVO">
+		UPDATE TB_MSG_SND /* dongovi2020.biz01.dao.updateMessageSend */
+		SET 
+			LSN_IDX = #{lsnIdx} 
+			, STDNT_IDX = #{stdntIdx} 
+			, SND_DY = #{sndDy} 
+			, MSG_SND_MTD_CD = #{msgSndMtdCd} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND MSG_SND_IDX = #{msgSndIdx}  
+	</update>
+	
+	<delete id="deleteMessageSend" parameterType="dongovi2020.common.model.extend.MessageSendVO">
+		UPDATE TB_MSG_SND /* dongovi2020.biz01.dao.deleteMessageSend */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_MSG_SND /* dongovi2020.biz01.dao.deleteMessageSend */
+		WHERE 1=1 
+			AND MSG_SND_IDX = #{msgSndIdx}   
+	</delete>
+	
+	<!-- ===== TB_STDNT - Student | 학생 ================================================================= -->
+	<resultMap id="_StudentResultMap" type="dongovi2020.common.model.extend.StudentVO">
+		<id property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="nm" column="NM" /> <!-- 이름 -->
+		<result property="gdrCd" column="GDR_CD" /> <!-- 공통코드001 -->
+		<result property="mobNo" column="MOB_NO" /> <!-- 휴대전화 번호 -->
+		<result property="eml" column="EML" /> <!-- 이메일 -->
+		<result property="addr" column="ADDR" /> <!-- 주소 -->
+		<result property="gdnNm" column="GDN_NM" /> <!-- 보호자 이름 -->
+		<result property="gdnRltn" column="GDN_RLTN" /> <!-- 보호자 관계 -->
+		<result property="gdnPhnNo" column="GDN_PHN_NO" /> <!-- 보호자 전화 번호 -->
+		<result property="gdnEml" column="GDN_EML" /> <!-- 보호자 이메일 -->
+		<result property="acntBnkCd" column="ACNT_BNK_CD" /> <!-- 공통코드012 -->
+		<result property="acntNo" column="ACNT_NO" /> <!-- 계좌번호 -->
+		<result property="rmks" column="RMKS" /> <!-- 비고 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectStudent" parameterType="dongovi2020.common.model.extend.StudentVO" resultMap="_StudentResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectStudent */
+			STDNT_IDX 
+			, NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, GDN_NM 
+			, GDN_RLTN 
+			, GDN_PHN_NO 
+			, GDN_EML 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, RMKS 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_STDNT 
+		WHERE 1=1 
+			AND STDNT_IDX = #{stdntIdx}   
+	</select>
+	
+	<select id="selectStudentList" parameterType="dongovi2020.common.model.extend.StudentVO" resultMap="_StudentResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectStudentList */
+			STDNT_IDX 
+			, NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, GDN_NM 
+			, GDN_RLTN 
+			, GDN_PHN_NO 
+			, GDN_EML 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, RMKS 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_STDNT 
+		WHERE 1=1 
+			AND STDNT_IDX = #{stdntIdx}  
+	</select>
+	
+	<select id="selectStudentListCount" parameterType="dongovi2020.common.model.extend.StudentVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectStudentCount */
+			COUNT(1) CNT
+		FROM TB_STDNT 
+		WHERE 1=1 
+			AND STDNT_IDX = #{stdntIdx}  
+	</select>
+	
+	<insert id="insertStudent" parameterType="dongovi2020.common.model.extend.StudentVO" useGeneratedKeys="true" keyProperty="stdntIdx" >
+		INSERT INTO TB_STDNT ( /* dongovi2020.biz01.dao.insertStudent */ 
+			NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, GDN_NM 
+			, GDN_RLTN 
+			, GDN_PHN_NO 
+			, GDN_EML 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, RMKS 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{nm} 
+			, #{gdrCd} 
+			, #{mobNo} 
+			, #{eml} 
+			, #{addr} 
+			, #{gdnNm} 
+			, #{gdnRltn} 
+			, #{gdnPhnNo} 
+			, #{gdnEml} 
+			, #{acntBnkCd} 
+			, #{acntNo} 
+			, #{rmks} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateStudent" parameterType="dongovi2020.common.model.extend.StudentVO">
+		UPDATE TB_STDNT /* dongovi2020.biz01.dao.updateStudent */
+		SET 
+			NM = #{nm} 
+			, GDR_CD = #{gdrCd} 
+			, MOB_NO = #{mobNo} 
+			, EML = #{eml} 
+			, ADDR = #{addr} 
+			, GDN_NM = #{gdnNm} 
+			, GDN_RLTN = #{gdnRltn} 
+			, GDN_PHN_NO = #{gdnPhnNo} 
+			, GDN_EML = #{gdnEml} 
+			, ACNT_BNK_CD = #{acntBnkCd} 
+			, ACNT_NO = #{acntNo} 
+			, RMKS = #{rmks} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND STDNT_IDX = #{stdntIdx}  
+	</update>
+	
+	<delete id="deleteStudent" parameterType="dongovi2020.common.model.extend.StudentVO">
+		UPDATE TB_STDNT /* dongovi2020.biz01.dao.deleteStudent */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_STDNT /* dongovi2020.biz01.dao.deleteStudent */
+		WHERE 1=1 
+			AND STDNT_IDX = #{stdntIdx}   
+	</delete>
+	
+	<!-- ===== TB_SYS_LGN_LOG - SystemLoginLog | 시스템 로그인 로그 ================================================================= -->
+	<resultMap id="_SystemLoginLogResultMap" type="dongovi2020.common.model.extend.SystemLoginLogVO">
+		<id property="idx" column="IDX" /> <!-- IDX -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectSystemLoginLog" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO" resultMap="_SystemLoginLogResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectSystemLoginLog */
+			IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_SYS_LGN_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}   
+	</select>
+	
+	<select id="selectSystemLoginLogList" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO" resultMap="_SystemLoginLogResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectSystemLoginLogList */
+			IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_SYS_LGN_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</select>
+	
+	<select id="selectSystemLoginLogListCount" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectSystemLoginLogCount */
+			COUNT(1) CNT
+		FROM TB_SYS_LGN_LOG 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</select>
+	
+	<insert id="insertSystemLoginLog" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO" useGeneratedKeys="true" keyProperty="idx" >
+		INSERT INTO TB_SYS_LGN_LOG ( /* dongovi2020.biz01.dao.insertSystemLoginLog */ 
+			USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateSystemLoginLog" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO">
+		UPDATE TB_SYS_LGN_LOG /* dongovi2020.biz01.dao.updateSystemLoginLog */
+		SET 
+			CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND IDX = #{idx}  
+	</update>
+	
+	<delete id="deleteSystemLoginLog" parameterType="dongovi2020.common.model.extend.SystemLoginLogVO">
+		UPDATE TB_SYS_LGN_LOG /* dongovi2020.biz01.dao.deleteSystemLoginLog */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_SYS_LGN_LOG /* dongovi2020.biz01.dao.deleteSystemLoginLog */
+		WHERE 1=1 
+			AND IDX = #{idx}   
+	</delete>
+	
+	<!-- ===== TB_SYS_USR - SystemUser | 시스템 사용자 ================================================================= -->
+	<resultMap id="_SystemUserResultMap" type="dongovi2020.common.model.extend.SystemUserVO">
+		<id property="usrIdx" column="USR_IDX" /> <!-- 사용자 IDX -->
+		<result property="usrDivCd" column="USR_DIV_CD" /> <!-- 공통코드002 -->
+		<result property="usrPwd" column="USR_PWD" /> <!-- (임시사용) -->
+		<result property="usrPwd암호화" column="USR_PWD_암호화" /> <!-- 사용자 비밀번호 암호화 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectSystemUser" parameterType="dongovi2020.common.model.extend.SystemUserVO" resultMap="_SystemUserResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectSystemUser */
+			USR_IDX 
+			, USR_DIV_CD 
+			, USR_PWD 
+			, USR_PWD_암호화 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_SYS_USR 
+		WHERE 1=1 
+			AND USR_IDX = #{usrIdx}   
+	</select>
+	
+	<select id="selectSystemUserList" parameterType="dongovi2020.common.model.extend.SystemUserVO" resultMap="_SystemUserResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectSystemUserList */
+			USR_IDX 
+			, USR_DIV_CD 
+			, USR_PWD 
+			, USR_PWD_암호화 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_SYS_USR 
+		WHERE 1=1 
+			AND USR_IDX = #{usrIdx}  
+	</select>
+	
+	<select id="selectSystemUserListCount" parameterType="dongovi2020.common.model.extend.SystemUserVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectSystemUserCount */
+			COUNT(1) CNT
+		FROM TB_SYS_USR 
+		WHERE 1=1 
+			AND USR_IDX = #{usrIdx}  
+	</select>
+	
+	<insert id="insertSystemUser" parameterType="dongovi2020.common.model.extend.SystemUserVO" useGeneratedKeys="true" keyProperty="usrIdx" >
+		INSERT INTO TB_SYS_USR ( /* dongovi2020.biz01.dao.insertSystemUser */ 
+			USR_DIV_CD 
+			, USR_PWD 
+			, USR_PWD_암호화 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{usrDivCd} 
+			, #{usrPwd} 
+			, #{usrPwd암호화} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateSystemUser" parameterType="dongovi2020.common.model.extend.SystemUserVO">
+		UPDATE TB_SYS_USR /* dongovi2020.biz01.dao.updateSystemUser */
+		SET 
+			USR_DIV_CD = #{usrDivCd} 
+			, USR_PWD = #{usrPwd} 
+			, USR_PWD_암호화 = #{usrPwd암호화} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND USR_IDX = #{usrIdx}  
+	</update>
+	
+	<delete id="deleteSystemUser" parameterType="dongovi2020.common.model.extend.SystemUserVO">
+		UPDATE TB_SYS_USR /* dongovi2020.biz01.dao.deleteSystemUser */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_SYS_USR /* dongovi2020.biz01.dao.deleteSystemUser */
+		WHERE 1=1 
+			AND USR_IDX = #{usrIdx}   
+	</delete>
+	
+	<!-- ===== TB_TCHR - Teacher | 교사 ================================================================= -->
+	<resultMap id="_TeacherResultMap" type="dongovi2020.common.model.extend.TeacherVO">
+		<id property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
+		<result property="teamIdx" column="TEAM_IDX" /> <!-- 팀 IDX -->
+		<result property="tchrNk" column="TCHR_NK" /> <!-- 교사 별명 -->
+		<result property="rlyNm" column="RLY_NM" /> <!-- 실제 이름 -->
+		<result property="gdrCd" column="GDR_CD" /> <!-- 공통코드001 -->
+		<result property="mobNo" column="MOB_NO" /> <!-- 휴대전화 번호 -->
+		<result property="eml" column="EML" /> <!-- 이메일 -->
+		<result property="addr" column="ADDR" /> <!-- 주소 -->
+		<result property="acntBnkCd" column="ACNT_BNK_CD" /> <!-- 공통코드012 -->
+		<result property="acntNo" column="ACNT_NO" /> <!-- 계좌 번호 -->
+		<result property="jonDy" column="JON_DY" /> <!-- 입사일자 -->
+		<result property="untLtrFee" column="UNT_LTR_FEE" /> <!-- 단위 강의료 -->
+		<result property="usrIdx" column="USR_IDX" /> <!-- 사용자 IDX -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO" resultMap="_TeacherResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeacher */
+			TCHR_IDX 
+			, TEAM_IDX 
+			, TCHR_NK 
+			, RLY_NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, JON_DY 
+			, UNT_LTR_FEE 
+			, USR_IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TCHR 
+		WHERE 1=1 
+			AND TCHR_IDX = #{tchrIdx}   
+	</select>
+	
+	<select id="selectTeacherList" parameterType="dongovi2020.common.model.extend.TeacherVO" resultMap="_TeacherResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeacherList */
+			TCHR_IDX 
+			, TEAM_IDX 
+			, TCHR_NK 
+			, RLY_NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, JON_DY 
+			, UNT_LTR_FEE 
+			, USR_IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TCHR 
+		WHERE 1=1 
+			AND TCHR_IDX = #{tchrIdx}  
+	</select>
+	
+	<select id="selectTeacherListCount" parameterType="dongovi2020.common.model.extend.TeacherVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectTeacherCount */
+			COUNT(1) CNT
+		FROM TB_TCHR 
+		WHERE 1=1 
+			AND TCHR_IDX = #{tchrIdx}  
+	</select>
+	
+	<insert id="insertTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO" useGeneratedKeys="true" keyProperty="tchrIdx" >
+		INSERT INTO TB_TCHR ( /* dongovi2020.biz01.dao.insertTeacher */ 
+			TEAM_IDX 
+			, TCHR_NK 
+			, RLY_NM 
+			, GDR_CD 
+			, MOB_NO 
+			, EML 
+			, ADDR 
+			, ACNT_BNK_CD 
+			, ACNT_NO 
+			, JON_DY 
+			, UNT_LTR_FEE 
+			, USR_IDX 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{teamIdx} 
+			, #{tchrNk} 
+			, #{rlyNm} 
+			, #{gdrCd} 
+			, #{mobNo} 
+			, #{eml} 
+			, #{addr} 
+			, #{acntBnkCd} 
+			, #{acntNo} 
+			, #{jonDy} 
+			, #{untLtrFee} 
+			, #{usrIdx} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO">
+		UPDATE TB_TCHR /* dongovi2020.biz01.dao.updateTeacher */
+		SET 
+			TEAM_IDX = #{teamIdx} 
+			, TCHR_NK = #{tchrNk} 
+			, RLY_NM = #{rlyNm} 
+			, GDR_CD = #{gdrCd} 
+			, MOB_NO = #{mobNo} 
+			, EML = #{eml} 
+			, ADDR = #{addr} 
+			, ACNT_BNK_CD = #{acntBnkCd} 
+			, ACNT_NO = #{acntNo} 
+			, JON_DY = #{jonDy} 
+			, UNT_LTR_FEE = #{untLtrFee} 
+			, USR_IDX = #{usrIdx} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND TCHR_IDX = #{tchrIdx}  
+	</update>
+	
+	<delete id="deleteTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO">
+		UPDATE TB_TCHR /* dongovi2020.biz01.dao.deleteTeacher */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_TCHR /* dongovi2020.biz01.dao.deleteTeacher */
+		WHERE 1=1 
+			AND TCHR_IDX = #{tchrIdx}   
+	</delete>
+	
+	<!-- ===== TB_TCHR_LTR_FEE - TeacherLectureFee | 교사 강의료 ================================================================= -->
+	<resultMap id="_TeacherLectureFeeResultMap" type="dongovi2020.common.model.extend.TeacherLectureFeeVO">
+		<id property="tchrLtrFeeIdx" column="TCHR_LTR_FEE_IDX" /> <!-- 교사 강의료 IDX -->
+		<result property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
+		<result property="ctrtUpdYm" column="CTRT_UPD_YM" /> <!-- 계약 변경 연월 -->
+		<result property="schdUpdYm" column="SCHD_UPD_YM" /> <!-- 예정 변경 연월 -->
+		<result property="untLtrFeeAmt" column="UNT_LTR_FEE_AMT" /> <!-- 단위 강의료 금액 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectTeacherLectureFee" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO" resultMap="_TeacherLectureFeeResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeacherLectureFee */
+			TCHR_LTR_FEE_IDX 
+			, TCHR_IDX 
+			, CTRT_UPD_YM 
+			, SCHD_UPD_YM 
+			, UNT_LTR_FEE_AMT 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TCHR_LTR_FEE 
+		WHERE 1=1 
+			AND TCHR_LTR_FEE_IDX = #{tchrLtrFeeIdx}   
+	</select>
+	
+	<select id="selectTeacherLectureFeeList" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO" resultMap="_TeacherLectureFeeResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeacherLectureFeeList */
+			TCHR_LTR_FEE_IDX 
+			, TCHR_IDX 
+			, CTRT_UPD_YM 
+			, SCHD_UPD_YM 
+			, UNT_LTR_FEE_AMT 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TCHR_LTR_FEE 
+		WHERE 1=1 
+			AND TCHR_LTR_FEE_IDX = #{tchrLtrFeeIdx}  
+	</select>
+	
+	<select id="selectTeacherLectureFeeListCount" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectTeacherLectureFeeCount */
+			COUNT(1) CNT
+		FROM TB_TCHR_LTR_FEE 
+		WHERE 1=1 
+			AND TCHR_LTR_FEE_IDX = #{tchrLtrFeeIdx}  
+	</select>
+	
+	<insert id="insertTeacherLectureFee" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO" useGeneratedKeys="true" keyProperty="tchrLtrFeeIdx" >
+		INSERT INTO TB_TCHR_LTR_FEE ( /* dongovi2020.biz01.dao.insertTeacherLectureFee */ 
+			TCHR_IDX 
+			, CTRT_UPD_YM 
+			, SCHD_UPD_YM 
+			, UNT_LTR_FEE_AMT 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{tchrIdx} 
+			, #{ctrtUpdYm} 
+			, #{schdUpdYm} 
+			, #{untLtrFeeAmt} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateTeacherLectureFee" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO">
+		UPDATE TB_TCHR_LTR_FEE /* dongovi2020.biz01.dao.updateTeacherLectureFee */
+		SET 
+			TCHR_IDX = #{tchrIdx} 
+			, CTRT_UPD_YM = #{ctrtUpdYm} 
+			, SCHD_UPD_YM = #{schdUpdYm} 
+			, UNT_LTR_FEE_AMT = #{untLtrFeeAmt} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND TCHR_LTR_FEE_IDX = #{tchrLtrFeeIdx}  
+	</update>
+	
+	<delete id="deleteTeacherLectureFee" parameterType="dongovi2020.common.model.extend.TeacherLectureFeeVO">
+		UPDATE TB_TCHR_LTR_FEE /* dongovi2020.biz01.dao.deleteTeacherLectureFee */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_TCHR_LTR_FEE /* dongovi2020.biz01.dao.deleteTeacherLectureFee */
+		WHERE 1=1 
+			AND TCHR_LTR_FEE_IDX = #{tchrLtrFeeIdx}   
+	</delete>
+	
+	<!-- ===== TB_TEAM - Team | 팀 ================================================================= -->
+	<resultMap id="_TeamResultMap" type="dongovi2020.common.model.extend.TeamVO">
+		<id property="teamIdx" column="TEAM_IDX" /> <!-- 팀 IDX -->
+		<result property="teamNm" column="TEAM_NM" /> <!-- 팀 이름 -->
+		<result property="teamLdrTchrIdx" column="TEAM_LDR_TCHR_IDX" /> <!-- 팀장 교사 IDX -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectTeam" parameterType="dongovi2020.common.model.extend.TeamVO" resultMap="_TeamResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeam */
+			TEAM_IDX 
+			, TEAM_NM 
+			, TEAM_LDR_TCHR_IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TEAM 
+		WHERE 1=1 
+			AND TEAM_IDX = #{teamIdx}   
+	</select>
+	
+	<select id="selectTeamList" parameterType="dongovi2020.common.model.extend.TeamVO" resultMap="_TeamResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectTeamList */
+			TEAM_IDX 
+			, TEAM_NM 
+			, TEAM_LDR_TCHR_IDX 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TEAM 
+		WHERE 1=1 
+			AND TEAM_IDX = #{teamIdx}  
+	</select>
+	
+	<select id="selectTeamListCount" parameterType="dongovi2020.common.model.extend.TeamVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectTeamCount */
+			COUNT(1) CNT
+		FROM TB_TEAM 
+		WHERE 1=1 
+			AND TEAM_IDX = #{teamIdx}  
+	</select>
+	
+	<insert id="insertTeam" parameterType="dongovi2020.common.model.extend.TeamVO" useGeneratedKeys="true" keyProperty="teamIdx" >
+		INSERT INTO TB_TEAM ( /* dongovi2020.biz01.dao.insertTeam */ 
+			TEAM_NM 
+			, TEAM_LDR_TCHR_IDX 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{teamNm} 
+			, #{teamLdrTchrIdx} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateTeam" parameterType="dongovi2020.common.model.extend.TeamVO">
+		UPDATE TB_TEAM /* dongovi2020.biz01.dao.updateTeam */
+		SET 
+			TEAM_NM = #{teamNm} 
+			, TEAM_LDR_TCHR_IDX = #{teamLdrTchrIdx} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND TEAM_IDX = #{teamIdx}  
+	</update>
+	
+	<delete id="deleteTeam" parameterType="dongovi2020.common.model.extend.TeamVO">
+		UPDATE TB_TEAM /* dongovi2020.biz01.dao.deleteTeam */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_TEAM /* dongovi2020.biz01.dao.deleteTeam */
+		WHERE 1=1 
+			AND TEAM_IDX = #{teamIdx}   
+	</delete>
+	
+	<!-- ===== TB_UNPD_SND - UnpaidSend | 미납 발송 ================================================================= -->
+	<resultMap id="_UnpaidSendResultMap" type="dongovi2020.common.model.extend.UnpaidSendVO">
+		<id property="unpdSndIdx" column="UNPD_SND_IDX" /> <!-- 미납 발송 IDX -->
+		<result property="lsnIdx" column="LSN_IDX" /> <!-- 수업 IDX -->
+		<result property="stdntIdx" column="STDNT_IDX" /> <!-- 학생 IDX -->
+		<result property="unpdSndDt1st" column="UNPD_SND_DT_1ST" /> <!-- 미납 발송 일시 1차 -->
+		<result property="unpdSndDt2nd" column="UNPD_SND_DT_2ND" /> <!-- 미납 발송 일시 2차 -->
+		<result property="unpdSndDt3rd" column="UNPD_SND_DT_3RD" /> <!-- 미납 발송 일시 3차 -->
+		<result property="unpdSndDt4th" column="UNPD_SND_DT_4TH" /> <!-- 미납 발송 일시 4차 -->
+		<result property="unpdSndDt5th" column="UNPD_SND_DT_5TH" /> <!-- 미납 발송 일시 5차 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectUnpaidSend" parameterType="dongovi2020.common.model.extend.UnpaidSendVO" resultMap="_UnpaidSendResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectUnpaidSend */
+			UNPD_SND_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, date_format(UNPD_SND_DT_1ST,'%Y-%m-%d %T') AS UNPD_SND_DT_1ST 
+			, date_format(UNPD_SND_DT_2ND,'%Y-%m-%d %T') AS UNPD_SND_DT_2ND 
+			, date_format(UNPD_SND_DT_3RD,'%Y-%m-%d %T') AS UNPD_SND_DT_3RD 
+			, date_format(UNPD_SND_DT_4TH,'%Y-%m-%d %T') AS UNPD_SND_DT_4TH 
+			, date_format(UNPD_SND_DT_5TH,'%Y-%m-%d %T') AS UNPD_SND_DT_5TH 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_UNPD_SND 
+		WHERE 1=1 
+			AND UNPD_SND_IDX = #{unpdSndIdx}   
+	</select>
+	
+	<select id="selectUnpaidSendList" parameterType="dongovi2020.common.model.extend.UnpaidSendVO" resultMap="_UnpaidSendResultMap">
+		SELECT /* dongovi2020.biz01.dao.selectUnpaidSendList */
+			UNPD_SND_IDX 
+			, LSN_IDX 
+			, STDNT_IDX 
+			, date_format(UNPD_SND_DT_1ST,'%Y-%m-%d %T') AS UNPD_SND_DT_1ST 
+			, date_format(UNPD_SND_DT_2ND,'%Y-%m-%d %T') AS UNPD_SND_DT_2ND 
+			, date_format(UNPD_SND_DT_3RD,'%Y-%m-%d %T') AS UNPD_SND_DT_3RD 
+			, date_format(UNPD_SND_DT_4TH,'%Y-%m-%d %T') AS UNPD_SND_DT_4TH 
+			, date_format(UNPD_SND_DT_5TH,'%Y-%m-%d %T') AS UNPD_SND_DT_5TH 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_UNPD_SND 
+		WHERE 1=1 
+			AND UNPD_SND_IDX = #{unpdSndIdx}  
+	</select>
+	
+	<select id="selectUnpaidSendListCount" parameterType="dongovi2020.common.model.extend.UnpaidSendVO" resultType="int">
+		SELECT /* dongovi2020.biz01.dao.selectUnpaidSendCount */
+			COUNT(1) CNT
+		FROM TB_UNPD_SND 
+		WHERE 1=1 
+			AND UNPD_SND_IDX = #{unpdSndIdx}  
+	</select>
+	
+	<insert id="insertUnpaidSend" parameterType="dongovi2020.common.model.extend.UnpaidSendVO" useGeneratedKeys="true" keyProperty="unpdSndIdx" >
+		INSERT INTO TB_UNPD_SND ( /* dongovi2020.biz01.dao.insertUnpaidSend */ 
+			LSN_IDX 
+			, STDNT_IDX 
+			, UNPD_SND_DT_1ST 
+			, UNPD_SND_DT_2ND 
+			, UNPD_SND_DT_3RD 
+			, UNPD_SND_DT_4TH 
+			, UNPD_SND_DT_5TH 
+			, USE_YN 
+			, CRE_DT 
+			, CRE_PSN 
+			, UPD_DT 
+			, UPD_PSN 
+		) VALUES ( 
+			#{lsnIdx} 
+			, #{stdntIdx} 
+			, #{unpdSndDt1st} 
+			, #{unpdSndDt2nd} 
+			, #{unpdSndDt3rd} 
+			, #{unpdSndDt4th} 
+			, #{unpdSndDt5th} 
+			, 'Y' 
+			, #{creDt} 
+			, #{crePsn} 
+			, #{updDt} 
+			, #{updPsn} 
+		)
+	</insert>
+	
+	<update id="updateUnpaidSend" parameterType="dongovi2020.common.model.extend.UnpaidSendVO">
+		UPDATE TB_UNPD_SND /* dongovi2020.biz01.dao.updateUnpaidSend */
+		SET 
+			LSN_IDX = #{lsnIdx} 
+			, STDNT_IDX = #{stdntIdx} 
+			, UNPD_SND_DT_1ST = #{unpdSndDt1st} 
+			, UNPD_SND_DT_2ND = #{unpdSndDt2nd} 
+			, UNPD_SND_DT_3RD = #{unpdSndDt3rd} 
+			, UNPD_SND_DT_4TH = #{unpdSndDt4th} 
+			, UNPD_SND_DT_5TH = #{unpdSndDt5th} 
+			, CRE_DT = #{creDt} 
+			, CRE_PSN = #{crePsn} 
+			, UPD_DT = #{updDt} 
+			, UPD_PSN = #{updPsn} 
+		WHERE 1=1 
+			AND UNPD_SND_IDX = #{unpdSndIdx}  
+	</update>
+	
+	<delete id="deleteUnpaidSend" parameterType="dongovi2020.common.model.extend.UnpaidSendVO">
+		UPDATE TB_UNPD_SND /* dongovi2020.biz01.dao.deleteUnpaidSend */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM TB_UNPD_SND /* dongovi2020.biz01.dao.deleteUnpaidSend */
+		WHERE 1=1 
+			AND UNPD_SND_IDX = #{unpdSndIdx}   
+	</delete>
+
+
+</mapper>

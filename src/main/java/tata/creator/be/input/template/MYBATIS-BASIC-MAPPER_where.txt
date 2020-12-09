@@ -1,0 +1,1 @@
+			AND CRN_MBR_NO = #{crnMbrNo}

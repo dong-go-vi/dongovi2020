@@ -1,0 +1,21 @@
+package tata.creator.be.output.biz.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import dongovi2020.base.common.BaseDao;
+
+##IMPORT_VO##
+
+/**
+ * ##DAO_NAME##Dao
+ * @author tata creator
+ * @since ##TODAY## 
+ */
+@Repository
+public class ##DAO_NAME##Dao extends BaseDao {
+
+##EACH_TABLES##
+
+}

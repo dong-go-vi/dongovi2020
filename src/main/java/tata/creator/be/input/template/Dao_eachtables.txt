@@ -1,0 +1,68 @@
+	/// ===== ##BIZ_NAME## ===== =======================================================================
+
+	/**
+	 * select##BIZ_NAME## => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public ##BIZ_NAME##VO select##BIZ_NAME##(##BIZ_NAME##VO param) throws Exception {
+		return sqlSession.selectOne("##NAMESPACE##.select##BIZ_NAME##", param);
+	}
+
+	/**
+	 * select##BIZ_NAME##List => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public List<##BIZ_NAME##VO> select##BIZ_NAME##List(##BIZ_NAME##VO param) throws Exception {
+		return sqlSession.selectList("##NAMESPACE##.select##BIZ_NAME##List", param);
+	}
+
+	/**
+	 * select##BIZ_NAME##ListCount => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public int select##BIZ_NAME##ListCount(##BIZ_NAME##VO param) throws Exception {
+		return sqlSession.selectOne("##NAMESPACE##.select##BIZ_NAME##ListCount", param);
+	}
+
+	/**
+	 * insert##BIZ_NAME## => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	public int insert##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+##INSERT_RETURN_CODE##
+	}
+
+	/**
+	 * update##BIZ_NAME## => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	public int update##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+		return sqlSession.update("##NAMESPACE##.update##BIZ_NAME##", model);
+	}
+
+	/**
+	 * delete##BIZ_NAME## => 테이블: ##TABLE_NAME## - ##TABLE_COMMENT##
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	public int delete##BIZ_NAME##(##BIZ_NAME##VO model) throws Exception {
+		return sqlSession.delete("##NAMESPACE##.delete##BIZ_NAME##", model);
+	}
+

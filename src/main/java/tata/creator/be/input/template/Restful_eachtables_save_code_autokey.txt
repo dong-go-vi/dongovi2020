@@ -1,0 +1,6 @@
+			if ( vo == null || vo.##KEY_GETTER##() == 0) {
+				iResult = ##service_NAME##Service.add##BIZ_NAME##(param);
+				param.##KEY_SETTER##(iResult); // key setting
+			} else {
+				iResult = ##service_NAME##Service.modify##BIZ_NAME##(param);
+			}

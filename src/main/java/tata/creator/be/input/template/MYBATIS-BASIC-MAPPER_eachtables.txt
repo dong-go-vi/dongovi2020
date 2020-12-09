@@ -1,0 +1,53 @@
+	
+	<!-- ===== ##TABLE_NAME## - ##TABLE_COMMENT## ================================================================= -->
+	<resultMap id="_##BIZ_NAME##ResultMap" type="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO">
+##ORM_AREA##
+	</resultMap>
+
+	<select id="select##BIZ_NAME##" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO" resultMap="_##BIZ_NAME##ResultMap">
+		SELECT /* ##NAMESPACE##.select##BIZ_NAME## */
+##SELECT_COLUMNS##
+		FROM ##TABLE_NAME## 
+		WHERE 1=1 
+##WHERE_CONDITIONS## 
+	</select>
+	
+	<select id="select##BIZ_NAME##List" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO" resultMap="_##BIZ_NAME##ResultMap">
+		SELECT /* ##NAMESPACE##.select##BIZ_NAME##List */
+##SELECT_COLUMNS##
+		FROM ##TABLE_NAME## 
+		WHERE 1=1 
+##WHERE_CONDITIONS##
+	</select>
+	
+	<select id="select##BIZ_NAME##ListCount" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO" resultType="int">
+		SELECT /* ##NAMESPACE##.select##BIZ_NAME##Count */
+			COUNT(1) CNT
+		FROM ##TABLE_NAME## 
+		WHERE 1=1 
+##WHERE_CONDITIONS##
+	</select>
+	
+	<insert id="insert##BIZ_NAME##" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO" ##USEKEY##>
+		INSERT INTO ##TABLE_NAME## ( /* ##NAMESPACE##.insert##BIZ_NAME## */ 
+##INSERT_COLUMNS##
+		) VALUES ( 
+##INSERT_VALUES##
+		)
+	</insert>
+	
+	<update id="update##BIZ_NAME##" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO">
+		UPDATE ##TABLE_NAME## /* ##NAMESPACE##.update##BIZ_NAME## */
+		SET 
+##UPDATE_SET##
+		WHERE 1=1 
+##WHERE_CONDITIONS##
+	</update>
+	
+	<delete id="delete##BIZ_NAME##" parameterType="tata.creator.be.output.common.model.extend.##BIZ_NAME##VO">
+		UPDATE ##TABLE_NAME## /* ##NAMESPACE##.delete##BIZ_NAME## */
+		SET USE_YN = 'N', UPDT_MN_NO = #{loginMbrNo}, UPDT_DT = NOW() 
+		-- DELETE FROM ##TABLE_NAME## /* ##NAMESPACE##.delete##BIZ_NAME## */
+		WHERE 1=1 
+##WHERE_CONDITIONS## 
+	</delete>

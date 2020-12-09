@@ -1,0 +1,1260 @@
+package devketerius.base.common;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URLDecoder;
+import java.security.MessageDigest;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class StringUtils {
+	
+	private static Logger logger = LoggerFactory.getLogger(StringUtils.class);
+	private static final char WHITE_SPACE = 32;
+	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	
+//	private static AtomicLong counter = new AtomicLong(0);
+	
+	public static boolean isNull(String str)
+	{
+		if(str != null)
+			str = str.trim();
+		return str == null || "".equals(str);
+	}
+
+	public static boolean isAlpha(String str)
+	{
+		if(str == null)
+			return false;
+		int size = str.length();
+		if(size == 0)
+			return false;
+		for(int i = 0; i < size; i++)
+			if(!Character.isLetter(str.charAt(i)))
+				return false;
+
+		return true;
+	}
+
+	public static boolean isAlphaNumeric(String str)
+	{
+		if(str == null)
+			return false;
+		int size = str.length();
+		if(size == 0)
+			return false;
+		for(int i = 0; i < size; i++)
+			if(!Character.isLetterOrDigit(str.charAt(i)))
+				return false;
+
+		return true;
+	}
+
+	public static String integer2string(int integer)
+	{
+		return (new StringBuilder()).append("").append(integer).toString();
+	}
+
+	public static String long2string(long longdata)
+	{
+		return String.valueOf(longdata);
+	}
+
+	public static String float2string(float floatdata)
+	{
+		return String.valueOf(floatdata);
+	}
+
+	public static String double2string(double doubledata)
+	{
+		return String.valueOf(doubledata);
+	}
+
+	public static String null2void(String str)
+	{
+		if(isNull(str))
+			str = "";
+		return str;
+	}
+
+	public static int string2integer(String str)
+	{
+		if(isNull(str))
+			return 0;
+		else
+			return Integer.parseInt(str);
+	}
+
+	public static float string2float(String str)
+	{
+		if(isNull(str))
+			return 0.0F;
+		else
+			return Float.parseFloat(str);
+	}
+
+	public static double string2double(String str)
+	{
+		if(isNull(str))
+			return 0.0D;
+		else
+			return Double.parseDouble(str);
+	}
+
+	public static long string2long(String str)
+	{
+		if(isNull(str))
+			return 0L;
+		else
+			return Long.parseLong(str);
+	}
+
+	public static String nullToString(String str, String defaultValue)
+	{
+		if(isNull(str))
+			return defaultValue;
+		else
+			return str;
+	}
+
+	public static String nullToString(String str)
+	{
+		return nullToString(str, "");
+	}
+
+	public static int string2integer(String str, int defaultValue)
+	{
+		if(isNull(str))
+			return defaultValue;
+		else
+			return Integer.parseInt(str);
+	}
+
+	public static float string2float(String str, float defaultValue)
+	{
+		if(isNull(str))
+			return defaultValue;
+		else
+			return Float.parseFloat(str);
+	}
+
+	public static double string2double(String str, double defaultValue)
+	{
+		if(isNull(str))
+			return defaultValue;
+		else
+			return Double.parseDouble(str);
+	}
+
+	public static long string2long(String str, long defaultValue)
+	{
+		if(isNull(str))
+			return defaultValue;
+		else
+			return Long.parseLong(str);
+	}
+
+	public static boolean equals(String source, String target)
+	{
+		return null2void(source).equals(null2void(target));
+	}
+
+	public static String toSubString(String str, int beginIndex, int endIndex)
+	{
+		if(equals(str, ""))
+			return str;
+		if(str.length() < beginIndex)
+			return "";
+		if(str.length() < endIndex)
+			return str.substring(beginIndex);
+		else
+			return str.substring(beginIndex, endIndex);
+	}
+
+	public static String toSubString(String source, int beginIndex)
+	{
+		if(equals(source, ""))
+			return source;
+		if(source.length() < beginIndex)
+			return "";
+		else
+			return source.substring(beginIndex);
+	}
+
+	public static int search(String source, String target)
+	{
+		int result = 0;
+		String strCheck = new String(source);
+		int i = 0;
+		do
+		{
+			if(i >= source.length())
+				break;
+			int loc = strCheck.indexOf(target);
+			if(loc == -1)
+				break;
+			result++;
+			i = loc + target.length();
+			strCheck = strCheck.substring(i);
+		} while(true);
+		return result;
+	}
+
+	public static String trim(String str)
+	{
+		return str.trim();
+	}
+
+	public static String ltrim(String str)
+	{
+		int index;
+		for(index = 0; ' ' == str.charAt(index++););
+		if(index > 0)
+			str = str.substring(index - 1);
+		return str;
+	}
+
+	public static String rtrim(String str)
+	{
+		int index;
+		for(index = str.length(); ' ' == str.charAt(--index););
+		if(index < str.length())
+			str = str.substring(0, index + 1);
+		return str;
+	}
+
+	public static String concat(String str1, String str2)
+	{
+		StringBuffer sb = new StringBuffer(str1);
+		sb.append(str2);
+		return sb.toString();
+	}
+
+	public static String lPad(String str, int len, char pad)
+	{
+		return lPad(str, len, pad, false);
+	}
+
+	public static String lPad(String str, int len, char pad, boolean isTrim)
+	{
+		if(isNull(str))
+			return null;
+		if(isTrim)
+			str = str.trim();
+		for(int i = str.length(); i < len; i++)
+			str = (new StringBuilder()).append(pad).append(str).toString();
+
+		return str;
+	}
+
+	public static String rPad(String str, int len, char pad)
+	{
+		return rPad(str, len, pad, false);
+	}
+
+	public static String rPad(String str, int len, char pad, boolean isTrim)
+	{
+		if(isNull(str))
+			return null;
+		if(isTrim)
+			str = str.trim();
+		for(int i = str.length(); i < len; i++)
+			str = (new StringBuilder()).append(str).append(pad).toString();
+
+		return str;
+	}
+
+	public static String alignLeft(String str, int length)
+	{
+		return alignLeft(str, length, false);
+	}
+
+	public static String alignLeft(String str, int length, boolean isEllipsis)
+	{
+		if(str.length() <= length)
+		{
+			StringBuffer temp = new StringBuffer(str);
+			for(int i = 0; i < length - str.length(); i++)
+				temp.append(' ');
+
+			return temp.toString();
+		}
+		if(isEllipsis)
+		{
+			StringBuffer temp = new StringBuffer(length);
+			temp.append(str.substring(0, length - 3));
+			temp.append("...");
+			return temp.toString();
+		} else
+		{
+			return str.substring(0, length);
+		}
+	}
+
+	public static String alignRight(String str, int length)
+	{
+		return alignRight(str, length, false);
+	}
+
+	public static String alignRight(String str, int length, boolean isEllipsis)
+	{
+		if(str.length() <= length)
+		{
+			StringBuffer temp = new StringBuffer(length);
+			for(int i = 0; i < length - str.length(); i++)
+				temp.append(' ');
+
+			temp.append(str);
+			return temp.toString();
+		}
+		if(isEllipsis)
+		{
+			StringBuffer temp = new StringBuffer(length);
+			temp.append(str.substring(0, length - 3));
+			temp.append("...");
+			return temp.toString();
+		} else
+		{
+			return str.substring(0, length);
+		}
+	}
+
+	public static String alignCenter(String str, int length)
+	{
+		return alignCenter(str, length, false);
+	}
+
+	public static String alignCenter(String str, int length, boolean isEllipsis)
+	{
+		if(str.length() <= length)
+		{
+			StringBuffer temp = new StringBuffer(length);
+			int leftMargin = (length - str.length()) / 2;
+			int rightMargin;
+			if(leftMargin * 2 == length - str.length())
+				rightMargin = leftMargin;
+			else
+				rightMargin = leftMargin + 1;
+			for(int i = 0; i < leftMargin; i++)
+				temp.append(' ');
+
+			temp.append(str);
+			for(int i = 0; i < rightMargin; i++)
+				temp.append(' ');
+
+			return temp.toString();
+		}
+		if(isEllipsis)
+		{
+			StringBuffer temp = new StringBuffer(length);
+			temp.append(str.substring(0, length - 3));
+			temp.append("...");
+			return temp.toString();
+		} else
+		{
+			return str.substring(0, length);
+		}
+	}
+
+	public static String capitalize(String str)
+	{
+		return isNull(str) ? str : (new StringBuilder()).append(str.substring(0, 1).toUpperCase()).append(str.substring(1).toLowerCase()).toString();
+	}
+
+	public static boolean isPatternMatch(String str, String pattern)
+		throws Exception
+	{
+		Matcher matcher = Pattern.compile(pattern).matcher(str);
+		logger.debug((new StringBuilder()).append("").append(matcher).toString());
+		return matcher.matches();
+	}
+
+	public static String toEng(String kor)
+		throws UnsupportedEncodingException
+	{
+		if(isNull(kor))
+			return null;
+		else
+			return new String(kor.getBytes("KSC5601"), "8859_1");
+	}
+
+	public static String toKor(String en)
+		throws UnsupportedEncodingException
+	{
+		if(isNull(en))
+			return null;
+		else
+			return new String(en.getBytes("8859_1"), "euc-kr");
+	}
+
+	public static int countOf(String str, String charToFind)
+	{
+		int findLength = charToFind.length();
+		int count = 0;
+		for(int idx = str.indexOf(charToFind); idx >= 0; idx = str.indexOf(charToFind, idx + findLength))
+			count++;
+
+		return count;
+	}
+
+	public static String encodePassword(String password, String algorithm)
+	{
+		byte unencodedPassword[] = password.getBytes();
+		MessageDigest md = null;
+		try
+		{
+			md = MessageDigest.getInstance(algorithm);
+		}
+		catch(Exception e)
+		{
+			logger.error("Exception: {}", e);
+			return password;
+		}
+		md.reset();
+		md.update(unencodedPassword);
+		byte encodedPassword[] = md.digest();
+		StringBuffer buf = new StringBuffer();
+		for(int i = 0; i < encodedPassword.length; i++)
+		{
+			if((encodedPassword[i] & 255) < 16)
+				buf.append("0");
+			buf.append(Long.toString(encodedPassword[i] & 255, 16));
+		}
+
+		return buf.toString();
+	}
+
+	public static String swapFirstLetterCase(String str)
+	{
+		StringBuffer sbuf = new StringBuffer(str);
+		sbuf.deleteCharAt(0);
+		if(Character.isLowerCase(str.substring(0, 1).toCharArray()[0]))
+			sbuf.insert(0, str.substring(0, 1).toUpperCase());
+		else
+			sbuf.insert(0, str.substring(0, 1).toLowerCase());
+		return sbuf.toString();
+	}
+
+	public static String trim(String origString, String trimString)
+	{
+		int startPosit = origString.indexOf(trimString);
+		if(startPosit != -1)
+		{
+			int endPosit = trimString.length() + startPosit;
+			return (new StringBuilder()).append(origString.substring(0, startPosit)).append(origString.substring(endPosit)).toString();
+		} else
+		{
+			return origString;
+		}
+	}
+
+	public static String getLastString(String origStr, String strToken)
+	{
+		StringTokenizer str = new StringTokenizer(origStr, strToken);
+		String lastStr;
+		for(lastStr = ""; str.hasMoreTokens(); lastStr = str.nextToken());
+		return lastStr;
+	}
+
+	public static String[] getStringArray(String str, String strToken)
+	{
+		if(str == null)
+			return null;
+		if(str.indexOf(strToken) != -1)
+		{
+			StringTokenizer st = new StringTokenizer(str, strToken);
+			String stringArray[] = new String[st.countTokens()];
+			for(int i = 0; st.hasMoreTokens(); i++)
+				stringArray[i] = st.nextToken();
+
+			return stringArray;
+		} else
+		{
+			return (new String[] {
+				str
+			});
+		}
+	}
+
+	public static boolean isNotEmpty(Object str)
+	{
+		return !isEmpty(str);
+	}
+
+	public static boolean isEmpty(Object s)
+	{
+		if (s == null) {
+			return true;
+		}
+		if ((s instanceof String) && (((String)s).trim().length() == 0)) {
+			return true;
+		}
+		if (s instanceof Map) {
+			return ((Map<?, ?>)s).isEmpty();
+		}
+		if (s instanceof List) {
+			return ((List<?>)s).isEmpty();
+		}
+		if (s instanceof Object[]) {
+			return (((Object[])s).length == 0);
+		}
+		return false;
+	}
+	
+	public static boolean isEmpty(String str)
+	{
+		return str == null || str.length() == 0 || str.equals("");
+	}
+	
+	public static String replace(String str, String replacedStr, String replaceStr)
+	{
+		String newStr = "";
+		if(str.indexOf(replacedStr) != -1)
+		{
+			String s1 = str.substring(0, str.indexOf(replacedStr));
+			String s2 = str.substring(str.indexOf(replacedStr) + 1);
+			newStr = (new StringBuilder()).append(s1).append(replaceStr).append(s2).toString();
+		}
+		return newStr;
+	}
+
+	public static boolean isPatternMatching(String str, String pattern)
+		throws Exception
+	{
+		if(pattern.indexOf('*') >= 0)
+			pattern = pattern.replaceAll("\\*", ".*");
+		pattern = (new StringBuilder()).append("^").append(pattern).append("$").toString();
+		return Pattern.matches(pattern, str);
+	}
+
+	public static boolean containsMaxSequence(String str, String maxSeqNumber)
+	{
+		int occurence = 1;
+		int max = string2integer(maxSeqNumber);
+		if(str == null)
+			return false;
+		int sz = str.length();
+		for(int i = 0; i < sz - 1; i++)
+			if(str.charAt(i) == str.charAt(i + 1))
+			{
+				if(++occurence == max)
+					return true;
+			} else
+			{
+				occurence = 1;
+			}
+
+		return false;
+	}
+
+	public static boolean containsInvalidChars(String str, char invalidChars[])
+	{
+		if(str == null || invalidChars == null)
+			return false;
+		int strSize = str.length();
+		int validSize = invalidChars.length;
+		for(int i = 0; i < strSize; i++)
+		{
+			char ch = str.charAt(i);
+			for(int j = 0; j < validSize; j++)
+				if(invalidChars[j] == ch)
+					return true;
+
+		}
+
+		return false;
+	}
+
+	public static boolean containsInvalidChars(String str, String invalidChars)
+	{
+		if(str == null || invalidChars == null)
+			return true;
+		else
+			return containsInvalidChars(str, invalidChars.toCharArray());
+	}
+
+	public static boolean isNumeric(String str)
+	{
+		if(str == null)
+			return false;
+		int sz = str.length();
+		if(sz == 0)
+			return false;
+		for(int i = 0; i < sz; i++)
+			if(!Character.isDigit(str.charAt(i)))
+				return false;
+
+		return true;
+	}
+
+	public static String reverse(String str)
+	{
+		if(str == null)
+			return null;
+		else
+			return (new StringBuffer(str)).reverse().toString();
+	}
+
+	public static String fillString(String originalStr, char ch, int cipers)
+	{
+		int originalStrLength = originalStr.length();
+		if(cipers < originalStrLength)
+			return null;
+		int difference = cipers - originalStrLength;
+		StringBuffer strBuf = new StringBuffer();
+		for(int i = 0; i < difference; i++)
+			strBuf.append(ch);
+
+		strBuf.append(originalStr);
+		return strBuf.toString();
+	}
+
+	public static final boolean isEmptyTrimmed(String foo)
+	{
+		return foo == null || foo.trim().length() == 0;
+	}
+
+	public static String getToken()
+	{
+		return UUID.randomUUID().toString();
+	}
+
+	public static List getTokens(String lst, String separator)
+	{
+		List tokens = new ArrayList();
+		if(lst != null)
+		{
+			for(StringTokenizer st = new StringTokenizer(lst, separator); st.hasMoreTokens();)
+				try
+				{
+					String en = st.nextToken().trim();
+					tokens.add(en);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+
+		}
+		return tokens;
+	}
+
+	public static List getTokens(String lst)
+	{
+		return getTokens(lst, ",");
+	}
+
+	public static String convertToCamel(String str)
+	{
+		Pattern p = Pattern.compile("[_-](.)");
+		Matcher m = p.matcher(str.toLowerCase());
+		StringBuffer sb = new StringBuffer();
+		for(; m.find(); m.appendReplacement(sb, m.group(1).toUpperCase()));
+		m.appendTail(sb);
+		return sb.toString();
+	}
+
+	public static String convertToCamelCase(String targetString, char posChar)
+	{
+		StringBuffer result = new StringBuffer();
+		boolean nextUpper = false;
+		String allLower = targetString.toLowerCase();
+		for(int i = 0; i < allLower.length(); i++)
+		{
+			char currentChar = allLower.charAt(i);
+			if(currentChar == posChar)
+			{
+				nextUpper = true;
+				continue;
+			}
+			if(nextUpper)
+			{
+				currentChar = Character.toUpperCase(currentChar);
+				nextUpper = false;
+			}
+			result.append(currentChar);
+		}
+
+		return result.toString();
+	}
+
+	public static String convertToCamelCase(String underScore)
+	{
+		return convertToCamelCase(underScore, '_');
+	}
+
+	public static String convertToUnderScore(String camelCase)
+	{
+		String result = "";
+		for(int i = 0; i < camelCase.length(); i++)
+		{
+			char currentChar = camelCase.charAt(i);
+			if(i > 0 && Character.isUpperCase(currentChar))
+				result = result.concat("_");
+			result = result.concat(Character.toString(currentChar).toLowerCase());
+		}
+
+		return result;
+	}
+
+	public static String nl2br(String comment)
+	{
+		if(comment == null)
+			return "";
+		else
+			return comment.replaceAll("\n", "<br />");
+	}
+
+	public static String removeMinusChar(String str)
+	{
+		return remove(str, '-');
+	}
+
+	public static String remove(String str, char remove)
+	{
+		if(isEmpty(str) || str.indexOf(remove) == -1)
+			return str;
+		char chars[] = str.toCharArray();
+		int pos = 0;
+		for(int i = 0; i < chars.length; i++)
+			if(chars[i] != remove)
+				chars[pos++] = chars[i];
+
+		return new String(chars, 0, pos);
+	}
+
+	public static String substr(String str, Integer startIdx, Integer cnt)
+	{
+		if(str == null)
+			return str;
+		int strLen = str.length();
+		if(startIdx.intValue() < 0)
+			startIdx = Integer.valueOf(0);
+		if(startIdx.intValue() > strLen)
+			startIdx = Integer.valueOf(strLen);
+		if(cnt.intValue() < 0)
+			cnt = Integer.valueOf(0);
+		int endIdx = startIdx.intValue() + cnt.intValue();
+		if(endIdx > strLen)
+			endIdx = strLen;
+		return str.substring(startIdx.intValue(), endIdx);
+	}
+
+	public static String substr(String str, int cnt, String suffix)
+	{
+		if(str == null)
+			return str;
+		if(suffix == null)
+			suffix = "";
+		if(str.length() > cnt)
+		{
+			str = substr(str, Integer.valueOf(0), Integer.valueOf(cnt));
+			str = (new StringBuilder()).append(str).append(suffix).toString();
+		}
+		return str;
+	}
+
+	public static String strcut(String str, Integer cnt)
+	{
+		if(str == null)
+		{
+			return str;
+		} else
+		{
+			str = substr(str, cnt.intValue(), "...");
+			return str;
+		}
+	}
+
+	public static String stripTags(String str)
+	{
+		return str.replaceAll("<(/)?([a-zA-Z1-9]*)(\\s[a-zA-Z1-9]*=[^>]*)?(\\s)*(/)?>", "");
+	}
+
+	public static String stripScriptTag(String tag)
+	{
+		return tag.replaceAll("<(no)?[sS][cC][rR][iI][pP][tT][^>]*>.*?</(no)?[sS][cC][rR][iI][pP][tT]>", "");
+	}
+
+	public static String stripXSS(String value)
+	{
+		if(value != null)
+		{
+			value = value.replaceAll("", "");
+			Pattern scriptPattern = Pattern.compile("<script>(.*?)</script>", 2);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\'(.*?)\\'", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\\"(.*?)\\\"", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("</script>", 2);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("<script(.*?)>", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("eval\\((.*?)\\)", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("expression\\((.*?)\\)", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("javascript:", 2);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("vbscript:", 2);
+			value = scriptPattern.matcher(value).replaceAll("");
+			scriptPattern = Pattern.compile("onload(.*?)=", 42);
+			value = scriptPattern.matcher(value).replaceAll("");
+			value = value.replaceAll("<(/)?([a-zA-Z1-9]*)(\\s[a-zA-Z1-9]*=[^>]*)?(\\s)*(/)?>", "");
+			value = value.replaceAll("<", "&lt;");
+			value = value.replaceAll(">", "&gt;");
+			value = value.replaceAll("\"", "&quot;");
+			value = value.replaceAll("'", "&#39;");
+		}
+		return value;
+	}
+
+//	public static String[] splitWithoutSpace(String str, String regex)
+//	{
+//		String newTags[] = null;
+//		if(ValidationUtils.isNotNull(str))
+//		{
+//			String tags[] = str.split(regex);
+//			int spaceCount = 0;
+//			for(int j = 0; j < tags.length; j++)
+//			{
+//				String tag = tags[j].trim().replaceAll("\\s", "");
+//				if(tag.equals(""))
+//					spaceCount++;
+//			}
+//
+//			newTags = new String[tags.length - spaceCount];
+//			int index = 0;
+//			for(int j = 0; j < tags.length; j++)
+//			{
+//				String tag = tags[j].trim().replaceAll("\\s", "");
+//				if(!tag.equals(""))
+//				{
+//					newTags[index] = tags[j].trim();
+//					index++;
+//				}
+//			}
+//
+//		}
+//		return newTags;
+//	}
+
+//	public static String splitWithoutSpaceToString(String str, String regex)
+//	{
+//		String result[] = splitWithoutSpace(str, regex);
+//		return nullToString(join(result, ","), "");
+//	}
+
+	public static String join(String s[], String glue)
+	{
+		int k = s.length;
+		if(k == 0)
+			return null;
+		StringBuilder out = new StringBuilder();
+		out.append(s[0]);
+		for(int x = 1; x < k; x++)
+			out.append(glue).append(s[x]);
+
+		return out.toString();
+	}
+
+	public static void main(String args[])
+	{
+		String a = "1.00";
+		Float f = Float.valueOf(Float.parseFloat(a));
+		System.out.println(f);
+		if(f.toString().endsWith(".0"))
+			System.out.println(f.intValue());
+		else
+			System.out.println(f.toString());
+		System.exit(0);
+		int i = Integer.parseInt(a);
+		String valToStore = (float)i != f.floatValue() ? String.valueOf(f) : String.valueOf(i);
+		System.out.println(valToStore);
+		int b = (int)Float.parseFloat(a);
+		System.out.println(b);
+		System.out.println(Integer.parseInt(a));
+		System.out.println(intFormat(a));
+		System.out.println(phoneNumberPattern(a));
+		String txt = "abc``abc``";
+		System.out.println(replaceComma(txt));
+	}
+
+	public static String ssnPattern(String ssn)
+	{
+		if(ssn.length() != 13)
+			return ssn;
+		else
+			return (new StringBuilder()).append(ssn.substring(0, 6)).append("-*******").toString();
+	}
+
+	public static String phoneNumberPattern(String phoneNumber)
+	{
+		if(phoneNumber.length() == 10)
+			return (new StringBuilder()).append(phoneNumber.substring(0, 3)).append("-").append(phoneNumber.substring(3, 6)).append("-").append(phoneNumber.substring(6, 10)).toString();
+		if(phoneNumber.length() == 11)
+			return (new StringBuilder()).append(phoneNumber.substring(0, 3)).append("-").append(phoneNumber.substring(3, 7)).append("-").append(phoneNumber.substring(7, 11)).toString();
+		if(phoneNumber.length() == 12)
+			return (new StringBuilder()).append(phoneNumber.substring(0, 4)).append("-").append(phoneNumber.substring(4, 8)).append("-").append(phoneNumber.substring(8, 12)).toString();
+		else
+			return phoneNumber;
+	}
+
+	public static String numberFormat(Object number)
+	{
+		try
+		{
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			return nf.format(number);
+		}
+		catch(Exception e)
+		{
+			return number.toString();
+		}
+	}
+
+	public static String numberFormat(String number)
+	{
+		if(isEmpty(number))
+			return number;
+		try
+		{
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			return nf.format(Double.parseDouble(number));
+		}
+		catch(Exception e)
+		{
+			return number;
+		}
+	}
+
+	public static String intFormat(String number)
+	{
+		if(number == null || number.trim().equals(""))
+			return "0";
+		Float f = Float.valueOf(Float.parseFloat(number));
+		if(f.toString().endsWith(".0"))
+			return Integer.toString(f.intValue());
+		else
+			return f.toString();
+	}
+
+	public static HashMap paramToMap(String url)
+	{
+		HashMap map = new HashMap();
+		if(url.indexOf("?") > -1)
+		{
+			String parameters = url.substring(url.indexOf("?") + 1, url.length());
+			if(parameters.indexOf("&") > -1)
+			{
+				String params[] = parameters.split("&");
+				for(int i = 0; i < params.length; i++)
+				{
+					String param[] = params[i].split("=");
+					String key = param[0];
+					String value = "";
+					if(param.length > 1)
+						try
+						{
+							value = URLDecoder.decode(param[1], "UTF-8");
+						}
+						catch(UnsupportedEncodingException e)
+						{
+							e.printStackTrace();
+						}
+					if(key.equals("itemsPerPage") || key.equals("page"))
+					{
+						int itemsPerPage = Integer.parseInt(value);
+						map.put(key, Integer.valueOf(itemsPerPage));
+					} else
+					{
+						map.put(key, value);
+					}
+				}
+
+			}
+		}
+		return map;
+	}
+
+	public static String replaceComma(String text)
+	{
+		return text.replaceAll("`", ",");
+	}
+
+	public static String replaceAll(String string, String pattern, String replacement)
+	{
+		return string.replaceAll(pattern, replacement);
+	}
+
+	public static String negativeNumberToEmpty(int negativeNumber)
+	{
+		return negativeNumber >= 0 ? Integer.toString(negativeNumber) : "";
+	}
+
+	public static String negativeNumberToEmpty(String negativeNumber)
+	{
+		if("".equals(negativeNumber))
+			return "";
+		BigDecimal decimal;
+		try
+		{
+			return negativeNumberToEmpty(Integer.parseInt(negativeNumber));
+		}
+		catch(NumberFormatException e)
+		{
+			decimal = new BigDecimal(negativeNumber);
+		}
+		try
+		{
+			return negativeNumberToEmpty(decimal.setScale(0, RoundingMode.HALF_UP).intValue());
+		}
+		catch(Exception ex)
+		{
+			return "";
+		}
+	}
+
+	public static String zeroToEmpty(int number)
+	{
+		return number != 0 ? Integer.toString(number) : "";
+	}
+
+	public static String zeroToEmpty(String number)
+	{
+		String value = "";
+		try
+		{
+			value = zeroToEmpty(Integer.parseInt(number));
+		}
+		catch(NumberFormatException e)
+		{
+			BigDecimal decimal = new BigDecimal(number);
+			value = zeroToEmpty(decimal.setScale(0, RoundingMode.HALF_UP).intValue());
+		}
+		return value;
+	}
+
+	public static String maskName(String name)
+	{
+		if(name == null)
+		{
+			return name;
+		} else
+		{
+			name = substr(name, name.length() - 1, "*");
+			return name;
+		}
+	}
+
+	public static String getRandomPassword()
+	{
+		return UUID.randomUUID().toString().substring(0, 8);
+	}
+
+	public static String getNewline()
+	{
+		return System.getProperty("line.separator");
+	}
+
+	public static String getWhitespace()
+	{
+		return " ";
+	}
+
+	public static String getRandomString()
+	{
+		return getRandomString(5, 4, "-");
+	}
+
+	public static String getRandomString(int digits, int part)
+	{
+		return getRandomString(digits, part, "-");
+	}
+
+	public static String getRandomString(int digits, int part, String delimeter)
+	{
+		int randomStringLength = digits * part;
+		UUID temp = UUID.randomUUID();
+		String id = Long.toHexString(temp.getMostSignificantBits());
+		String uniqueId = id;
+		String saltString = String.valueOf(System.nanoTime());
+		try
+		{
+			if(uniqueId.length() < randomStringLength)
+				if(saltString.length() >= 16)
+					uniqueId = (new StringBuilder()).append(id).append(saltString.substring(16 - (randomStringLength - id.length()), 16)).toString();
+				else
+					uniqueId = (new StringBuilder()).append(id).append(saltString.substring(saltString.length() - (randomStringLength - id.length()), saltString.length())).toString();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println((new StringBuilder()).append("id : ").append(id).append(", saltString :").append(saltString).toString());
+		}
+		String uuid = "";
+		for(int i = 0; i < part; i++)
+		{
+			if(i > 0)
+				uuid = (new StringBuilder()).append(uuid).append("-").toString();
+			uuid = (new StringBuilder()).append(uuid).append(uniqueId.substring(i * digits, i * digits + digits)).toString();
+		}
+
+		return uuid.toUpperCase();
+	}
+
+	public static String[] getRandomStrings(int stringCount)
+	{
+		String randomStrings[] = new String[stringCount];
+		for(int i = 0; i < stringCount; i++)
+			randomStrings[i] = getRandomString(4, 4, "-");
+
+		return randomStrings;
+	}
+	
+	/**
+	 * 파일 확장자
+	 * @param fileName
+	 * @return
+	 */
+	public static String getFileExtention(String fileName) {
+		if (fileName != null && fileName.lastIndexOf(".") > -1) {
+			return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+		}
+		return "";
+	}
+	
+	/**
+	 * 이미지 확장자 확인
+	 * @param file
+	 * @return
+	 */
+	public static boolean isImage(File file) {
+		boolean is = false;
+		String fileName = file.getName();
+		String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+		String[] imageTypes = { "jpg", "png", "gif", "jpeg"};
+ 
+		int len = imageTypes.length;
+		for (int i = 0; i < len; i++) {
+			if (ext.equalsIgnoreCase(imageTypes[i])) {
+				is = true;
+				break;
+			}
+		}
+		return is;
+	}
+	
+	/**
+	 * 포멧 변경 (20190304 -> 2019-03-04)
+	 * @param s
+	 * @return
+	 */
+	public static String getDateFormat(String s) {
+		return s.substring(0, 4)+"-"+s.substring(4, 6)+"-"+s.substring(6, 8);
+	}
+	
+	public static String addComma(String str) {
+
+        StringBuffer sb = new StringBuffer(str);
+        StringBuffer rsb = new StringBuffer();
+        sb = sb.reverse();
+        int p = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            p = i % 3;
+
+            if (i > 0)
+                if (p == 0)
+                    rsb.append(",");
+
+            rsb.append(sb.substring(i, (i + 1)));
+        }
+
+        return (rsb.reverse()).toString();
+    }
+    
+    //int type인 경우
+    public static String addComma(int num) {
+
+        String str = num + "";
+        StringBuffer sb = new StringBuffer(str);
+        StringBuffer rsb = new StringBuffer();
+        sb = sb.reverse();
+        int p = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            p = i % 3;
+
+            if (i > 0)
+                if (p == 0)
+                    rsb.append(",");
+
+            rsb.append(sb.substring(i, (i + 1)));
+        }
+
+        return (rsb.reverse()).toString();
+    }
+    
+    public static String getUploadFileSubFix(AtomicLong counter){
+    	
+  //  	AtomicLong counter = new AtomicLong(0);
+    			
+    	String subFix = "";
+    	try {
+    		long nano = System.currentTimeMillis();
+    		subFix = new SimpleDateFormat("yyyyMMddHHmmssSSSS").format(nano) + "_" + counter.incrementAndGet();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+		return subFix;
+    }
+    
+    public static String dupAreaNmMarge(String input) {
+    	
+    	String returnVal = "";
+    	
+    	try {
+    		
+	    	String[] arrayInput = input.split("\\,");	 
+	    	arrayInput = new HashSet<String>(Arrays.asList(arrayInput)).toArray(new String[0]);
+			
+	    	for(int i=0; i<arrayInput.length; i++) {
+	    		
+	    		if(i == arrayInput.length-1)
+	    			returnVal = returnVal + arrayInput[i];
+	    		else 
+	    			returnVal = returnVal + arrayInput[i] + ",";
+			}
+			
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return returnVal;
+    }
+    
+//    public static String replaceToEditorHost(String content) {
+//    	// TODO : 이중화 시점에 Host - https://img.lessonmon.co.kr 로 변경
+//    	return org.apache.commons.lang3.StringUtils.replaceEach(content, new String[]{"/upload/editor/", ""}, new String[]{"https://img.lessonmon.kr/editor/", ""});
+//    }
+    
+}

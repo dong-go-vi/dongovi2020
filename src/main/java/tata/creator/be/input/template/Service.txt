@@ -1,0 +1,32 @@
+package tata.creator.be.output.biz.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import tata.creator.be.output.biz.dao.##DAO_NAME##Dao;
+##IMPORT_VO##
+
+
+/**
+ * ##SERVICE_NAME##Service
+ * @author tata creator
+ * @since ##TODAY## 
+ */
+@Service
+public class ##SERVICE_NAME##Service {
+
+	/** */
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(##SERVICE_NAME##Service.class);
+
+	@Autowired
+	private ##DAO_NAME##Dao ##dao_NAME##Dao;
+
+##EACH_TABLES##
+
+}

@@ -1,0 +1,6 @@
+			CRN_MBR_NO 
+			, BSIS_IF 
+			, RGNT_NO 
+			, REG_DT 
+			, UPDT_MN_NO 
+			, UPDT_DT 

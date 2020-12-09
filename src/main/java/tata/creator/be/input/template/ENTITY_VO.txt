@@ -1,0 +1,26 @@
+package tata.creator.be.output.common.model.entity;
+
+import java.io.Serializable;
+
+// import tata.creator.be.output.common.model.BaseVO;
+import dongovi2020.base.common.BaseVO;
+
+/**
+ * TABLE VO - ##TABLE_NAME## / ##TABLE_COMMENT##		
+ * @author tata creator
+ * @since ##TODAY##
+ *
+ */
+ @SuppressWarnings("serial")
+public class ##TABLE_NAME## extends BaseVO implements Serializable{
+	
+	// ===== column level property =====
+
+##PROPERTY_AREA##
+
+
+	// ===== setters and getters =====
+
+##GETTER_SETTER_AREA##
+
+}

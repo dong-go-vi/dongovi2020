@@ -1,0 +1,219 @@
+	/// ===== ##BIZ_NAME## ===== =======================================================================
+
+	/**
+	 * search ##BIZ_NAME## => search##BIZ_NAME##
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/search##BIZ_NAME##")
+	public ResponseEntity<Map<String, Object>> apiSearch##BIZ_NAME##(HttpServletRequest request, @ModelAttribute("param") ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			map.put("vo", ##service_NAME##Service.search##BIZ_NAME##(param));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_READ_FAIL)));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * search ##BIZ_NAME## List => search##BIZ_NAME##List
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/search##BIZ_NAME##List")
+	public ResponseEntity<Map<String, Object>> apiSearch##BIZ_NAME##List(HttpServletRequest request, @ModelAttribute("param") ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			map.put("list", ##service_NAME##Service.search##BIZ_NAME##List(param));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_READ_FAIL)));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * search ##BIZ_NAME## List for Page => search##BIZ_NAME##List
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/search##BIZ_NAME##ListCount")
+	public ResponseEntity<Map<String, Object>> apiSearch##BIZ_NAME##ListCount(HttpServletRequest request, @ModelAttribute("param") ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			map.put("count", ##service_NAME##Service.search##BIZ_NAME##ListCount(param));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_READ_FAIL)));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * save ##BIZ_NAME## => save##BIZ_NAME##
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/save##BIZ_NAME##")
+	public ResponseEntity<Map<String, Object>> apiSave##BIZ_NAME##(HttpServletRequest request, @RequestBody ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			int iResult = 0;
+
+			##BIZ_NAME##VO vo = ##service_NAME##Service.search##BIZ_NAME##(param);
+##SAVE_CODE##
+			logger.debug(Integer.toString(iResult));
+			map.put("msg", new Message("S002", MessageUtils.getMessage(Constants.FNT_REG_SUCESS)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_REG_FAIL)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * add ##BIZ_NAME## => add##BIZ_NAME##
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/add##BIZ_NAME##")
+	@Deprecated
+	public ResponseEntity<Map<String, Object>> apiAdd##BIZ_NAME##(HttpServletRequest request, @RequestBody ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			int iResult = ##service_NAME##Service.add##BIZ_NAME##(param);
+##ADD_CODE##
+			logger.debug(Integer.toString(iResult));
+			map.put("msg", new Message("S002", MessageUtils.getMessage(Constants.FNT_REG_SUCESS)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_REG_FAIL)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * modify ##BIZ_NAME## => modify##BIZ_NAME##
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/modify##BIZ_NAME##")
+	@Deprecated
+	public ResponseEntity<Map<String, Object>> apiModify##BIZ_NAME##(HttpServletRequest request, @ModelAttribute("param") ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			int iResult = ##service_NAME##Service.modify##BIZ_NAME##(param);
+			logger.debug(Integer.toString(iResult));
+			map.put("msg", new Message("S002", MessageUtils.getMessage(Constants.FNT_MOD_SUCESS)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_MOD_FAIL)));
+			map.put("vo", param);
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+
+	/**
+	 * remove ##BIZ_NAME## => remove##BIZ_NAME##
+	 * 
+	 * @param requestContext
+	 * @param param
+	 * @return ResponseEntity
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "##API_URI##/remove##BIZ_NAME##")
+	public ResponseEntity<Map<String, Object>> apiRemove##BIZ_NAME##(HttpServletRequest request, @ModelAttribute("param") ##BIZ_NAME##VO param) {
+		ResponseEntity<Map<String, Object>> responseEntity = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginMbrNo", getLoginUserKey(request));
+		try {
+			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+
+			int iResult = ##service_NAME##Service.remove##BIZ_NAME##(param);
+			logger.debug(Integer.toString(iResult));
+			map.put("msg", new Message("S002", MessageUtils.getMessage(Constants.FNT_DEL_SUCESS)));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			map.put("msg", new Message("E002", MessageUtils.getMessage(Constants.FNT_DEL_FAIL)));
+			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		map = null;
+		return responseEntity;
+	}
+

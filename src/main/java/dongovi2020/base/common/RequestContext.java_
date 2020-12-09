@@ -1,0 +1,417 @@
+package dongovi2020.base.common;
+
+import java.io.Serializable;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.util.UrlPathHelper;
+
+public class RequestContext implements Serializable {
+	private static final long serialVersionUID = -7199284900227235513L;
+	
+	private static final Logger logger = LoggerFactory.getLogger("defaultLogger");
+	public static final String MGR_SESSION = "__MGR_SESSION";
+	public static final String MBR_SESSION = "__MBR_SESSION";
+	
+//	private MgrManagerModel mgrManagerModel;
+//	private MemberFrontModel memberFrontModel;
+	
+	private HttpServletRequest httpServletRequest;
+	private Locale locale;
+	private HttpSession httpSession;
+	private UrlPathHelper urlPathHelper;
+//	private Device device;
+	private String deviceCd;
+	
+	// 관리자 유저 번호
+	private int admNo = 0;
+	// 관리자 구분 (회원: 201001, 관리자: 201002)
+	private String admKn = "";
+	
+	// Lessonmom Mbr
+	private int mbrNo = 0;
+	
+	// S3 origin
+	private String s3HostImg;
+	private String s3HostResouce;
+	private String s3HostCover;
+	private String s3HostLesson;
+	private String s3HostProfile;
+	private String s3HostVod;
+	
+	// 버킷별 호트스(Resize)
+	private String s3HostProfileW110;
+	
+	private String s3HostCoverW800;
+	private String s3HostCoverW360;
+	private String s3HostCoverW390;
+	private String s3HostCoverW381;
+	private String s3HostCoverW280;
+	private String s3HostCoverW328;
+	
+	private String s3HostVodW178;
+	private String s3HostVodW122;
+	
+	private String s3HostLessonW538;
+	private String s3HostLessonW284;
+	
+	public RequestContext() {}
+	
+	public void initContext(HttpServletRequest request) {
+		
+		this.httpServletRequest = request;
+		this.urlPathHelper = new UrlPathHelper();
+	    this.urlPathHelper.setDefaultEncoding("UTF-8");
+		this.httpSession = request.getSession();
+//		this.device = DeviceUtils.getCurrentDevice(request);
+		this.locale = LocaleContextHolder.getLocale();
+		
+		// 관리자 정보 설정
+		Object mgrObj = this.getSession().getAttribute(MGR_SESSION);
+		if (mgrObj != null) {
+//			this.mgrManagerModel = (MgrManagerModel) mgrObj;
+//			this.admNo = this.mgrManagerModel.getUraMgrNo();
+			this.admKn = "201002";
+		}
+
+		// 레슨몬 사용자 정보 설정
+		Object mbrObj = this.getSession().getAttribute(MBR_SESSION);
+		if (mbrObj != null) {
+//			this.memberFrontModel = (MemberFrontModel) mbrObj;
+//			this.mbrNo = this.memberFrontModel.getMaaMbrNo();
+			this.admKn = "201001";
+		}
+		
+		// logger.debug("RequestContext Current Request ["+request.toString()+"]");
+	}
+	
+	public String getHttpHost(){
+		return new StringBuffer().append("https://").append(this.httpServletRequest.getServerName()).append(":" + this.httpServletRequest.getServerPort()).toString();
+	}
+	public String getRemoteAddr(){
+		return CommonUtils.getRemoteAddr(this.httpServletRequest);
+	}
+	public String getQueryString(){
+		return this.urlPathHelper.getOriginatingQueryString(this.httpServletRequest);
+	}
+	public String getRequestUri(){
+		try{
+			return this.urlPathHelper.getOriginatingRequestUri(this.httpServletRequest);
+		}catch(Exception e){/* ignore */}
+		
+		return this.httpServletRequest.getRequestURI();
+	}
+	public String getRequestToken(){
+		return null; //ValidationUtils.isNull(this.httpServletRequest.getParameter("token")) ? null : this.httpServletRequest.getParameter("token").toString();
+	}
+	public HttpServletRequest getRequest(){
+		return this.httpServletRequest;
+	}
+	public HttpSession getSession(){
+		return this.httpSession;
+	}
+	public void setSession(HttpSession httpSession){
+		this.httpSession = httpSession;
+	}
+//	public String getRequesEncUrl(){
+//		String queryString = getQueryString();
+//
+//		if(StringUtils.isEmpty(queryString)){
+//			return Base64Utils.encode(getRequestUri());
+//		}
+//	    return Base64Utils.encode(getRequestUri() + "?" + queryString);
+//	}
+	public boolean isManagerPage() {
+		return getRequestUri().startsWith("/manager");
+	}
+	public String getRequestUrl(){
+		if (StringUtils.isEmpty(getQueryString())) {
+			return getRequestUri();
+		}
+		return getRequestUri() + "?" + getQueryString();
+	}
+	public String getRequestFullUrl(){
+		String requestFullUrl = getHttpHost() + CommonUtils.getForwardRequestUri(this.httpServletRequest);
+	    String queryString = getQueryString();
+
+	    if(StringUtils.isEmpty(queryString)){
+	    	return requestFullUrl;
+	    }
+	    return requestFullUrl + "?" + queryString;
+	}
+	public UrlPathHelper getUrlPathHelper(){
+		return this.urlPathHelper;
+	}
+//	public Device getDevice() {
+//		return device;
+//	}
+	public String getDeviceUriPrefix() {
+		
+		String[] arr = this.getRequestUri().split("\\/");
+		
+		return arr[1];
+	}
+//	public MgrManagerModel getMgrManagerModel() {
+//		return mgrManagerModel;
+//	}
+//	public void setMgrManagerModel(MgrManagerModel mgrManagerModel) {
+//		this.mgrManagerModel = mgrManagerModel;
+//	}
+//	public void setSessionMgr(MgrManagerModel mgrManagerModel) {
+//		this.getSession().setAttribute(MGR_SESSION, mgrManagerModel);
+//		
+//		// 유저 정보 설정
+//		this.admNo = mgrManagerModel.getUraMgrNo();
+//		
+//		// 회원 구분 설정
+//		this.admKn = "201002";
+//	}
+//	public MemberFrontModel getMemberFrontModel() {
+//		return memberFrontModel;
+//	}
+//	public void setMemberFrontModel(MemberFrontModel memberFrontModel) {
+//		this.memberFrontModel = memberFrontModel;
+//	}
+//	public void setSessionMbr(MemberFrontModel model) {
+//		this.getSession().setAttribute(MBR_SESSION, model);
+//		
+//		// 사용자 정보 설정
+//		mbrNo = model.getMaaMbrNo();
+//
+//		// 회원 구분 설정
+//		this.admKn = "201001";
+//	}
+	public int getAdmNo() {
+		return admNo;
+	}
+	public String getAdmKn() {
+		return admKn;
+	}
+	public int getMbrNo() {
+		return mbrNo;
+	}
+//	public String getDeviceCd() {
+//		if(this.getDevice().isMobile()) {
+//			this.deviceCd  = "104002";
+//		}else if(this.getDevice().isNormal()){
+//			this.deviceCd  = "104001";
+//		}else if(this.getDevice().isTablet()){
+//			this.deviceCd  = "104003";
+//		}else {
+//			this.deviceCd  = "104999";
+//		}
+//		return deviceCd;
+//	}
+	public void setDeviceCd(String deviceCd) {
+		this.deviceCd = deviceCd;
+	}
+	
+	/**
+	 * - HTTP 요청 헤더  X-Forwarded-For(XFF)
+	 *   프록시환경 OR 클라우드 위에 있는 - 웹 응용 프로그램
+	 *   cluster로 구성되어 load balancer 에서 호출된다. 
+	 *   이럴 경우에서 getRemoteAddr() 을 호출하면 접근한 클라이언트의 외부아이피가 아닌 웹서버나 load balancer의 IP
+	 * 
+	 * @param request
+	 * @return
+	 */
+	
+	public String getRemoteAddrOfXforwarded(){
+	    return (null != this.httpServletRequest.getHeader("X-FORWARDED-FOR")) ? this.httpServletRequest.getHeader("X-FORWARDED-FOR") : this.httpServletRequest.getRemoteAddr();
+	}
+	
+	public String getRemoteAddrOfXforwarded(HttpServletRequest request){
+	    return (null != request.getHeader("X-FORWARDED-FOR")) ? request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
+	}
+
+	public String getS3HostImg() {
+		return s3HostImg;
+	}
+
+	public void setS3HostImg(String s3HostImg) {
+		this.s3HostImg = s3HostImg;
+	}
+
+	public String getS3HostResouce() {
+		return s3HostResouce;
+	}
+
+	public void setS3HostResouce(String s3HostResouce) {
+		this.s3HostResouce = s3HostResouce;
+	}
+
+	public String getS3HostCover() {
+		return s3HostCover;
+	}
+
+	public void setS3HostCover(String s3HostCover) {
+		this.s3HostCover = s3HostCover;
+	}
+
+	public String getS3HostLesson() {
+		return s3HostLesson;
+	}
+
+	public void setS3HostLesson(String s3HostLesson) {
+		this.s3HostLesson = s3HostLesson;
+	}
+
+	public String getS3HostProfile() {
+		return s3HostProfile;
+	}
+
+	public void setS3HostProfile(String s3HostProfile) {
+		this.s3HostProfile = s3HostProfile;
+	}
+
+	public String getS3HostVod() {
+		return s3HostVod;
+	}
+
+	public void setS3HostVod(String s3HostVod) {
+		this.s3HostVod = s3HostVod;
+	}
+
+	public String getS3HostProfileW110() {
+		return s3HostProfileW110;
+	}
+
+	public void setS3HostProfileW110(String s3HostProfileW110) {
+		this.s3HostProfileW110 = s3HostProfileW110;
+	}
+
+	public String getS3HostCoverW800() {
+		return s3HostCoverW800;
+	}
+
+	public void setS3HostCoverW800(String s3HostCoverW800) {
+		this.s3HostCoverW800 = s3HostCoverW800;
+	}
+
+	public String getS3HostCoverW360() {
+		return s3HostCoverW360;
+	}
+
+	public void setS3HostCoverW360(String s3HostCoverW360) {
+		this.s3HostCoverW360 = s3HostCoverW360;
+	}
+
+	public String getS3HostCoverW390() {
+		return s3HostCoverW390;
+	}
+
+	public void setS3HostCoverW390(String s3HostCoverW390) {
+		this.s3HostCoverW390 = s3HostCoverW390;
+	}
+
+	public String getS3HostCoverW381() {
+		return s3HostCoverW381;
+	}
+
+	public void setS3HostCoverW381(String s3HostCoverW381) {
+		this.s3HostCoverW381 = s3HostCoverW381;
+	}
+
+	public String getS3HostCoverW280() {
+		return s3HostCoverW280;
+	}
+
+	public void setS3HostCoverW280(String s3HostCoverW280) {
+		this.s3HostCoverW280 = s3HostCoverW280;
+	}
+
+	public String getS3HostCoverW328() {
+		return s3HostCoverW328;
+	}
+
+	public void setS3HostCoverW328(String s3HostCoverW328) {
+		this.s3HostCoverW328 = s3HostCoverW328;
+	}
+
+	public String getS3HostVodW178() {
+		return s3HostVodW178;
+	}
+
+	public void setS3HostVodW178(String s3HostVodW178) {
+		this.s3HostVodW178 = s3HostVodW178;
+	}
+
+	public String getS3HostVodW122() {
+		return s3HostVodW122;
+	}
+
+	public void setS3HostVodW122(String s3HostVodW122) {
+		this.s3HostVodW122 = s3HostVodW122;
+	}
+
+	public String getS3HostLessonW538() {
+		return s3HostLessonW538;
+	}
+
+	public void setS3HostLessonW538(String s3HostLessonW538) {
+		this.s3HostLessonW538 = s3HostLessonW538;
+	}
+
+	public String getS3HostLessonW284() {
+		return s3HostLessonW284;
+	}
+
+	public void setS3HostLessonW284(String s3HostLessonW284) {
+		this.s3HostLessonW284 = s3HostLessonW284;
+	}
+	
+/*	
+ 	필요시 Method 추가하여 처리
+	Enumeration<?> enumeration = request.getParameterNames();
+    String key = null;
+    String[] values = null;
+    while(enumeration.hasMoreElements()){
+        key = (String) enumeration.nextElement();
+        values = request.getParameterValues(key);
+        if(values != null){
+            commandMap.put(key, (values.length > 1) ? values:values[0] );
+        }
+    }
+        
+	private Map<String,Object> map = new HashMap<String,Object>();
+
+	public Object get(String key){
+		return map.get(key);
+    }
+    public void put(String key, Object value){
+        map.put(key, value);
+    }
+    public Object remove(String key){
+        return map.remove(key);
+    }
+    public boolean containsKey(String key){
+        return map.containsKey(key);
+    }
+    public boolean containsValue(Object value){
+        return map.containsValue(value);
+    }
+    public void clear(){
+        map.clear();
+    }
+    public Set<Entry<String, Object>> entrySet(){
+        return map.entrySet();
+    }
+    public Set<String> keySet(){
+        return map.keySet();
+    }
+    public boolean isEmpty(){
+        return map.isEmpty();
+    }
+    public void putAll(Map<? extends String, ?extends Object> m){
+        map.putAll(m);
+    }
+    public Map<String,Object> getMap(){
+        return map;
+    }	
+*/  
+}

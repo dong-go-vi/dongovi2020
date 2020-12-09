@@ -1,0 +1,138 @@
+package devketerius.base.common;
+
+public class PageParam extends SearchParam implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1677416705713156813L;
+	private static final int PAGE= 1;
+	private static final int PER_PAGE = 10;
+	
+	
+	//===== member variables =====
+	
+	// 파라메터로 받아 오는 값
+	private int page = 1;
+	private int perPage = 10;
+	
+	private int offset = 0;
+	private int totalPage = 0;
+	private int count = 0;
+
+	// 정렬
+	private String order;
+	private String sortColumn;
+	private boolean sortAscending;
+	
+	// session login member id No. (=loginMbrNo) // Added in 2020-11-03
+	private int loginMbrNo = 0;
+
+	//===== getters and setters =====
+	
+	public int getPage() {
+		return this.page;
+	}
+
+	public void setPage(int page) {
+		this.page = this.page != 0 ? page : PAGE;
+		this.offset = (page-1) * this.perPage;
+	}
+
+	public int getOffset() {
+		return this.offset;
+	}
+	
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	public int getPerPage() {
+		if(this.perPage > 50)
+			this.perPage = 10;
+		
+		return this.perPage;
+	}
+
+	public void setPerPage(int perPage) {
+		this.perPage = this.perPage != 0 ? perPage : PER_PAGE;
+		this.offset = (page-1) * this.perPage;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+		this.totalPage = (int) Math.ceil((double) count / perPage);
+	}
+	
+	public String getOrder() {
+		return order;
+	}
+	
+	public String getSortColumn() {
+		return sortColumn;
+	}
+	public void setSortColumn(String sortColumn) {
+		this.sortColumn = sortColumn;
+		setOrderColumnAscending();
+	}
+	public boolean isSortAscending() {
+		return sortAscending;
+	}
+	
+	public void setSortAscending(boolean sortAscending) {
+		this.sortAscending = sortAscending;
+		setOrderColumnAscending();
+	}
+	
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	
+	public void setOrderColumnAscending() {
+		
+		if(sortColumn != null) {
+			String regex = "([a-z])([A-Z]+)";
+			String replacement = "$1_$2";
+			String column = this.sortColumn.replaceAll(regex, replacement).toUpperCase();
+			
+			String s = (this.sortAscending) ? "ASC" : "DESC";
+			String s1 = "ORDER BY "+ column + " " + s;
+			
+			this.order = s1;
+		} else {
+			this.order = null;
+		}
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("\n");
+		sb.append("page: "+ page+"\n");
+		sb.append("perPage: "+ perPage+"\n");
+		sb.append("offset: "+ offset+"\n");
+		sb.append("totalPage: "+ totalPage+"\n");
+		sb.append("count: "+ count+"\n");
+		sb.append("order: "+ order+"\n");
+		sb.append("sortColumn: "+ sortColumn+"\n");
+		sb.append("sortAscending: "+ sortAscending+"\n");
+		return sb.toString();
+	}
+
+	public int getLoginMbrNo() {
+		return loginMbrNo;
+	}
+
+	public void setLoginMbrNo(int loginMbrNo) {
+		this.loginMbrNo = loginMbrNo;
+	}
+	
+}
