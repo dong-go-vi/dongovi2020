@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hello thymeleaf</title>
 </head>
-<body>
+<body>test0
 	<h1>Hello thymeleaf</h1>
 	<h2>
 		name = ${name}

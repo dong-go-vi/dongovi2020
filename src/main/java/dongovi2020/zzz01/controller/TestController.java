@@ -54,4 +54,28 @@ public class TestController {
 //		return mav;
 //	}
 
+	@RequestMapping("/index")
+	public String index() throws Exception {
+		return "index";
+	}
+	
+	@RequestMapping("/common/zzz1")
+	public String commonZzz1() throws Exception {
+		return "common/zzz1";
+	}
+
+	@RequestMapping("/common/zzz1.pop")
+	public String commonZzz1Pop() throws Exception {
+		return "common/zzz1";
+	}
+
+	@RequestMapping("/zzz/zzz2")
+	public String zzzZzz2() throws Exception {
+		return "index";
+	}
+
+	@RequestMapping("/zzz/zzz2.pop")
+	public String zzzZzz2Pop() throws Exception {
+		return "common/zzz1";
+	}
 }

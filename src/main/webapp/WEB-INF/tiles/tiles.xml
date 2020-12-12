@@ -4,30 +4,55 @@
 
 <tiles-definitions>
 
-	<!-- base tiles layout add -->
-
-	<definition name="base" template="/WEB-INF/tiles/layout/base.jsp">
-		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	
+	<!-- nobase tiles -->
+	
+	<definition name="nobase" template="/WEB-INF/tiles/layout/nobase.jsp">
+		<put-attribute name="baseContent" value="" />
 	</definition>
 
-	<definition name="nobase" template="/WEB-INF/tiles/layout/base.jsp">
-		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	<definition name="common/*" extends="nobase">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/common/{1}.jsp" />
+	</definition>
+
+	<definition name="common/*/*" extends="nobase">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/common/{1}/{2}.jsp" />
+	</definition>
+
+	<definition name="*.pop" extends="base">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}.jsp" />
 	</definition>
 	
-	<definition name="index" extends="base">
-		<put-attribute name="body" value="/WEB-INF/jsps/index.jsp" />
+	<definition name="*/*.pop" extends="base">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}.jsp" />
 	</definition>
 
+	<definition name="*/*/*.pop" extends="base">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}/{3}.jsp" />
+	</definition>
+	
+	
+	<!-- base tiles - sidebar, topbar -->
+
+	<definition name="base" template="/WEB-INF/tiles/layout/base.jsp">
+		<put-attribute name="baseSidebar" value="/WEB-INF/tiles/layout/baseSidebar.jsp" />
+		<put-attribute name="baseTopbar" value="/WEB-INF/tiles/layout/baseTopbar.jsp" />
+		<put-attribute name="baseContent" value="" />
+	</definition>
+
+	<definition name="index" extends="base">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/index.jsp" />
+	</definition>
+
+	<definition name="*" extends="base">
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}.jsp" />
+	</definition>
 	<definition name="*/*" extends="base">
-		<put-attribute name="body" value="/WEB-INF/jsps/{1}/{2}.jsp" />
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}.jsp" />
 	</definition>
 
 	<definition name="*/*/*" extends="base">
-		<put-attribute name="body" value="/WEB-INF/jsps/{1}/{2}/{3}.jsp" />
+		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}/{3}.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -8,7 +8,7 @@
 <title>View Test Page</title>
 </head>
 <body>
-	abc.jsp
+	test1.jsp
 </body>
 </html>
 
