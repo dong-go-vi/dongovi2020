@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tata.creator.be.output.biz.service.BizBasicService;
+import dongovi2020.base.common.BaseRestful;
 import dongovi2020.base.common.Constants;
 import dongovi2020.base.common.Message;
 import dongovi2020.base.common.MessageUtils;
-
+import tata.creator.be.output.biz.service.BizBasicService;
 import tata.creator.be.output.common.model.extend.CommonCodeVO;
-import tata.creator.be.output.common.model.extend.LessonVO;
+import tata.creator.be.output.common.model.extend.LectureFeePayAddDetailVO;
+import tata.creator.be.output.common.model.extend.LectureFeePayVO;
 import tata.creator.be.output.common.model.extend.LessonAreaVO;
 import tata.creator.be.output.common.model.extend.LessonFormVO;
 import tata.creator.be.output.common.model.extend.LessonPlaceVO;
@@ -30,17 +31,16 @@ import tata.creator.be.output.common.model.extend.LessonStudentConstitueVO;
 import tata.creator.be.output.common.model.extend.LessonStudentTuitionDepositVO;
 import tata.creator.be.output.common.model.extend.LessonTrunVO;
 import tata.creator.be.output.common.model.extend.LessonTurnStudentPaticipationVO;
-import tata.creator.be.output.common.model.extend.LectureFeePayVO;
-import tata.creator.be.output.common.model.extend.LectureFeePayAddDetailVO;
-import tata.creator.be.output.common.model.extend.MenuVO;
+import tata.creator.be.output.common.model.extend.LessonVO;
 import tata.creator.be.output.common.model.extend.MenuAccessLogVO;
 import tata.creator.be.output.common.model.extend.MenuAuthVO;
+import tata.creator.be.output.common.model.extend.MenuVO;
 import tata.creator.be.output.common.model.extend.MessageSendVO;
 import tata.creator.be.output.common.model.extend.StudentVO;
 import tata.creator.be.output.common.model.extend.SystemLoginLogVO;
 import tata.creator.be.output.common.model.extend.SystemUserVO;
-import tata.creator.be.output.common.model.extend.TeacherVO;
 import tata.creator.be.output.common.model.extend.TeacherLectureFeeVO;
+import tata.creator.be.output.common.model.extend.TeacherVO;
 import tata.creator.be.output.common.model.extend.TeamVO;
 import tata.creator.be.output.common.model.extend.UnpaidSendVO;
 
@@ -51,7 +51,7 @@ import tata.creator.be.output.common.model.extend.UnpaidSendVO;
  * @since 2020.12.05 
  */
 @Controller
-public class BizBasicRestful {
+public class BizBasicRestful extends BaseRestful {
 
 	private static final Logger logger = LoggerFactory.getLogger(BizBasicRestful.class);
 
@@ -73,9 +73,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchCommonCode(HttpServletRequest request, @ModelAttribute("param") CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchCommonCode(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -101,9 +101,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchCommonCodeList(HttpServletRequest request, @ModelAttribute("param") CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchCommonCodeList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -129,9 +129,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchCommonCodeListCount(HttpServletRequest request, @ModelAttribute("param") CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchCommonCodeListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -157,9 +157,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveCommonCode(HttpServletRequest request, @RequestBody CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -199,9 +199,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddCommonCode(HttpServletRequest request, @RequestBody CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addCommonCode(param);
 
@@ -233,9 +233,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyCommonCode(HttpServletRequest request, @ModelAttribute("param") CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyCommonCode(param);
 			logger.debug(Integer.toString(iResult));
@@ -265,9 +265,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveCommonCode(HttpServletRequest request, @ModelAttribute("param") CommonCodeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeCommonCode(param);
 			logger.debug(Integer.toString(iResult));
@@ -297,9 +297,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLesson(HttpServletRequest request, @ModelAttribute("param") LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLesson(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -325,9 +325,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonList(HttpServletRequest request, @ModelAttribute("param") LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -353,9 +353,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonListCount(HttpServletRequest request, @ModelAttribute("param") LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -381,9 +381,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLesson(HttpServletRequest request, @RequestBody LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -424,9 +424,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLesson(HttpServletRequest request, @RequestBody LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLesson(param);
 			param.setLsnIdx(iResult); // key setting
@@ -459,9 +459,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLesson(HttpServletRequest request, @ModelAttribute("param") LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLesson(param);
 			logger.debug(Integer.toString(iResult));
@@ -491,9 +491,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLesson(HttpServletRequest request, @ModelAttribute("param") LessonVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLesson(param);
 			logger.debug(Integer.toString(iResult));
@@ -523,9 +523,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonArea(HttpServletRequest request, @ModelAttribute("param") LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonArea(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -551,9 +551,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonAreaList(HttpServletRequest request, @ModelAttribute("param") LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonAreaList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -579,9 +579,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonAreaListCount(HttpServletRequest request, @ModelAttribute("param") LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonAreaListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -607,9 +607,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonArea(HttpServletRequest request, @RequestBody LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -649,9 +649,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonArea(HttpServletRequest request, @RequestBody LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonArea(param);
 
@@ -683,9 +683,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonArea(HttpServletRequest request, @ModelAttribute("param") LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonArea(param);
 			logger.debug(Integer.toString(iResult));
@@ -715,9 +715,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonArea(HttpServletRequest request, @ModelAttribute("param") LessonAreaVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonArea(param);
 			logger.debug(Integer.toString(iResult));
@@ -747,9 +747,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonForm(HttpServletRequest request, @ModelAttribute("param") LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonForm(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -775,9 +775,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonFormList(HttpServletRequest request, @ModelAttribute("param") LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonFormList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -803,9 +803,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonFormListCount(HttpServletRequest request, @ModelAttribute("param") LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonFormListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -831,9 +831,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonForm(HttpServletRequest request, @RequestBody LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -873,9 +873,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonForm(HttpServletRequest request, @RequestBody LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonForm(param);
 
@@ -907,9 +907,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonForm(HttpServletRequest request, @ModelAttribute("param") LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonForm(param);
 			logger.debug(Integer.toString(iResult));
@@ -939,9 +939,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonForm(HttpServletRequest request, @ModelAttribute("param") LessonFormVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonForm(param);
 			logger.debug(Integer.toString(iResult));
@@ -971,9 +971,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonPlace(HttpServletRequest request, @ModelAttribute("param") LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonPlace(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -999,9 +999,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonPlaceList(HttpServletRequest request, @ModelAttribute("param") LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonPlaceList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1027,9 +1027,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonPlaceListCount(HttpServletRequest request, @ModelAttribute("param") LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonPlaceListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1055,9 +1055,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonPlace(HttpServletRequest request, @RequestBody LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -1097,9 +1097,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonPlace(HttpServletRequest request, @RequestBody LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonPlace(param);
 
@@ -1131,9 +1131,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonPlace(HttpServletRequest request, @ModelAttribute("param") LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonPlace(param);
 			logger.debug(Integer.toString(iResult));
@@ -1163,9 +1163,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonPlace(HttpServletRequest request, @ModelAttribute("param") LessonPlaceVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonPlace(param);
 			logger.debug(Integer.toString(iResult));
@@ -1195,9 +1195,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentConstitue(HttpServletRequest request, @ModelAttribute("param") LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonStudentConstitue(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1223,9 +1223,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentConstitueList(HttpServletRequest request, @ModelAttribute("param") LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonStudentConstitueList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1251,9 +1251,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentConstitueListCount(HttpServletRequest request, @ModelAttribute("param") LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonStudentConstitueListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1279,9 +1279,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonStudentConstitue(HttpServletRequest request, @RequestBody LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -1322,9 +1322,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonStudentConstitue(HttpServletRequest request, @RequestBody LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonStudentConstitue(param);
 			param.setLsnStdntCsttIdx(iResult); // key setting
@@ -1357,9 +1357,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonStudentConstitue(HttpServletRequest request, @ModelAttribute("param") LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonStudentConstitue(param);
 			logger.debug(Integer.toString(iResult));
@@ -1389,9 +1389,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonStudentConstitue(HttpServletRequest request, @ModelAttribute("param") LessonStudentConstitueVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonStudentConstitue(param);
 			logger.debug(Integer.toString(iResult));
@@ -1421,9 +1421,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentTuitionDeposit(HttpServletRequest request, @ModelAttribute("param") LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonStudentTuitionDeposit(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1449,9 +1449,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentTuitionDepositList(HttpServletRequest request, @ModelAttribute("param") LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonStudentTuitionDepositList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1477,9 +1477,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonStudentTuitionDepositListCount(HttpServletRequest request, @ModelAttribute("param") LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonStudentTuitionDepositListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1505,9 +1505,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonStudentTuitionDeposit(HttpServletRequest request, @RequestBody LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -1548,9 +1548,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonStudentTuitionDeposit(HttpServletRequest request, @RequestBody LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonStudentTuitionDeposit(param);
 			param.setLsnStdntTtnDpstIdx(iResult); // key setting
@@ -1583,9 +1583,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonStudentTuitionDeposit(HttpServletRequest request, @ModelAttribute("param") LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonStudentTuitionDeposit(param);
 			logger.debug(Integer.toString(iResult));
@@ -1615,9 +1615,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonStudentTuitionDeposit(HttpServletRequest request, @ModelAttribute("param") LessonStudentTuitionDepositVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonStudentTuitionDeposit(param);
 			logger.debug(Integer.toString(iResult));
@@ -1647,9 +1647,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTrun(HttpServletRequest request, @ModelAttribute("param") LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonTrun(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1675,9 +1675,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTrunList(HttpServletRequest request, @ModelAttribute("param") LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonTrunList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1703,9 +1703,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTrunListCount(HttpServletRequest request, @ModelAttribute("param") LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonTrunListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1731,9 +1731,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonTrun(HttpServletRequest request, @RequestBody LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -1774,9 +1774,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonTrun(HttpServletRequest request, @RequestBody LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonTrun(param);
 			param.setLsnTrnIdx(iResult); // key setting
@@ -1809,9 +1809,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonTrun(HttpServletRequest request, @ModelAttribute("param") LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonTrun(param);
 			logger.debug(Integer.toString(iResult));
@@ -1841,9 +1841,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonTrun(HttpServletRequest request, @ModelAttribute("param") LessonTrunVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonTrun(param);
 			logger.debug(Integer.toString(iResult));
@@ -1873,9 +1873,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTurnStudentPaticipation(HttpServletRequest request, @ModelAttribute("param") LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLessonTurnStudentPaticipation(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1901,9 +1901,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTurnStudentPaticipationList(HttpServletRequest request, @ModelAttribute("param") LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLessonTurnStudentPaticipationList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1929,9 +1929,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLessonTurnStudentPaticipationListCount(HttpServletRequest request, @ModelAttribute("param") LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLessonTurnStudentPaticipationListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -1957,9 +1957,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLessonTurnStudentPaticipation(HttpServletRequest request, @RequestBody LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -2000,9 +2000,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLessonTurnStudentPaticipation(HttpServletRequest request, @RequestBody LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLessonTurnStudentPaticipation(param);
 			param.setLsnTrnStdntPtcptIdx(iResult); // key setting
@@ -2035,9 +2035,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLessonTurnStudentPaticipation(HttpServletRequest request, @ModelAttribute("param") LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLessonTurnStudentPaticipation(param);
 			logger.debug(Integer.toString(iResult));
@@ -2067,9 +2067,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLessonTurnStudentPaticipation(HttpServletRequest request, @ModelAttribute("param") LessonTurnStudentPaticipationVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLessonTurnStudentPaticipation(param);
 			logger.debug(Integer.toString(iResult));
@@ -2099,9 +2099,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePay(HttpServletRequest request, @ModelAttribute("param") LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLectureFeePay(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2127,9 +2127,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePayList(HttpServletRequest request, @ModelAttribute("param") LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLectureFeePayList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2155,9 +2155,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePayListCount(HttpServletRequest request, @ModelAttribute("param") LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLectureFeePayListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2183,9 +2183,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLectureFeePay(HttpServletRequest request, @RequestBody LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -2226,9 +2226,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLectureFeePay(HttpServletRequest request, @RequestBody LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLectureFeePay(param);
 			param.setLtrFeePayIdx(iResult); // key setting
@@ -2261,9 +2261,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLectureFeePay(HttpServletRequest request, @ModelAttribute("param") LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLectureFeePay(param);
 			logger.debug(Integer.toString(iResult));
@@ -2293,9 +2293,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLectureFeePay(HttpServletRequest request, @ModelAttribute("param") LectureFeePayVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLectureFeePay(param);
 			logger.debug(Integer.toString(iResult));
@@ -2325,9 +2325,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePayAddDetail(HttpServletRequest request, @ModelAttribute("param") LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchLectureFeePayAddDetail(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2353,9 +2353,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePayAddDetailList(HttpServletRequest request, @ModelAttribute("param") LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchLectureFeePayAddDetailList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2381,9 +2381,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchLectureFeePayAddDetailListCount(HttpServletRequest request, @ModelAttribute("param") LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchLectureFeePayAddDetailListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2409,9 +2409,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveLectureFeePayAddDetail(HttpServletRequest request, @RequestBody LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -2452,9 +2452,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddLectureFeePayAddDetail(HttpServletRequest request, @RequestBody LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addLectureFeePayAddDetail(param);
 			param.setLtrFeePayAddDtlIdx(iResult); // key setting
@@ -2487,9 +2487,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyLectureFeePayAddDetail(HttpServletRequest request, @ModelAttribute("param") LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyLectureFeePayAddDetail(param);
 			logger.debug(Integer.toString(iResult));
@@ -2519,9 +2519,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveLectureFeePayAddDetail(HttpServletRequest request, @ModelAttribute("param") LectureFeePayAddDetailVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeLectureFeePayAddDetail(param);
 			logger.debug(Integer.toString(iResult));
@@ -2551,9 +2551,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenu(HttpServletRequest request, @ModelAttribute("param") MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchMenu(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2579,9 +2579,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuList(HttpServletRequest request, @ModelAttribute("param") MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchMenuList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2607,9 +2607,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuListCount(HttpServletRequest request, @ModelAttribute("param") MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchMenuListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2635,9 +2635,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveMenu(HttpServletRequest request, @RequestBody MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -2678,9 +2678,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddMenu(HttpServletRequest request, @RequestBody MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addMenu(param);
 			param.setMnuIdx(iResult); // key setting
@@ -2713,9 +2713,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyMenu(HttpServletRequest request, @ModelAttribute("param") MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyMenu(param);
 			logger.debug(Integer.toString(iResult));
@@ -2745,9 +2745,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveMenu(HttpServletRequest request, @ModelAttribute("param") MenuVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeMenu(param);
 			logger.debug(Integer.toString(iResult));
@@ -2777,9 +2777,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAccessLog(HttpServletRequest request, @ModelAttribute("param") MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchMenuAccessLog(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2805,9 +2805,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAccessLogList(HttpServletRequest request, @ModelAttribute("param") MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchMenuAccessLogList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2833,9 +2833,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAccessLogListCount(HttpServletRequest request, @ModelAttribute("param") MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchMenuAccessLogListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -2861,9 +2861,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveMenuAccessLog(HttpServletRequest request, @RequestBody MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -2904,9 +2904,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddMenuAccessLog(HttpServletRequest request, @RequestBody MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addMenuAccessLog(param);
 			param.setIdx(iResult); // key setting
@@ -2939,9 +2939,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyMenuAccessLog(HttpServletRequest request, @ModelAttribute("param") MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyMenuAccessLog(param);
 			logger.debug(Integer.toString(iResult));
@@ -2971,9 +2971,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveMenuAccessLog(HttpServletRequest request, @ModelAttribute("param") MenuAccessLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeMenuAccessLog(param);
 			logger.debug(Integer.toString(iResult));
@@ -3003,9 +3003,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAuth(HttpServletRequest request, @ModelAttribute("param") MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchMenuAuth(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3031,9 +3031,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAuthList(HttpServletRequest request, @ModelAttribute("param") MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchMenuAuthList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3059,9 +3059,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMenuAuthListCount(HttpServletRequest request, @ModelAttribute("param") MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchMenuAuthListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3087,9 +3087,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveMenuAuth(HttpServletRequest request, @RequestBody MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -3130,9 +3130,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddMenuAuth(HttpServletRequest request, @RequestBody MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addMenuAuth(param);
 			param.setMnuAthIdx(iResult); // key setting
@@ -3165,9 +3165,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyMenuAuth(HttpServletRequest request, @ModelAttribute("param") MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyMenuAuth(param);
 			logger.debug(Integer.toString(iResult));
@@ -3197,9 +3197,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveMenuAuth(HttpServletRequest request, @ModelAttribute("param") MenuAuthVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeMenuAuth(param);
 			logger.debug(Integer.toString(iResult));
@@ -3229,9 +3229,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMessageSend(HttpServletRequest request, @ModelAttribute("param") MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchMessageSend(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3257,9 +3257,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMessageSendList(HttpServletRequest request, @ModelAttribute("param") MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchMessageSendList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3285,9 +3285,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchMessageSendListCount(HttpServletRequest request, @ModelAttribute("param") MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchMessageSendListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3313,9 +3313,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveMessageSend(HttpServletRequest request, @RequestBody MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -3356,9 +3356,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddMessageSend(HttpServletRequest request, @RequestBody MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addMessageSend(param);
 			param.setMsgSndIdx(iResult); // key setting
@@ -3391,9 +3391,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyMessageSend(HttpServletRequest request, @ModelAttribute("param") MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyMessageSend(param);
 			logger.debug(Integer.toString(iResult));
@@ -3423,9 +3423,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveMessageSend(HttpServletRequest request, @ModelAttribute("param") MessageSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeMessageSend(param);
 			logger.debug(Integer.toString(iResult));
@@ -3455,9 +3455,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchStudent(HttpServletRequest request, @ModelAttribute("param") StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchStudent(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3483,9 +3483,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchStudentList(HttpServletRequest request, @ModelAttribute("param") StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchStudentList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3511,9 +3511,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchStudentListCount(HttpServletRequest request, @ModelAttribute("param") StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchStudentListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3539,9 +3539,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveStudent(HttpServletRequest request, @RequestBody StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -3582,9 +3582,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddStudent(HttpServletRequest request, @RequestBody StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addStudent(param);
 			param.setStdntIdx(iResult); // key setting
@@ -3617,9 +3617,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyStudent(HttpServletRequest request, @ModelAttribute("param") StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyStudent(param);
 			logger.debug(Integer.toString(iResult));
@@ -3649,9 +3649,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveStudent(HttpServletRequest request, @ModelAttribute("param") StudentVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeStudent(param);
 			logger.debug(Integer.toString(iResult));
@@ -3681,9 +3681,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemLoginLog(HttpServletRequest request, @ModelAttribute("param") SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchSystemLoginLog(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3709,9 +3709,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemLoginLogList(HttpServletRequest request, @ModelAttribute("param") SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchSystemLoginLogList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3737,9 +3737,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemLoginLogListCount(HttpServletRequest request, @ModelAttribute("param") SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchSystemLoginLogListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3765,9 +3765,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveSystemLoginLog(HttpServletRequest request, @RequestBody SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -3808,9 +3808,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddSystemLoginLog(HttpServletRequest request, @RequestBody SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addSystemLoginLog(param);
 			param.setIdx(iResult); // key setting
@@ -3843,9 +3843,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifySystemLoginLog(HttpServletRequest request, @ModelAttribute("param") SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifySystemLoginLog(param);
 			logger.debug(Integer.toString(iResult));
@@ -3875,9 +3875,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveSystemLoginLog(HttpServletRequest request, @ModelAttribute("param") SystemLoginLogVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeSystemLoginLog(param);
 			logger.debug(Integer.toString(iResult));
@@ -3907,9 +3907,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemUser(HttpServletRequest request, @ModelAttribute("param") SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchSystemUser(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3935,9 +3935,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemUserList(HttpServletRequest request, @ModelAttribute("param") SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchSystemUserList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3963,9 +3963,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchSystemUserListCount(HttpServletRequest request, @ModelAttribute("param") SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchSystemUserListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -3991,9 +3991,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveSystemUser(HttpServletRequest request, @RequestBody SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -4034,9 +4034,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddSystemUser(HttpServletRequest request, @RequestBody SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addSystemUser(param);
 			param.setUsrIdx(iResult); // key setting
@@ -4069,9 +4069,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifySystemUser(HttpServletRequest request, @ModelAttribute("param") SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifySystemUser(param);
 			logger.debug(Integer.toString(iResult));
@@ -4101,9 +4101,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveSystemUser(HttpServletRequest request, @ModelAttribute("param") SystemUserVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeSystemUser(param);
 			logger.debug(Integer.toString(iResult));
@@ -4133,9 +4133,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacher(HttpServletRequest request, @ModelAttribute("param") TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchTeacher(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4161,9 +4161,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacherList(HttpServletRequest request, @ModelAttribute("param") TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchTeacherList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4189,9 +4189,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacherListCount(HttpServletRequest request, @ModelAttribute("param") TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchTeacherListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4217,9 +4217,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveTeacher(HttpServletRequest request, @RequestBody TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -4260,9 +4260,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddTeacher(HttpServletRequest request, @RequestBody TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addTeacher(param);
 			param.setTchrIdx(iResult); // key setting
@@ -4295,9 +4295,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyTeacher(HttpServletRequest request, @ModelAttribute("param") TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyTeacher(param);
 			logger.debug(Integer.toString(iResult));
@@ -4327,9 +4327,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveTeacher(HttpServletRequest request, @ModelAttribute("param") TeacherVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeTeacher(param);
 			logger.debug(Integer.toString(iResult));
@@ -4359,9 +4359,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacherLectureFee(HttpServletRequest request, @ModelAttribute("param") TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchTeacherLectureFee(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4387,9 +4387,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacherLectureFeeList(HttpServletRequest request, @ModelAttribute("param") TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchTeacherLectureFeeList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4415,9 +4415,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeacherLectureFeeListCount(HttpServletRequest request, @ModelAttribute("param") TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchTeacherLectureFeeListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4443,9 +4443,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveTeacherLectureFee(HttpServletRequest request, @RequestBody TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -4486,9 +4486,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddTeacherLectureFee(HttpServletRequest request, @RequestBody TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addTeacherLectureFee(param);
 			param.setTchrLtrFeeIdx(iResult); // key setting
@@ -4521,9 +4521,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyTeacherLectureFee(HttpServletRequest request, @ModelAttribute("param") TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyTeacherLectureFee(param);
 			logger.debug(Integer.toString(iResult));
@@ -4553,9 +4553,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveTeacherLectureFee(HttpServletRequest request, @ModelAttribute("param") TeacherLectureFeeVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeTeacherLectureFee(param);
 			logger.debug(Integer.toString(iResult));
@@ -4585,9 +4585,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeam(HttpServletRequest request, @ModelAttribute("param") TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchTeam(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4613,9 +4613,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeamList(HttpServletRequest request, @ModelAttribute("param") TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchTeamList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4641,9 +4641,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchTeamListCount(HttpServletRequest request, @ModelAttribute("param") TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchTeamListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4669,9 +4669,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveTeam(HttpServletRequest request, @RequestBody TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -4712,9 +4712,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddTeam(HttpServletRequest request, @RequestBody TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addTeam(param);
 			param.setTeamIdx(iResult); // key setting
@@ -4747,9 +4747,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyTeam(HttpServletRequest request, @ModelAttribute("param") TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyTeam(param);
 			logger.debug(Integer.toString(iResult));
@@ -4779,9 +4779,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveTeam(HttpServletRequest request, @ModelAttribute("param") TeamVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeTeam(param);
 			logger.debug(Integer.toString(iResult));
@@ -4811,9 +4811,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchUnpaidSend(HttpServletRequest request, @ModelAttribute("param") UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("vo", bizBasicService.searchUnpaidSend(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4839,9 +4839,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchUnpaidSendList(HttpServletRequest request, @ModelAttribute("param") UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("list", bizBasicService.searchUnpaidSendList(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4867,9 +4867,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSearchUnpaidSendListCount(HttpServletRequest request, @ModelAttribute("param") UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			map.put("count", bizBasicService.searchUnpaidSendListCount(param));
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -4895,9 +4895,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiSaveUnpaidSend(HttpServletRequest request, @RequestBody UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = 0;
 
@@ -4938,9 +4938,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiAddUnpaidSend(HttpServletRequest request, @RequestBody UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.addUnpaidSend(param);
 			param.setUnpdSndIdx(iResult); // key setting
@@ -4973,9 +4973,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiModifyUnpaidSend(HttpServletRequest request, @ModelAttribute("param") UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.modifyUnpaidSend(param);
 			logger.debug(Integer.toString(iResult));
@@ -5005,9 +5005,9 @@ public class BizBasicRestful {
 	public ResponseEntity<Map<String, Object>> apiRemoveUnpaidSend(HttpServletRequest request, @ModelAttribute("param") UnpaidSendVO param) {
 		ResponseEntity<Map<String, Object>> responseEntity = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("loginMbrNo", getLoginUserKey(request));
+		map.put("LoginMemberKey", getSessionMemberKey(request));
 		try {
-			param.setLoginMbrNo(getLoginUserKey(request)); // vo에 로그인 id 세팅
+			param.setLoginMemberKey(getSessionMemberKey(request)); // vo에 로그인 id 세팅
 
 			int iResult = bizBasicService.removeUnpaidSend(param);
 			logger.debug(Integer.toString(iResult));
@@ -5022,21 +5022,5 @@ public class BizBasicRestful {
 		return responseEntity;
 	}
 
-
-
-
-	private int getLoginUserKey(HttpServletRequest request) {
-		int key = 0;
-		if ( request != null && request.getSession() != null && request.getSession().getAttribute("LOGIN_USER_ID") != null) {
-			try {
-				key = (int)request.getSession().getAttribute("LOGIN_USER_ID");
-			} catch (Exception e) {
-				logger.error("ERROR:" + request.getSession().getAttribute("LOGIN_USER_ID"));
-				e = null;
-			}
-		}
-		request = null; 
-		return key;
-	}
 
 }

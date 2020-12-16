@@ -22,9 +22,9 @@ import dongovi2020.common.model.united.MemberVO;
 
 
 /**
- * BizBasicRestful
- * @author tata creator
- * @since 2020.12.05 
+ * MemberRestful
+ * @author extoller
+ * @since 2020.12.16 
  */
 @Controller
 public class MemberRestful extends BaseRestful {
@@ -71,7 +71,7 @@ public class MemberRestful extends BaseRestful {
 			logger.error("Error:"+e.getMessage());
 		} 
 		
-		return resultData.getResponseEntity(true);
+		return resultData.getResponseEntity();
 	}
 	
 
@@ -102,7 +102,7 @@ public class MemberRestful extends BaseRestful {
 		} catch (Exception e) {
 			logger.error("Error:"+e.getMessage());
 		}
-		return resultData.getResponseEntity(true);
+		return resultData.getResponseEntity();
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class MemberRestful extends BaseRestful {
 		} catch (Exception e) {
 			logger.error("Error:"+e.getMessage());
 		}
-		return resultData.getResponseEntity(true);
+		return resultData.getResponseEntity();
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class MemberRestful extends BaseRestful {
 		} catch (Exception e) {
 			logger.error("Error:"+e.getMessage());
 		}
-		return resultData.getResponseEntity(true);
+		return resultData.getResponseEntity();
 	}
 	
 	/**
@@ -223,6 +223,6 @@ public class MemberRestful extends BaseRestful {
 		} catch (Exception e) {
 			logger.error("Error:"+e.getMessage());
 		}
-		return resultData.getResponseEntity(true);
+		return resultData.getResponseEntity();
 	}
 }

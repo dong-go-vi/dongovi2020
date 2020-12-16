@@ -82,14 +82,8 @@ public class ResultData extends BaseVO {
 	}
 	
 	public ResponseEntity<Map<String, Object>> getResponseEntity(){
-		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-		this.release();
-		return responseEntity;
-	}
-	
-	public ResponseEntity<Map<String, Object>> getResponseEntity(boolean useErrorStatus){
 		ResponseEntity<Map<String, Object>> responseEntity = null;
-		if ( useErrorStatus == true && code < 0) {
+		if ( code <= 0) {
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
 			responseEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
