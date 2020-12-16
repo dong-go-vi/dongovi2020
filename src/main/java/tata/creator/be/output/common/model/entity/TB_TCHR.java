@@ -18,6 +18,11 @@ public class TB_TCHR extends BaseVO implements Serializable{
 
 	private int tchrIdx; // 교사 IDX 
 	private int teamIdx; // 팀 IDX 
+	private String tchrEmpNoId; // 교사 사번 아이디
+	private String usrDivCd; // 사용자 구분 코드
+	private String usrPwd; // 사용자 비밀번호
+	private String usrPwdEnc; // 사용자 비밀번호 암호화
+	private String useApprStsCd; // 사용 승인 상태 코드
 	private String tchrNk; // 교사 별명 
 	private String rlyNm; // 실제 이름 
 	private String gdrCd; // 공통코드001 
@@ -28,7 +33,6 @@ public class TB_TCHR extends BaseVO implements Serializable{
 	private String acntNo; // 계좌 번호 
 	private String jonDy; // 입사일자 
 	private int untLtrFee; // 단위 강의료 
-	private int usrIdx; // 사용자 IDX 
 	private String useYn; // 사용 여부 
 	private String creDt; // 생성 일시 
 	private String crePsn; // 생성자 
@@ -123,13 +127,6 @@ public class TB_TCHR extends BaseVO implements Serializable{
 		return untLtrFee; 
 	} 
 	
-	public void setUsrIdx(int usrIdx) { 
-		this.usrIdx = usrIdx; 
-	} 
-	public int getUsrIdx() { 
-		return usrIdx; 
-	} 
-	
 	public void setUseYn(String useYn) { 
 		this.useYn = useYn; 
 	} 
@@ -163,8 +160,37 @@ public class TB_TCHR extends BaseVO implements Serializable{
 	} 
 	public String getUpdPsn() { 
 		return updPsn; 
+	}
+	public String getTchrEmpNoId() {
+		return tchrEmpNoId;
+	}
+	public void setTchrEmpNoId(String tchrEmpNoId) {
+		this.tchrEmpNoId = tchrEmpNoId;
+	}
+	public String getUsrDivCd() {
+		return usrDivCd;
+	}
+	public void setUsrDivCd(String usrDivCd) {
+		this.usrDivCd = usrDivCd;
+	}
+	public String getUsrPwd() {
+		return usrPwd;
+	}
+	public void setUsrPwd(String usrPwd) {
+		this.usrPwd = usrPwd;
+	}
+	public String getUsrPwdEnc() {
+		return usrPwdEnc;
+	}
+	public void setUsrPwdEnc(String usrPwdEnc) {
+		this.usrPwdEnc = usrPwdEnc;
+	}
+	public String getUseApprStsCd() {
+		return useApprStsCd;
+	}
+	public void setUseApprStsCd(String useApprStsCd) {
+		this.useApprStsCd = useApprStsCd;
 	} 
+
 	
-
-
 }

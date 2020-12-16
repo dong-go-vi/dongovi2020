@@ -2069,6 +2069,10 @@
 	<resultMap id="_TeacherResultMap" type="dongovi2020.common.model.extend.TeacherVO">
 		<id property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
 		<result property="teamIdx" column="TEAM_IDX" /> <!-- 팀 IDX -->
+		<result property="tchrEmpNoId" column="TCHR_EMP_NO_ID" /> <!-- 교사 사번 아이디 -->
+		<result property="usrPwd" column="USR_PWD" /> <!-- 비밀번호 -->
+		<result property="usrPwdEnc" column="USR_PWD_ENC" /> <!-- 비밀번호 암호화 -->
+		<result property="useApprStsCd" column="USE_APPR_STS_CD" /> <!-- 사용 승인 상태 코드 -->
 		<result property="tchrNk" column="TCHR_NK" /> <!-- 교사 별명 -->
 		<result property="rlyNm" column="RLY_NM" /> <!-- 실제 이름 -->
 		<result property="gdrCd" column="GDR_CD" /> <!-- 공통코드001 -->
@@ -2091,6 +2095,10 @@
 		SELECT /* dongovi2020.biz01.dao.selectTeacher */
 			TCHR_IDX 
 			, TEAM_IDX 
+			, TCHR_EMP_NO_ID 
+			, USR_PWD 
+			, USR_PWD_ENC 
+			, USE_APPR_STS_CD 
 			, TCHR_NK 
 			, RLY_NM 
 			, GDR_CD 
@@ -2116,6 +2124,10 @@
 		SELECT /* dongovi2020.biz01.dao.selectTeacherList */
 			TCHR_IDX 
 			, TEAM_IDX 
+			, TCHR_EMP_NO_ID 
+			, USR_PWD 
+			, USR_PWD_ENC 
+			, USE_APPR_STS_CD 
 			, TCHR_NK 
 			, RLY_NM 
 			, GDR_CD 

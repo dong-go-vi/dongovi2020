@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+	Mybatis mapper, tata creator generated!
+	##TODAY## 
+ -->
+ 
+<mapper namespace="dongovi2020.admin.member.dao">
+
+	<resultMap id="_TeacherResultMap" type="dongovi2020.common.model.extend.TeacherVO">
+		<id property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
+		<result property="tchrEmpNoId" column="TCHR_EMP_NO_ID" /> <!-- 교사 사번 아이디 -->
+		<result property="usrPwd" column="USR_PWD" /> <!-- 비밀번호 -->
+		<result property="usrPwdEnc" column="USR_PWD_ENC" /> <!-- 비밀번호 암호화 -->
+		<result property="useApprStsCd" column="USE_APPR_STS_CD" /> <!-- 사용 승인 상태 코드 -->
+		<result property="tchrNk" column="TCHR_NK" /> <!-- 교사 별명 -->
+		<result property="useYn" column="USE_YN" /> <!-- 사용 여부 -->
+		<result property="creDt" column="CRE_DT" /> <!-- 생성 일시 -->
+		<result property="crePsn" column="CRE_PSN" /> <!-- 생성자 -->
+		<result property="updDt" column="UPD_DT" /> <!-- 수정 일시 -->
+		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
+	</resultMap>
+
+	<select id="selectTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO" resultMap="_TeacherResultMap">
+		SELECT /* dongovi2020.admin.member.dao.selectTeacher */
+			TCHR_IDX
+			, TCHR_EMP_NO_ID 
+			, USR_PWD 
+			, USR_PWD_ENC 
+			, USE_APPR_STS_CD 
+			, TCHR_NK 
+			, USE_YN 
+			, date_format(CRE_DT,'%Y-%m-%d %T') AS CRE_DT 
+			, CRE_PSN 
+			, date_format(UPD_DT,'%Y-%m-%d %T') AS UPD_DT 
+			, UPD_PSN 
+		FROM TB_TCHR 
+		WHERE 1=1 
+			AND TCHR_EMP_NO_ID = #{tchrEmpNoId} 
+	</select>
+
+</mapper>
