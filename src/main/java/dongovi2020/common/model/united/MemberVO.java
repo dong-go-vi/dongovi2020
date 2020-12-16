@@ -10,5 +10,16 @@ import dongovi2020.common.model.extend.TeacherVO;
  */
 @SuppressWarnings("serial")
 public class MemberVO extends TeacherVO {
+	
+	private String usrPswdNew;
+
+	public String getUsrPswdNew() {
+		return usrPswdNew;
+	}
+
+	public void setUsrPswdNew(String usrPswdNew) {
+		this.usrPswdNew = usrPswdNew;
+	} 
+	
 
 }

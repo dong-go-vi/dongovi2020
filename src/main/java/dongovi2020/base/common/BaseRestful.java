@@ -33,19 +33,15 @@ public class BaseRestful {
 	 * @param request
 	 * @return int
 	 */
-	protected int getSessionLoginCurationMemberIdx(HttpServletRequest request) {
-		int loginCrtMbrIdx = 0; 
-		if ( request != null && request.getSession() != null ) {
-			try {
-				if ( request.getSession().getAttribute(BaseRestful.USER_KEY_NAME) != null ) {
-					loginCrtMbrIdx = (int)request.getSession().getAttribute(BaseRestful.USER_KEY_NAME);
-				}
-			} catch (Exception e) {
-				logger.error("Error:"+e.getMessage());
-				e = null; 
-			}
+	protected String getSessionMemberKey(HttpServletRequest request) {
+		String memberKey = null; 
+		try {
+			memberKey = (String)request.getSession().getAttribute(BaseRestful.USER_KEY_NAME);
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			e = null; 
 		}
-		return loginCrtMbrIdx;
+		return memberKey;
 	}
 
 	/**
@@ -53,22 +49,19 @@ public class BaseRestful {
 	 * @param request
 	 * @return MemberVO
 	 */
-	@SuppressWarnings("unused")
-	protected MemberVO getSessionLoginCurationMemberInfo(HttpServletRequest request) {
+	protected MemberVO getSessionLoginMember(HttpServletRequest request) {
 		MemberVO vo = null; 
-		if ( request != null && request.getSession() != null && request.getSession().getAttribute(BaseRestful.USER_KEY_NAME) != null ) {
-			try {
-				vo = new MemberVO();
-				vo.setTchrEmpNoId((String)request.getSession().getAttribute(BaseRestful.USER_KEY_NAME));
-				vo.setUsrDivCd((String)request.getSession().getAttribute(BaseRestful.USER_INFO_USR_DIV_CD));
-				vo.setTchrNk((String)request.getSession().getAttribute(BaseRestful.USER_INFO_TCHR_NK));
-				vo.setRlyNm((String)request.getSession().getAttribute(BaseRestful.USER_INFO_RLY_NM));
-				vo.setTeamIdx((Integer)request.getSession().getAttribute(BaseRestful.USER_INFO_TEAM_IDX));
-				// vo.setTeamNm((String)request.getSession().getAttribute(BaseRestful.USER_INFO_TEAM_NM));
-			} catch (Exception e) {
-				logger.error("Error:"+e.getMessage());
-				e = null; 
-			}
+		try {
+			vo = new MemberVO();
+			vo.setTchrEmpNoId((String)request.getSession().getAttribute(BaseRestful.USER_KEY_NAME));
+			vo.setUsrDivCd((String)request.getSession().getAttribute(BaseRestful.USER_INFO_USR_DIV_CD));
+			vo.setTchrNk((String)request.getSession().getAttribute(BaseRestful.USER_INFO_TCHR_NK));
+			vo.setRlyNm((String)request.getSession().getAttribute(BaseRestful.USER_INFO_RLY_NM));
+			vo.setTeamIdx((Integer)request.getSession().getAttribute(BaseRestful.USER_INFO_TEAM_IDX));
+			// vo.setTeamNm((String)request.getSession().getAttribute(BaseRestful.USER_INFO_TEAM_NM));
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			e = null; 
 		}
 		return vo;
 	}
@@ -78,24 +71,27 @@ public class BaseRestful {
 	 * @param request
 	 * @return
 	 */
-	protected void setSessionLoginCurationMember(HttpServletRequest request, MemberVO vo) {
+	protected void setSessionLoginMember(HttpServletRequest request, MemberVO vo) {
  
-		if ( request != null && vo != null && vo.getTchrEmpNoId().length() > 0) {
-			try {
-				HttpSession session = request.getSession();
-				
-				session.setAttribute(BaseRestful.USER_KEY_NAME, vo.getTchrEmpNoId());
-				session.setAttribute(BaseRestful.USER_INFO_USR_DIV_CD, vo.getUsrDivCd());
-				session.setAttribute(BaseRestful.USER_INFO_TCHR_NK, vo.getTchrNk());
-				session.setAttribute(BaseRestful.USER_INFO_RLY_NM, vo.getRlyNm());
-				session.setAttribute(BaseRestful.USER_INFO_TEAM_IDX, vo.getTeamIdx());
-				// session.setAttribute(BaseRestful.USER_INFO_TEAM_NM, vo.getTeamNm());
-			} catch (Exception e) {
-				logger.error("Error:"+e.getMessage());
-				e = null; 
+		try {
+			if ( vo == null ) {
+				vo = new MemberVO();
 			}
-		} else {
-			logger.info("request is null!");
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute(BaseRestful.USER_KEY_NAME, vo.getTchrEmpNoId());
+			session.setAttribute(BaseRestful.USER_INFO_USR_DIV_CD, vo.getUsrDivCd());
+			session.setAttribute(BaseRestful.USER_INFO_TCHR_NK, vo.getTchrNk());
+			session.setAttribute(BaseRestful.USER_INFO_RLY_NM, vo.getRlyNm());
+			session.setAttribute(BaseRestful.USER_INFO_TEAM_IDX, vo.getTeamIdx());
+			session.setAttribute(BaseRestful.USER_INFO_TEAM_NM, ""); // vo.getTeamNm()
+
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			e = null; 
+		} finally {
+			vo = null;
 		}
 	}
 
@@ -104,23 +100,19 @@ public class BaseRestful {
 	 * @param request
 	 * @return
 	 */
-	protected void setSessionLogoutCurationMember(HttpServletRequest request) {
+	protected void setSessionLogoutMember(HttpServletRequest request) {
  
-		if ( request != null ) {
-			try {
-				HttpSession session = request.getSession();
-				session.removeAttribute(BaseRestful.USER_KEY_NAME);
-				session.removeAttribute(BaseRestful.USER_INFO_USR_DIV_CD);
-				session.removeAttribute(BaseRestful.USER_INFO_TCHR_NK);
-				session.removeAttribute(BaseRestful.USER_INFO_RLY_NM);
-				session.removeAttribute(BaseRestful.USER_INFO_TEAM_NM);
-				// session.invalidate(); // 모든 세션 정보 삭제
-			} catch (Exception e) {
-				logger.error("Error:"+e.getMessage());
-				e = null; 
-			}
-		} else {
-			logger.info("request is null..");
+		try {
+			HttpSession session = request.getSession();
+			session.removeAttribute(BaseRestful.USER_KEY_NAME);
+			session.removeAttribute(BaseRestful.USER_INFO_USR_DIV_CD);
+			session.removeAttribute(BaseRestful.USER_INFO_TCHR_NK);
+			session.removeAttribute(BaseRestful.USER_INFO_RLY_NM);
+			session.removeAttribute(BaseRestful.USER_INFO_TEAM_NM);
+			// session.invalidate(); // 모든 세션 정보 삭제
+		} catch (Exception e) {
+			logger.error("Error:"+e.getMessage());
+			e = null; 
 		}
 	}
 

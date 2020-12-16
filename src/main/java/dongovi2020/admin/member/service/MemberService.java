@@ -49,4 +49,9 @@ public class MemberService {
 		return memberDao.updateMember(model);
 	}
 
+	public int modifyMemberPassword(MemberVO param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
