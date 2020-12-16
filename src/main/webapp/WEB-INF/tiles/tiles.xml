@@ -19,15 +19,15 @@
 		<put-attribute name="baseContent" value="/WEB-INF/jsps/common/{1}/{2}.jsp" />
 	</definition>
 
-	<definition name="*.pop" extends="base">
+	<definition name="*.pop" extends="nobase">
 		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}.jsp" />
 	</definition>
 	
-	<definition name="*/*.pop" extends="base">
+	<definition name="*/*.pop" extends="nobase">
 		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}.jsp" />
 	</definition>
 
-	<definition name="*/*/*.pop" extends="base">
+	<definition name="*/*/*.pop" extends="nobase">
 		<put-attribute name="baseContent" value="/WEB-INF/jsps/{1}/{2}/{3}.jsp" />
 	</definition>
 	

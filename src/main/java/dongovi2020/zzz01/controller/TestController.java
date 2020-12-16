@@ -46,19 +46,7 @@ public class TestController {
 		return "thymeleaf/tmlf01";
 	}
 
-//	@RequestMapping(value = "/thymeleaf/tmlf02")
-//	public ModelAndView test2() throws Exception {
-//		ModelAndView mav = new ModelAndView("thymeleaf/tmlf02");
-//		List<TestVO> testList = testService.selectTest();
-//		mav.addObject("list", testList);
-//		return mav;
-//	}
 
-	@RequestMapping("/index")
-	public String index() throws Exception {
-		return "index";
-	}
-	
 	@RequestMapping("/common/zzz1")
 	public String commonZzz1() throws Exception {
 		return "common/zzz1";
