@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TeacherController {
 
-	@RequestMapping("/teacher/team")
+	@RequestMapping("/teacher/teamList")
 	public String team() throws Exception {
-		return "teacher/team";
+		return "teacher/teamList";
 	}
 	
-	@RequestMapping("/teacher/teacher")
+	@RequestMapping("/teacher/teacherList")
 	public String teacher() throws Exception {
-		return "teacher/teacher";
+		return "teacher/teacherList";
 	}
 }
