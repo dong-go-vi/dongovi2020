@@ -15,7 +15,7 @@ public class MemberController {
 
 
 	@RequestMapping("/member/memberLogin.pop")
-	public String zzzZzz2() throws Exception {
+	public String memberLoginPop() throws Exception {
 		return "member/memberLogin.pop";
 	}
 

@@ -1,4 +1,4 @@
-package dongovi2020.biz01.service;
+package dongovi2020.common.service;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dongovi2020.biz01.dao.BizBasicDao;
+import dongovi2020.common.dao.BizBasicDao;
 import dongovi2020.common.model.extend.CommonCodeVO;
 import dongovi2020.common.model.extend.LectureFeePayAddDetailVO;
 import dongovi2020.common.model.extend.LectureFeePayVO;

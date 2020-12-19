@@ -1,4 +1,4 @@
-package dongovi2020.biz01.restful;
+package dongovi2020.common.restful;
 
 import java.util.Map;
 
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import dongovi2020.base.common.BaseRestful;
 import dongovi2020.base.common.ResultData;
-import dongovi2020.biz01.service.BizBasicService;
 import dongovi2020.common.model.extend.CommonCodeVO;
 import dongovi2020.common.model.extend.LectureFeePayAddDetailVO;
 import dongovi2020.common.model.extend.LectureFeePayVO;
@@ -38,6 +37,7 @@ import dongovi2020.common.model.extend.TeacherLectureFeeVO;
 import dongovi2020.common.model.extend.TeacherVO;
 import dongovi2020.common.model.extend.TeamVO;
 import dongovi2020.common.model.extend.UnpaidSendVO;
+import dongovi2020.common.service.BizBasicService;
 
 /**
  * BizBasicRestful

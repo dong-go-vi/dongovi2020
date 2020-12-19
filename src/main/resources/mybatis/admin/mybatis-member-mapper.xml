@@ -8,7 +8,7 @@
  
 <mapper namespace="dongovi2020.admin.member.dao">
 
-	<resultMap id="_TeacherResultMap" type="dongovi2020.common.model.extend.TeacherVO">
+	<resultMap id="_TeacherResultMap" type="dongovi2020.common.model.united.MemberVO">
 		<id property="tchrIdx" column="TCHR_IDX" /> <!-- 교사 IDX -->
 		<result property="tchrEmpNoId" column="TCHR_EMP_NO_ID" /> <!-- 교사 사번 아이디 -->
 		<result property="usrPwd" column="USR_PWD" /> <!-- 비밀번호 -->
@@ -22,7 +22,7 @@
 		<result property="updPsn" column="UPD_PSN" /> <!-- 수정자 -->
 	</resultMap>
 
-	<select id="selectTeacher" parameterType="dongovi2020.common.model.extend.TeacherVO" resultMap="_TeacherResultMap">
+	<select id="selectTeacher" parameterType="dongovi2020.common.model.united.MemberVO" resultMap="_TeacherResultMap">
 		SELECT /* dongovi2020.admin.member.dao.selectTeacher */
 			TCHR_IDX
 			, TCHR_EMP_NO_ID 

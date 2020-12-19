@@ -13,15 +13,15 @@
 							<div class="text-center">
 								<h1 class="h4 text-gray-900 mb-4">동고비 운영 시스템 로그인</h1>
 							</div>
-							<form class="user">
+							<form class="user" id="frm1">
 								<div class="form-group">
-									<input type="email" class="form-control form-control-user"ㅌ`
-										id="exampleInputEmail" aria-describedby="emailHelp"
-										placeholder="로그인 계정(아이디 번호)">
+									<input type="text" class="form-control form-control-user"
+										id="tchrEmpNoId" name="tchrEmpNoId" aria-describedby="emailHelp"
+										placeholder="로그인 계정(아이디 번호)" value="ZZZ1">
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control form-control-user"
-										id="exampleInputPassword" placeholder="비밀번호">
+										id="usrPwd" name="usrPwd" placeholder="비밀번호" value="1111">
 								</div>
 								<!-- <div class="form-group">
 									<div class="custom-control custom-checkbox small">
@@ -29,7 +29,7 @@
 										<label class="custom-control-label" for="customCheck">기억하기</label>
 									</div>
 								</div> -->
-								<a href="index.html" class="btn btn-primary btn-user btn-block">로그인</a>
+								<a href="#" class="btn btn-primary btn-user btn-block" id="btnLogin">로그인</a>
 							</form>
 							<hr>
 							<% //TODO 비밀번호 분실시 찾기 기능  %>
@@ -45,3 +45,15 @@
 	</div>
 
 </div>
+
+
+<%-- javascript area ------------------------------------------------------------------------------------------ --%>
+
+<script type="text/javascript">
+
+// ------ onLoad ------
+$(document).ready(function() {
+});
+
+</script>
+<%-- / javascript area ------------------------------------------------------------------------------------------ --%>

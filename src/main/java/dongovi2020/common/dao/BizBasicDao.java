@@ -1,4 +1,4 @@
-package dongovi2020.biz01.dao;
+package dongovi2020.common.dao;
 
 import java.util.List;
 
