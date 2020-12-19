@@ -10,16 +10,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title>Dongovi Admin 2020</title>
+	<base href="/${pageContext.request.contextPath}">
 
 	<!-- Custom fonts for this template-->
-	<link href="${pageContext.request.contextPath}/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<!-- Custom styles for this template-->
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.min.css" rel="stylesheet">
+	<link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+	<script type="text/javascript" src="common/js/jquery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="common/js/common.js"></script>
 	
 </head>
 
@@ -91,21 +92,21 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="${pageContext.request.contextPath}/admin/vendor/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="admin/vendor/jquery/jquery.min.js"></script>
+	<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
-	<script src="${pageContext.request.contextPath}/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="${pageContext.request.contextPath}/admin/js/sb-admin-2.min.js"></script>
+	<script src="admin/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<!-- <script src="${pageContext.request.contextPath}/admin/vendor/chart.js/Chart.min.js"></script> -->
+	<!-- <script src="admin/vendor/chart.js/Chart.min.js"></script> -->
 
 	<!-- Page level custom scripts -->
-	<!-- <script src="${pageContext.request.contextPath}/admin/js/demo/chart-area-demo.js"></script> -->
-	<!-- <script src="${pageContext.request.contextPath}/admin/js/demo/chart-pie-demo.js"></script> -->
+	<!-- <script src="admin/js/demo/chart-area-demo.js"></script> -->
+	<!-- <script src="admin/js/demo/chart-pie-demo.js"></script> -->
 
 </body>
 

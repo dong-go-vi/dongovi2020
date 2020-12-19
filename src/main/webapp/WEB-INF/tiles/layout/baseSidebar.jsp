@@ -14,11 +14,11 @@
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active">
+			<!-- <li class="nav-item active">
 				<a class="nav-link" href="index.html">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
-			</li>
+			</li> -->
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -75,8 +75,8 @@
 					
 				<div id="clpsTchr" class="collapse" aria-labelledby="hdTchr" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="#">팀 관리</a>
-						<a class="collapse-item" href="#">교사 정보</a>
+						<a class="collapse-item" href="teacher/teamList">팀 관리</a>
+						<a class="collapse-item" href="teacher/teacherList">교사 정보</a>
 						<a class="collapse-item" href="#">수업 시간표</a>
 						<a class="collapse-item" href="#">월별 강사료 관리(관리자)</a>
 						<a class="collapse-item" href="#">월별 강사료 관리(교사)</a>
