@@ -7,13 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MemberController {
 
-//	@Autowired 
-//	TestService testService;
-
-
-
-
-
 	@RequestMapping("/member/memberLogin.pop")
 	public String memberLoginPop() throws Exception {
 		return "member/memberLogin.pop";
