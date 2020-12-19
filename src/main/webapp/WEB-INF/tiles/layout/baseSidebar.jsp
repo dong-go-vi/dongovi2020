@@ -33,7 +33,9 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clpsLsn"
 				aria-expanded="true" aria-controls="clpsLsn">
-					<span>수업 관리</span></a>
+					<i class="fas fa-table"></i>
+					<span>
+					수업 관리</span></a>
 					
 				<div id="clpsLsn" class="collapse" aria-labelledby="hdLsn" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
@@ -54,6 +56,7 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clpsSnd"
 				aria-expanded="true" aria-controls="clpsSnd">
+					<i class="fas fa-paper-plane"></i>
 					<span>안내 발송 관리</span></a>
 					
 				<div id="clpsSnd" class="collapse" aria-labelledby="hdSnd" data-parent="#accordionSidebar">
@@ -71,6 +74,7 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clpsTchr"
 				aria-expanded="true" aria-controls="clpsTchr">
+				<i class="fas fa-chalkboard-teacher"></i>
 					<span>교사 / 팀 관리</span></a>
 					
 				<div id="clpsTchr" class="collapse" aria-labelledby="hdTchr" data-parent="#accordionSidebar">
@@ -89,6 +93,7 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clpsFnc"
 				aria-expanded="true" aria-controls="clpsFnc">
+				<i class="fas fa-chart-line"></i>
 					<span>재무 / 정산 조회</span></a>
 					
 				<div id="clpsFnc" class="collapse" aria-labelledby="hdFnc" data-parent="#accordionSidebar">
@@ -104,6 +109,7 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clpsSys"
 				aria-expanded="true" aria-controls="clpsSys">
+				<i class="fas fa-cogs"></i>
 					<span>시스템 관리</span></a>
 					
 				<div id="clpsSys" class="collapse" aria-labelledby="hdSys" data-parent="#accordionSidebar">
@@ -119,6 +125,7 @@
 			
 			<li class="nav-item">
 				<a class="nav-link" href="#">
+				<i class="fas fa-child"></i>
  					<span>학생 조회</span></a>
 			</li>
 
