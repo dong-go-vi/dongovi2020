@@ -60,13 +60,16 @@ public class MemberRestful extends BaseRestful {
 				if ( realPwd.equals(inputPwd) ) { 
 					setSessionLoginMember(request, vo); // session allocation 
 					resultData.setLoginMemberKey(vo.getTchrEmpNoId()); // 로그인 후 회원 키 할당
+	
+					if (vo!=null) { vo.setUsrPwd(null); }
+					resultData = new ResultData(true, vo);
+					resultData.putMapValue("isConfirmed", true);
+				} else {
+					resultData = new ResultData(true, vo);
+					resultData.putMapValue("isConfirmed", false);
 				}
 			}
 			
-			if (vo!=null) { vo.setUsrPwd(null); }
-
-			resultData = new ResultData(true, vo);
-
 		} catch (Exception e) {
 			logger.error("Error:"+e.getMessage());
 		} 

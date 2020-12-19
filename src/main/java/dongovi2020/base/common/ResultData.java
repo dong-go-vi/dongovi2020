@@ -94,6 +94,12 @@ public class ResultData extends BaseVO {
 		this.release();
 		return responseEntity;
 	}
+
+	public void putMapValue(String key, Object value) {
+		if ( map != null ) {
+			this.map.put(key, value);
+		}
+	}
 	
 	public void release() {
 		this.object = null; 
