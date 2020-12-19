@@ -4,7 +4,7 @@
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
+				<div class="sidebar-brand-icon">
 					<i class="fas fa-dove"></i><!-- 동고비 -->
 				</div>
 				<div class="sidebar-brand-text mx-3">동고비 운영 <sup>2020</sup></div>

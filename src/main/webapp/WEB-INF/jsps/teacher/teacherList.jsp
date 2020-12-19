@@ -295,7 +295,7 @@ const grid = new tui.Grid({
   el: document.getElementById('grid'),
   scrollX: true,
   scrollY: true,
-  bodyHeight:350,
+  bodyHeight:400,
   columns: [
 	{
 		header: '교사 사번 ID',
