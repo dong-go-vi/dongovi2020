@@ -11,5 +11,16 @@ public class MainController {
 	public String index() throws Exception {
 		return "index";
 	}
+	
+	@RequestMapping("/team")
+	public String team() throws Exception {
+		return "team";
+	}
+	
+	@RequestMapping("/teacher")
+	public String teacher() throws Exception {
+		return "teacher";
+	}
 
+	
 }
