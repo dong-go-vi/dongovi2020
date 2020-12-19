@@ -55,5 +55,59 @@
 $(document).ready(function() {
 });
 
+// ------ event ------
+// 저장 버튼 클릭 - 
+$('#btnLogin').click(function(){ 
+	loginMember();
+	$('#btnLogin').attr('disabled', true);
+	setTimeout("$('#btnLogin').attr('disabled', false);", 3000);
+});
+
+// ----- process functions -----
+// 저장 처리
+function loginMember(){
+
+	// ----- trim values
+
+	$('#tchrEmpNoId').val($('#tchrEmpNoId').val().trim());
+	$('#usrPwd').val($('#usrPwd').val().trim());
+	
+	// ----- validation check
+
+	// var isOk = false;
+	// isOk = checkEmail( $('#mbrEmlId').val() );
+	// if ( !isOk ) { alert("아이디로 사용할 이메일 주소가 유효하지 않습니다."); return; }
+
+	// ----- call api
+	
+	var data = formSerializeObjectToJson($('#frm1'));
+	__log("send data : ", data);
+
+	$.ajax({
+		url : '/api/member/loginMember.ajax',
+		type : 'POST',
+		data : JSON.stringify(data),
+		dataType: "json",
+		contentType: "application/json",
+		success : function(data) {
+			__log(data); // return;
+			if ( data.isConfirmed ){
+				alert("로그인에 성공하였습니다.");
+				location.href = "${pageContext.request.contextPath}/index"; // index page
+			} else {
+				// alert(data.message);
+				alert('로그인에 실패하였습니다. \n확인 후 다시 시도하여 주시기 바랍니다. ');
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('처리 중 에러가 발생하였습니다. '
+					+ '\n확인 후 다시 시도하여 주시기 바랍니다. '
+					+ '\n'
+					+ '\nError : ' + textStatus + '[' + jqXHR.status + ']'
+			);
+		}
+	});
+}
+
 </script>
 <%-- / javascript area ------------------------------------------------------------------------------------------ --%>
