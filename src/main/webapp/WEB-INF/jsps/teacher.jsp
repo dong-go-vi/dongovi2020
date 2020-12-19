@@ -21,23 +21,23 @@
 		</div>
 		
 		<!-- content -->
-		<div class="card mb-4 py-3 border-left-primary">
+		<div class="card mb-4 py-3 w-25 border-left-success">
 		
 			<div class="card-body pt-0 pb-0">
-				<div class="row">
-					<div class="col-xs-3">
-						<h5 class="h5 mr-5 text-gray-900">팀 선택</h5>
+				<div class="row justify-content-between">
+					<div class="mr-4">
+						<h4 class="text-gray-900">팀 선택</h4>
 					</div>
-					<div class="col-xs-6">
-						<select class="form-control" placeholder=".col-xs-6">
+					<div class="col-xs-8 mr-4">
+						<select class="form-control" placeholder=".col-xs-8">
 							<option value="">전체</option>
 							<option value="">강동</option>
 							<option value="">강남</option>
 						</select>
 					</div>
-					<div class="col-xs-3">
-						<a href="#" class="mr-5 btn btn-primary btn-icon-split">
-							<span class="text">확인</span>
+					<div>
+						<a href="#" class="btn btn-success btn-circle">
+						<i class="fas fa-check"></i>
 						</a>
 					</div>
 				</div>
@@ -86,11 +86,11 @@ const grid = new tui.Grid({
   data,
   columns: [
 	{
-		header: '팀 ID',
+		header: '교사 사번 ID',
 		name: 'id'
     },
 	{
-		header: '팀 이름',
+		header: '소속 팀명',
 		name: 'name'
 
     },
