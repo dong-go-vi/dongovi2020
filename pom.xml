@@ -9,11 +9,11 @@
 		<version>2.3.7.BUILD-SNAPSHOT</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>devketerius</groupId>
-	<artifactId>mytest1</artifactId>
-	<version>0.1</version>
-	<name>devketerius-mytest1</name>
-	<description>devketerius project for Spring Boot</description>
+	<groupId>dongovi2020</groupId>
+	<artifactId>dongovi2020</artifactId>
+	<version>1.0</version>
+	<name>dongovi2020</name>
+	<description>dongovi2020 project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
