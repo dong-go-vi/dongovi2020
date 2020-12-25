@@ -8,12 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TeacherController {
 
 	@RequestMapping("/teacher/teamList")
-	public String team() throws Exception {
+	public String teamList() throws Exception {
 		return "teacher/teamList";
 	}
 	
 	@RequestMapping("/teacher/teacherList")
-	public String teacher() throws Exception {
+	public String teacherList() throws Exception {
 		return "teacher/teacherList";
+	}
+	
+	@RequestMapping("/teacher/areaList")
+	public String areaList() throws Exception {
+		return "teacher/areaList";
+	}
+	
+	@RequestMapping("/teacher/placeList")
+	public String placeList() throws Exception {
+		return "teacher/placeList";
+	}
+	
+	@RequestMapping("/teacher/lessonFormList")
+	public String lessonFormList() throws Exception {
+		return "teacher/lessonFormList";
 	}
 }
