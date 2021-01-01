@@ -19,18 +19,29 @@
 				팀 관리
 			</h1>
 		</div>
-		
+		<div class="w-25">
+			<div class="card mb-4 py-3 border-left-primary">
+				<div class="card-body pt-0 pb-0 text-justify">
+					<div class="d-flex justify-content-between">
+						<a href="" class="btn btn-success btn-sm font-weight-bold">
+							추가
+						</a> 
+						<a href="" class="btn btn-warning btn-sm font-weight-bold">
+							수정
+						</a>
+						<a href="" class="btn btn-danger btn-sm font-weight-bold">
+							삭제
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- content -->
-		<div id="grid">
+		<div id="grid" class="w-50">
 		
 		</div>
 		
-		<!-- 버튼 -->
-		<div class="btnArea" style="margin-top:20px;">
-			<a href="#" class="btn btn-sm btn-primary btn-icon-split" style="float:right;">
-				<span class="text">수정</span>
-			</a>
-		</div>
+		
 	</div>
 	
 </body>
@@ -85,6 +96,7 @@ const grid = new tui.Grid({
   scrollX: false,
   scrollY: false,
   data,
+  rowHeaders: ['checkbox'],
   columns: [
 	{
 		header: '팀 ID',

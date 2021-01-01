@@ -21,29 +21,47 @@
 		</div>
 		
 		<!-- content -->
-		<div class="card mb-4 py-3 w-25 border-left-success">
+		<div class="card mb-4 py-3 w-25 border-left-primary d-inline-block">
 		
 			<div class="card-body pt-0 pb-0">
-				<div class="row justify-content-between">
-					<div class="mr-4">
-						<h6 class="text-gray-900">팀 선택</h6>
-					</div>
-					<div class="col-xs-8 mr-4">
-						<select class="form-control-sm" placeholder=".col-xs-8">
-							<option value="">전체</option>
-							<option value="">강동</option>
-							<option value="">강남</option>
-						</select>
-					</div>
-					<div>
-						<a href="#" class="btn btn-success btn-sm btn-circle">
-						<i class="fas fa-check"></i>
+				<div class="row">
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label for="selTeam" class="col-md-5 font-weight-bold text-primary">
+								팀 선택
+							</label>
+							<select class="form-control col-md-5 small" id="selTeam">
+								<option value="">전체</option>
+								<option value="">강동</option>
+								<option value="">강남</option>
+							</select>
+							<div class="col-md-2 pl-4 float-right">
+								<button class="btn btn-primary btn-sm btn-circle">
+									<i class=" fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+		<div class="w-25 d-inline-block float-right">
+			<div class="card mb-4 py-3 border-left-primary">
+				<div class="card-body pt-0 pb-0 text-justify">
+					<div class="d-flex justify-content-between">
+						<a href="" class="btn btn-success btn-sm font-weight-bold">
+							추가
+						</a> 
+						<a href="" class="btn btn-warning btn-sm font-weight-bold">
+							수정
+						</a>
+						<a href="" class="btn btn-danger btn-sm font-weight-bold">
+							삭제
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 		<div id="grid" class="mb-4">
 		
 		</div>

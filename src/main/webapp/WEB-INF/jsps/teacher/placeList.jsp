@@ -62,19 +62,19 @@
 				</div>	
 			</div>
 			
-			<div class="col-md-2">
-				<div class="card mb-4 py-3 border-left-success">
+			<div class="col-md-3">
+				<div class="card mb-4 py-3 border-left-primary">
 					<div class="card-body pt-0 pb-0 text-justify">
 						<div class="d-flex justify-content-between">
-							<a href="#" class="btn btn-success btn-sm btn-circle">
-							<i class="fas fa-plus"></i>
-							</a>
-							<a href="#" class="btn btn-warning btn-sm btn-circle">
-							<i class="fas fa-edit"></i>
-							</a>
-							<a href="#" class="btn btn-danger btn-sm btn-circle">
-							<i class="fas fa-trash"></i>
-							</a>
+							<a href="" class="btn btn-success btn-sm font-weight-bold">
+							추가
+						</a> 
+						<a href="" class="btn btn-warning btn-sm font-weight-bold">
+							수정
+						</a>
+						<a href="" class="btn btn-danger btn-sm font-weight-bold">
+							삭제
+						</a>
 						</div>		
 					</div>
 				</div>

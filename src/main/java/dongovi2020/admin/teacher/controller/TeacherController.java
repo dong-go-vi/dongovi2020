@@ -31,4 +31,9 @@ public class TeacherController {
 	public String lessonFormList() throws Exception {
 		return "teacher/lessonFormList";
 	}
+	
+	@RequestMapping("/teacher/lessonList")
+	public String lessonList() throws Exception {
+		return "teacher/lessonList";
+	}
 }
