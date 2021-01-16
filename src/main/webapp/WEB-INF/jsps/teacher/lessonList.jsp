@@ -45,17 +45,17 @@
 				</a>
 				<div class="d-inline-block float-right mt-2">
 					<div class="d-inline-block pr-3">
-					<a href="#" class="btn btn-sm btn-success font-weight-bold">
+					<a href="#" class="btn btn-sm btn-primary font-weight-bold">
 						연장
 					</a>
 					</div>
 					<div class="d-inline-block pr-3">
-					<a href="#" class="btn btn-sm btn-warning font-weight-bold">
+					<a href="#" class="btn btn-sm btn-primary font-weight-bold">
 						수정
 					</a>
 					</div>
 					<div class="d-inline-block">
-					<a href="#" class="btn btn-sm btn-danger font-weight-bold">
+					<a href="#" class="btn btn-sm btn-primary font-weight-bold">
 						삭제
 					</a>
 					</div>
